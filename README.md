@@ -46,6 +46,33 @@ reference. Statistics live in two layers:
 `grade_counts` holds graded outcomes only (`1.0`–`5.0` incl. steps like `1.4`, `B` = passed,
 `N` = failed); no-shows, withdrawals and cheating are separate columns on `exams`.
 
+## Importing data
+
+### TUM Info API
+
+```bash
+npm run import:tum-info -- --dry-run          # download + parse, report problems, no DB writes
+npm run import:tum-info                       # import (payload = full snapshot of the source)
+npm run import:tum-info -- --file courses.json   # import a local copy
+```
+
+Records are tagged with source `tum_info`. Special grade codes in that dataset are mapped as
+`6.0` → no-show, `7.0` → `B` (passed), `8.0` → `N` (failed); these mappings were checked against
+the dataset's own totals and failure rates.
+
+### Removing a source
+
+```bash
+npm run remove-source -- tum_info   # deletes all its records and re-merges affected modules
+```
+
+### Merge rules
+
+Exams are identified by (module number, semester, type). When several sources report the same
+exam, their grade distributions must match exactly (or, without a distribution, their attempt
+counts). If they differ, the exam is marked `conflict` and not published until an admin pins a
+source. Priority for filling in fields: `upload` > `aamin` > `tum_info`.
+
 ## Environment variables
 
 | Variable | Required | Description |
@@ -61,11 +88,13 @@ reference. Statistics live in two layers:
 | `npm run build` | Production build |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | Generate route types and run `tsc` |
-| `npm test` | Run the Vitest suite (parsers, importers) |
+| `npm test` | Run the Vitest suite (parsers, importers). Set `TEST_DATABASE_URL` to an empty scratch database to also run the DB integration tests |
 | `npm run db:generate` | Generate a migration after changing `src/db/schema.ts` |
 | `npm run db:migrate` | Apply migrations |
 | `npm run db:seed` | Upsert schools and departments |
 | `npm run db:studio` | Open Drizzle Studio |
+| `npm run import:tum-info` | Import TUM Info statistics (see below) |
+| `npm run remove-source -- <source>` | Delete all data of one source |
 
 ## Legal
 

@@ -1,0 +1,438 @@
+[
+ {
+  "school": "CIT",
+  "code": "IN0004",
+  "semester": "2011WS",
+  "examType": "endterm",
+  "name": "Introduction to Computer Organization and Technology - Computer Architecture",
+  "date": "2012-02-15 11:00:00 +0000",
+  "ects": 8,
+  "hours": 6.0,
+  "mode": "written",
+  "lang": "en",
+  "peopleTotal": 359,
+  "peopleFailed": 76,
+  "attemptsTotal": 312,
+  "attemptsFailedPercent": 0.24358974358974358,
+  "averageTotal": 3.386217948717949,
+  "averagePassed": 3.0271186440677966,
+  "grades": [
+   {
+    "grade": 1.0,
+    "people": 4
+   },
+   {
+    "grade": 1.3,
+    "people": 17
+   },
+   {
+    "grade": 1.7,
+    "people": 16
+   },
+   {
+    "grade": 2.0,
+    "people": 20
+   },
+   {
+    "grade": 2.3,
+    "people": 14
+   },
+   {
+    "grade": 2.7,
+    "people": 15
+   },
+   {
+    "grade": 3.0,
+    "people": 17
+   },
+   {
+    "grade": 3.3,
+    "people": 34
+   },
+   {
+    "grade": 3.7,
+    "people": 36
+   },
+   {
+    "grade": 4.0,
+    "people": 63
+   },
+   {
+    "grade": 4.3,
+    "people": 46
+   },
+   {
+    "grade": 4.7,
+    "people": 19
+   },
+   {
+    "grade": 5.0,
+    "people": 11
+   },
+   {
+    "grade": 6.0,
+    "people": 47
+   }
+  ]
+ },
+ {
+  "school": "ED",
+  "code": "MW2016",
+  "semester": "2012WS",
+  "examType": "endterm",
+  "name": "Basics of Machines Drawing and Computer Aided Design I",
+  "date": "2013-02-07 11:00:00 +0000",
+  "ects": 3,
+  "hours": 2.0,
+  "mode": "written",
+  "lang": "en",
+  "peopleTotal": 1276,
+  "peopleFailed": 0,
+  "attemptsTotal": 1276,
+  "attemptsFailedPercent": 0.0,
+  "averageTotal": 0.0,
+  "averagePassed": 0.0,
+  "grades": [
+   {
+    "grade": 7.0,
+    "people": 1276
+   }
+  ]
+ },
+ {
+  "school": "SOT",
+  "code": "CLA11200",
+  "semester": "2017WS",
+  "examType": "endterm",
+  "name": "Towns of the Future",
+  "date": "2018-02-07 11:00:00 +0000",
+  "ects": 2,
+  "hours": 1.0,
+  "mode": "written",
+  "lang": "en",
+  "peopleTotal": 82,
+  "peopleFailed": 0,
+  "attemptsTotal": 82,
+  "attemptsFailedPercent": 0.08536585365853659,
+  "averageTotal": 1.0,
+  "averagePassed": 1.0,
+  "grades": [
+   {
+    "grade": 1.0,
+    "people": 1
+   },
+   {
+    "grade": 7.0,
+    "people": 74
+   },
+   {
+    "grade": 8.0,
+    "people": 7
+   }
+  ]
+ },
+ {
+  "school": "CIT",
+  "code": "IN8005",
+  "semester": "2023WS",
+  "examType": "endterm",
+  "name": "Introduction into Computer Science (for non Informatics studies, TUM BWL)",
+  "date": "2024-02-24 09:30:00 +0000",
+  "ects": 6,
+  "hours": 4,
+  "mode": "written",
+  "lang": "en",
+  "peopleTotal": 583,
+  "peopleFailed": 147,
+  "attemptsTotal": 462,
+  "attemptsFailedPercent": 0.3181818181818182,
+  "averageTotal": 3.2742424242424244,
+  "averagePassed": 2.605714285714286,
+  "grades": [
+   {
+    "grade": 1.0,
+    "people": 17
+   },
+   {
+    "grade": 1.3,
+    "people": 26
+   },
+   {
+    "grade": 1.7,
+    "people": 26
+   },
+   {
+    "grade": 2.0,
+    "people": 25
+   },
+   {
+    "grade": 2.3,
+    "people": 43
+   },
+   {
+    "grade": 2.7,
+    "people": 38
+   },
+   {
+    "grade": 3.0,
+    "people": 46
+   },
+   {
+    "grade": 3.3,
+    "people": 40
+   },
+   {
+    "grade": 3.7,
+    "people": 39
+   },
+   {
+    "grade": 4.0,
+    "people": 15
+   },
+   {
+    "grade": 4.3,
+    "people": 44
+   },
+   {
+    "grade": 4.7,
+    "people": 41
+   },
+   {
+    "grade": 5.0,
+    "people": 62
+   },
+   {
+    "grade": 6.0,
+    "people": 121
+   }
+  ]
+ },
+ {
+  "school": "CIT",
+  "code": "IN2030",
+  "semester": "2012WS",
+  "examType": "retake",
+  "name": "Data Mining and Knowledge Discovery",
+  "date": "2013-03-27 11:00:00 +0000",
+  "ects": 3,
+  "hours": 2,
+  "mode": "written",
+  "lang": "en",
+  "peopleTotal": 37,
+  "peopleFailed": 7,
+  "attemptsTotal": 25,
+  "attemptsFailedPercent": 0.28,
+  "averageTotal": 3.496,
+  "averagePassed": 2.966666666666667,
+  "grades": [
+   {
+    "grade": 1.7,
+    "people": 2
+   },
+   {
+    "grade": 2.0,
+    "people": 1
+   },
+   {
+    "grade": 2.3,
+    "people": 3
+   },
+   {
+    "grade": 2.7,
+    "people": 2
+   },
+   {
+    "grade": 3.0,
+    "people": 2
+   },
+   {
+    "grade": 3.3,
+    "people": 2
+   },
+   {
+    "grade": 3.7,
+    "people": 3
+   },
+   {
+    "grade": 4.0,
+    "people": 3
+   },
+   {
+    "grade": 4.3,
+    "people": 1
+   },
+   {
+    "grade": 4.7,
+    "people": 1
+   },
+   {
+    "grade": 5.0,
+    "people": 5
+   },
+   {
+    "grade": 6.0,
+    "people": 12
+   }
+  ]
+ },
+ {
+  "school": "CIT",
+  "code": "IN0007_E",
+  "semester": "2021SS",
+  "examType": "endterm",
+  "name": "Fundamentals of Algorithms and Data Structures",
+  "date": "2021-07-25 23:00:00 +0000",
+  "ects": 6,
+  "hours": 5,
+  "mode": "written",
+  "lang": "en",
+  "peopleTotal": 1272,
+  "peopleFailed": 268,
+  "attemptsTotal": 1015,
+  "attemptsFailedPercent": 0.26403940886699506,
+  "averageTotal": 3.380295566502463,
+  "averagePassed": 2.8677376171352074,
+  "grades": [
+   {
+    "grade": 1.0,
+    "people": 28
+   },
+   {
+    "grade": 1.3,
+    "people": 25
+   },
+   {
+    "grade": 1.7,
+    "people": 47
+   },
+   {
+    "grade": 2.0,
+    "people": 67
+   },
+   {
+    "grade": 2.3,
+    "people": 70
+   },
+   {
+    "grade": 2.7,
+    "people": 87
+   },
+   {
+    "grade": 3.0,
+    "people": 114
+   },
+   {
+    "grade": 3.3,
+    "people": 104
+   },
+   {
+    "grade": 3.7,
+    "people": 111
+   },
+   {
+    "grade": 4.0,
+    "people": 94
+   },
+   {
+    "grade": 4.3,
+    "people": 41
+   },
+   {
+    "grade": 4.7,
+    "people": 75
+   },
+   {
+    "grade": 5.0,
+    "people": 152
+   },
+   {
+    "grade": 6.0,
+    "people": 257
+   }
+  ]
+ },
+ {
+  "school": "CIT",
+  "code": "IN8005",
+  "semester": "2023WS",
+  "examType": "retake",
+  "name": "Introduction into Computer Science (for non Informatics studies, TUM BWL)",
+  "date": "2024-04-03 11:00:00 +0000",
+  "ects": 6,
+  "hours": 4,
+  "mode": "written",
+  "lang": "en",
+  "peopleTotal": 277,
+  "peopleFailed": 23,
+  "attemptsTotal": 207,
+  "attemptsFailedPercent": 0.12077294685990338,
+  "averageTotal": 2.4058536585365853,
+  "averagePassed": 2.101098901098901,
+  "grades": [
+   {
+    "grade": 1.0,
+    "people": 54
+   },
+   {
+    "grade": 1.3,
+    "people": 13
+   },
+   {
+    "grade": 1.7,
+    "people": 16
+   },
+   {
+    "grade": 2.0,
+    "people": 23
+   },
+   {
+    "grade": 2.3,
+    "people": 12
+   },
+   {
+    "grade": 2.7,
+    "people": 9
+   },
+   {
+    "grade": 3.0,
+    "people": 19
+   },
+   {
+    "grade": 3.3,
+    "people": 14
+   },
+   {
+    "grade": 3.7,
+    "people": 16
+   },
+   {
+    "grade": 4.0,
+    "people": 6
+   },
+   {
+    "grade": 4.3,
+    "people": 3
+   },
+   {
+    "grade": 4.7,
+    "people": 7
+   },
+   {
+    "grade": 5.0,
+    "people": 13
+   },
+   {
+    "grade": 6.0,
+    "people": 70
+   },
+   {
+    "grade": 7.0,
+    "people": 0
+   },
+   {
+    "grade": 8.0,
+    "people": 2
+   }
+  ]
+ }
+]

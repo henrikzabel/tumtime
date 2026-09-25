@@ -3,6 +3,7 @@ import { z } from "zod";
 import { examRecordSchema, type ExamRecord } from "@/lib/stats/exam-record";
 import { normalizeGrade } from "@/lib/stats/grades";
 import { parseSemester } from "@/lib/stats/semester";
+import { decodeHtmlEntities } from "@/lib/text";
 
 /**
  * Importer for the public TUM Info API (https://mcmikecreations.github.io/tum_info/api/courses.json).
@@ -59,7 +60,7 @@ export function parseTumInfoCourse(raw: unknown): ExamRecord {
 
   return examRecordSchema.parse({
     moduleCode: c.code.trim().toUpperCase(),
-    moduleName: c.name?.trim() || undefined,
+    moduleName: c.name ? decodeHtmlEntities(c.name).trim() || undefined : undefined,
     moduleNameLang: c.name ? "en" : undefined,
     ects: c.ects && c.ects > 0 ? c.ects : undefined,
     semester,

@@ -62,6 +62,11 @@ describe("parseTumInfo", () => {
     expect(records.some((r) => r.moduleCode === "IN0007_E")).toBe(true);
   });
 
+  it("decodes HTML entities in module names", () => {
+    const [r] = parseTumInfo([{ ...(fixture[0] as object), name: "Programming (Exercises &amp; Laboratory)" }]).records;
+    expect(r.moduleName).toBe("Programming (Exercises & Laboratory)");
+  });
+
   it("reports malformed entries instead of throwing", () => {
     const res = parseTumInfo([{ code: "IN0001", semester: "sometime", examType: "endterm", grades: [] }]);
     expect(res.records).toHaveLength(0);

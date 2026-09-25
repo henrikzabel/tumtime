@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { formatSemester, parseSemester, semesterKey } from "./semester";
+import { formatSemester, formatSemesterShort, parseSemester, semesterKey } from "./semester";
 
 describe("parseSemester", () => {
   it.each([
@@ -26,6 +26,14 @@ describe("semesterKey", () => {
   it("orders summer before winter of the same year", () => {
     expect(semesterKey("2024SS")).toBeLessThan(semesterKey("2024WS"));
     expect(semesterKey("2024WS")).toBeLessThan(semesterKey("2025SS"));
+  });
+});
+
+describe("formatSemesterShort", () => {
+  it("formats both terms compactly", () => {
+    expect(formatSemesterShort("2024WS")).toBe("WS 24/25");
+    expect(formatSemesterShort("2099WS")).toBe("WS 99/00");
+    expect(formatSemesterShort("2025SS")).toBe("SS 25");
   });
 });
 

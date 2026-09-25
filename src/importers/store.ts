@@ -152,14 +152,18 @@ export async function rebuildModules(db: DbLike, moduleCodes: string[]) {
       if (entry) entry.last = r.semester;
       else names.set(k, { lang: r.moduleNameLang, name: r.moduleName, first: r.semester, last: r.semester });
     }
-    for (const n of names.values()) {
-      await db
-        .insert(moduleNames)
-        .values({ moduleId: mod.id, lang: n.lang, name: n.name, firstSemester: n.first, lastSemester: n.last })
-        .onConflictDoUpdate({
-          target: [moduleNames.moduleId, moduleNames.lang, moduleNames.name],
-          set: { firstSemester: n.first, lastSemester: n.last },
-        });
+    // Names are fully derived from source records, so replace them wholesale.
+    await db.delete(moduleNames).where(eq(moduleNames.moduleId, mod.id));
+    if (names.size) {
+      await db.insert(moduleNames).values(
+        [...names.values()].map((n) => ({
+          moduleId: mod.id,
+          lang: n.lang,
+          name: n.name,
+          firstSemester: n.first,
+          lastSemester: n.last,
+        })),
+      );
     }
 
     // Group by exam and merge.

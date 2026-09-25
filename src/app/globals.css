@@ -32,13 +32,13 @@
   --brand-dark: #072140;
   --brand-light: #5e94d4;
 
-  /* Chart series colours (used by the comparison view). */
+  /* Chart series colours, fixed order (validated for colour-vision deficiency in light mode). */
   --chart-1: #3070b3;
   --chart-2: #e37222;
-  --chart-3: #9fba36;
-  --chart-4: #8f81ea;
-  --chart-5: #ea7237;
-  --chart-6: #0e7c86;
+  --chart-3: #1baf7a;
+  --chart-4: #c98500;
+  --chart-grid: #e8ecf1;
+  --chart-fail: #c4071b;
 }
 
 .dark {
@@ -95,8 +95,7 @@
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-chart-6: var(--chart-6);
+  --color-chart-fail: var(--chart-fail);
 }
 
 @layer base {

@@ -38,6 +38,13 @@ export function semesterKey(semester: Semester): number {
   return Number(m[1]) * 2 + (m[2] === "WS" ? 1 : 0);
 }
 
+/** Compact form for tight spaces: "WS 24/25", "SS 25". */
+export function formatSemesterShort(semester: Semester): string {
+  const m = CANONICAL.exec(semester)!;
+  const yy = m[1].slice(-2);
+  return m[2] === "WS" ? `WS ${yy}/${String((Number(yy) + 1) % 100).padStart(2, "0")}` : `SS ${yy}`;
+}
+
 export function formatSemester(semester: Semester): string {
   const m = CANONICAL.exec(semester)!;
   const year = Number(m[1]);

@@ -3,67 +3,73 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design tokens follow the shadcn/ui convention so that components added via
- * `npx shadcn add ...` pick them up. Brand colours are inspired by the TUM
- * palette (TUM blue #3070B3, dark blue #072140) without using TUM's logo.
+ * Design tokens from the shadcn/ui preset b1D3CJHe:
+ *   style mira · base color neutral · theme green · font Inter · icons lucide · radius default
+ *   menu color default-translucent · menu accent subtle
+ * Values copied from the shadcn registry (neutral base + green theme). Chart colours are our own,
+ * validated for colour-vision deficiency (the preset's neutral chart ramp cannot tell series apart).
  */
 :root {
   --radius: 0.625rem;
 
-  --background: #ffffff;
-  --foreground: #0b1b2f;
-  --card: #ffffff;
-  --card-foreground: #0b1b2f;
-  --popover: #ffffff;
-  --popover-foreground: #0b1b2f;
-  --primary: #3070b3;
-  --primary-foreground: #ffffff;
-  --secondary: #eef3f9;
-  --secondary-foreground: #072140;
-  --muted: #f3f5f8;
-  --muted-foreground: #5b6b7f;
-  --accent: #e3edf8;
-  --accent-foreground: #072140;
-  --destructive: #c4071b;
-  --border: #e2e7ee;
-  --input: #d5dce6;
-  --ring: #3070b3;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.527 0.154 150.069);
+  --primary-foreground: oklch(0.982 0.018 155.826);
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
 
-  --brand-dark: #072140;
-  --brand-light: #5e94d4;
+  /* Chart series, fixed order — validated all-pairs for CVD on white. */
+  --chart-1: #008236;
+  --chart-2: #2a78d6;
+  --chart-3: #d55181;
+  --chart-4: #eda100;
+  --chart-grid: oklch(0.94 0 0);
+  --chart-fail: #e7000b;
 
-  /* Chart series colours, fixed order (validated for colour-vision deficiency in light mode). */
-  --chart-1: #3070b3;
-  --chart-2: #e37222;
-  --chart-3: #1baf7a;
-  --chart-4: #c98500;
-  --chart-grid: #e8ecf1;
-  --chart-fail: #c4071b;
+  /* Thin "unofficial" banner at the very top. */
+  --banner: oklch(0.205 0 0);
+  --banner-foreground: oklch(0.922 0 0);
 }
 
 .dark {
-  --background: #07111f;
-  --foreground: #e8eef6;
-  --card: #0c1a2c;
-  --card-foreground: #e8eef6;
-  --popover: #0c1a2c;
-  --popover-foreground: #e8eef6;
-  --primary: #5e94d4;
-  --primary-foreground: #07111f;
-  --secondary: #13263d;
-  --secondary-foreground: #e8eef6;
-  --muted: #13263d;
-  --muted-foreground: #9aabbf;
-  --accent: #1a3150;
-  --accent-foreground: #e8eef6;
-  --destructive: #f25565;
-  --border: #1d324c;
-  --input: #24405f;
-  --ring: #5e94d4;
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.448 0.119 151.328);
+  --primary-foreground: oklch(0.982 0.018 155.826);
+  --secondary: oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-grid: oklch(1 0 0 / 8%);
+  --banner: oklch(0.269 0 0);
+  --banner-foreground: oklch(0.922 0 0);
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -89,8 +95,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-brand-dark: var(--brand-dark);
-  --color-brand-light: var(--brand-light);
+  --color-banner: var(--banner);
+  --color-banner-foreground: var(--banner-foreground);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);

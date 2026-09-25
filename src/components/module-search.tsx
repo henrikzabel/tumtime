@@ -101,7 +101,7 @@ export function ModuleSearch({
       <Search
         className={cn(
           "pointer-events-none absolute top-1/2 -translate-y-1/2 text-muted-foreground",
-          size === "lg" ? "left-4 size-5" : "left-3 size-4",
+          size === "lg" ? "left-4 size-4.5" : "left-2.5 size-3.5",
         )}
       />
       <input
@@ -118,15 +118,15 @@ export function ModuleSearch({
         onFocus={() => hits.length && setOpen(true)}
         onKeyDown={onKeyDown}
         className={cn(
-          "w-full rounded-xl border bg-card shadow-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-[3px] focus-visible:ring-ring/40",
-          size === "lg" ? "h-14 pl-12 pr-4 text-base" : "h-9 pl-9 pr-3 text-sm",
+          "w-full border border-input bg-input/20 outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 dark:bg-input/30",
+          size === "lg" ? "h-12 rounded-lg bg-card pl-11 pr-4 text-base shadow-xs" : "h-7 rounded-md pl-8 pr-2 text-xs/relaxed",
         )}
       />
       {open && hits.length > 0 && (
         <ul
           id={listId}
           role="listbox"
-          className="absolute z-50 mt-2 w-full overflow-hidden rounded-xl border bg-popover text-left shadow-lg"
+          className="absolute z-50 mt-1.5 w-full overflow-hidden rounded-lg bg-popover/85 p-1 text-left text-popover-foreground shadow-md ring-1 ring-foreground/10 backdrop-blur-2xl backdrop-saturate-150"
         >
           {hits.map((hit, i) => (
             <li
@@ -140,11 +140,11 @@ export function ModuleSearch({
                 choose(hit);
               }}
               className={cn(
-                "flex cursor-pointer items-baseline gap-3 px-4 py-2.5",
-                i === active && "bg-accent text-accent-foreground",
+                "flex cursor-pointer items-baseline gap-3 rounded-md px-2.5 py-2 text-sm",
+                i === active && "bg-foreground/5",
               )}
             >
-              <span className="w-24 shrink-0 font-mono text-sm font-medium">{hit.code}</span>
+              <span className="w-24 shrink-0 font-mono text-xs font-medium">{hit.code}</span>
               <span className="truncate">{hit.nameEn ?? hit.nameDe ?? "—"}</span>
               {hit.ects ? <span className="ml-auto shrink-0 text-xs text-muted-foreground">{hit.ects} ECTS</span> : null}
             </li>
@@ -152,7 +152,7 @@ export function ModuleSearch({
         </ul>
       )}
       {showEmpty && (
-        <div className="absolute z-50 mt-2 w-full rounded-xl border bg-popover px-4 py-3 text-left text-sm text-muted-foreground shadow-lg">
+        <div className="absolute z-50 mt-1.5 w-full rounded-lg bg-popover/85 px-3 py-2.5 text-left text-xs/relaxed text-muted-foreground shadow-md ring-1 ring-foreground/10 backdrop-blur-2xl">
           No modules found for “{query.trim()}”.
         </div>
       )}

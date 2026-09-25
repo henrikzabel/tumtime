@@ -69,17 +69,17 @@ export function CompareView({ series }: { series: CompareSeries[] }) {
     <div className="mt-6 space-y-4">
       <div className="flex flex-wrap items-start gap-3">
         {series.map((s, i) => (
-          <div key={`${s.code}-${i}`} className="flex min-w-64 flex-1 items-start gap-3 rounded-xl border bg-card p-3 md:max-w-sm">
+          <div key={`${s.code}-${i}`} className="flex min-w-64 flex-1 items-start gap-3 rounded-lg bg-card p-3 ring-1 ring-foreground/10 md:max-w-sm">
             <span className="mt-1.5 size-3 shrink-0 rounded-full" style={{ background: COLORS[i] }} />
             <div className="min-w-0 flex-1">
               <div className="font-mono text-xs text-muted-foreground">{s.code}</div>
-              <div className="truncate font-medium" title={s.name}>
+              <div className="truncate text-sm font-medium" title={s.name}>
                 {s.name}
               </div>
               <select
                 value={s.selector}
                 onChange={(e) => navigate(items.map((it, j) => (j === i ? { ...it, selector: e.target.value } : it)))}
-                className="mt-2 h-8 w-full rounded-md border bg-background px-2 text-sm"
+                className="mt-2 h-7 w-full rounded-md border border-input bg-input/20 px-2 text-xs/relaxed outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
                 aria-label={`Exam for ${s.code}`}
               >
                 {s.options.map((o) => (
@@ -164,8 +164,8 @@ export function CompareView({ series }: { series: CompareSeries[] }) {
             </CardContent>
           </Card>
 
-          <div className="overflow-x-auto rounded-xl border bg-card">
-            <table className="w-full text-sm">
+          <div className="overflow-x-auto rounded-lg bg-card ring-1 ring-foreground/10">
+            <table className="w-full text-xs/relaxed">
               <thead className="border-b bg-muted/50 text-left text-xs text-muted-foreground">
                 <tr>
                   <th className="px-4 py-2.5 font-medium">Series</th>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 
+import { buttonVariants } from "@/components/ui/button";
 import { UrlSelect } from "@/components/url-select";
 import { formatAverage, formatCount, formatPercent } from "@/lib/format";
 import {
@@ -90,8 +91,8 @@ export default async function BrowsePage({ searchParams }: PageProps<"/browse">)
         </div>
       </Suspense>
 
-      <div className="mt-4 overflow-x-auto rounded-xl border bg-card">
-        <table className="w-full text-sm">
+      <div className="mt-4 overflow-x-auto rounded-lg bg-card ring-1 ring-foreground/10">
+        <table className="w-full text-xs/relaxed">
           <thead className="border-b bg-muted/50 text-left text-xs text-muted-foreground">
             <tr>
               <th className="px-4 py-2.5 font-medium">Module</th>
@@ -109,7 +110,7 @@ export default async function BrowsePage({ searchParams }: PageProps<"/browse">)
                 <td className="px-4 py-2.5">
                   <Link href={`/modules/${encodeURIComponent(r.code)}`} className="group block">
                     <span className="font-mono text-xs text-muted-foreground">{r.code}</span>
-                    <span className="block font-medium group-hover:text-primary group-hover:underline">
+                    <span className="block text-sm font-medium group-hover:text-primary group-hover:underline">
                       {r.nameEn ?? "—"}
                     </span>
                   </Link>
@@ -145,7 +146,7 @@ export default async function BrowsePage({ searchParams }: PageProps<"/browse">)
           <Link
             href={pageHref(page - 1)}
             aria-disabled={page <= 1}
-            className={cn("rounded-md border px-3 py-1.5", page <= 1 && "pointer-events-none opacity-40")}
+            className={cn(buttonVariants({ variant: "outline" }), page <= 1 && "pointer-events-none opacity-40")}
           >
             ← Previous
           </Link>
@@ -155,7 +156,7 @@ export default async function BrowsePage({ searchParams }: PageProps<"/browse">)
           <Link
             href={pageHref(page + 1)}
             aria-disabled={page >= pages}
-            className={cn("rounded-md border px-3 py-1.5", page >= pages && "pointer-events-none opacity-40")}
+            className={cn(buttonVariants({ variant: "outline" }), page >= pages && "pointer-events-none opacity-40")}
           >
             Next →
           </Link>

@@ -73,6 +73,26 @@ exam, their grade distributions must match exactly (or, without a distribution, 
 counts). If they differ, the exam is marked `conflict` and not published until an admin pins a
 source. Priority for filling in fields: `upload` > `aamin` > `tum_info`.
 
+## Study planner & timetable (Phase 2)
+
+`/planner` lets students start from the recommended study plan of their program, move modules
+between semesters, fill elective slots and track requirements (required modules, electives,
+Überfachliche Grundlagen, Anwendungsfach). Plans are stored in the browser (`localStorage`) and
+can be shared as a link. `/timetable` shows lectures and tutorial groups of the chosen modules on
+a weekly grid with clash detection and `.ics` export.
+
+```bash
+npm run import:planner                          # study plans, module handbook, courses of the upcoming semester
+npm run import:planner -- --semester 2027SS     # courses/dates of another semester
+npm run import:planner -- --skip-courses        # only study plans + module handbook
+```
+
+Sources (public, no login): the TUM School of CIT "Studienplan" pages (one table per starting
+cohort) and the TUM NAT API (`api.srv.nat.tum.de`: module handbook entries, courses with groups,
+dates and rooms). The importer is rate-limited; the NAT API can be slow for large modules, so a
+full run takes 10–20 minutes. Supported programs are configured in
+`src/importers/planner/programs.ts` (currently B.Sc. Informatik and B.Sc. Wirtschaftsinformatik).
+
 ## Environment variables
 
 | Variable | Required | Description |
@@ -95,6 +115,7 @@ source. Priority for filling in fields: `upload` > `aamin` > `tum_info`.
 | `npm run db:studio` | Open Drizzle Studio |
 | `npm run import:tum-info` | Import TUM Info statistics (see below) |
 | `npm run remove-source -- <source>` | Delete all data of one source |
+| `npm run import:planner` | Import study plans, module handbook and course dates (see above) |
 
 ## Legal
 

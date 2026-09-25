@@ -30,9 +30,14 @@ export default function HomePage() {
           </Link>
         ))}
       </div>
-      <Link href="/browse" className="text-sm text-primary underline-offset-4 hover:underline">
-        or browse all modules by school →
-      </Link>
+      <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm">
+        <Link href="/browse" className="text-primary underline-offset-4 hover:underline">
+          Browse all modules by school →
+        </Link>
+        <Link href="/planner" className="text-primary underline-offset-4 hover:underline">
+          Plan your studies & timetable →
+        </Link>
+      </div>
     </section>
   );
 }

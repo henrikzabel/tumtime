@@ -5,6 +5,7 @@ import { copy } from "@/lib/copy";
 const navItems = [
   { href: "/browse", label: copy.nav.browse },
   { href: "/compare", label: copy.nav.compare },
+  { href: "/planner", label: copy.nav.planner },
   { href: "/contribute", label: copy.nav.contribute },
 ] as const;
 

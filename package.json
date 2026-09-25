@@ -15,7 +15,8 @@
     "db:seed": "tsx scripts/seed.ts",
     "db:studio": "drizzle-kit studio",
     "import:tum-info": "tsx scripts/import-tum-info.ts",
-    "remove-source": "tsx scripts/remove-source.ts"
+    "remove-source": "tsx scripts/remove-source.ts",
+    "import:planner": "tsx scripts/import-planner.ts"
   },
   "dependencies": {
     "cheerio": "^1.2.0",

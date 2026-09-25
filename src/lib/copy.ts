@@ -12,6 +12,7 @@ export const copy = {
     search: "Search",
     browse: "Browse",
     compare: "Compare",
+    planner: "Planner",
     contribute: "Contribute",
   },
   footer: {

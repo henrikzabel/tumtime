@@ -1,5 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
+  bigint,
+  boolean,
   check,
   date,
   index,
@@ -193,3 +195,148 @@ export const submissions = pgTable("submissions", {
   reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
+
+/* ------------------------------------------------------------------------------------------------
+ * Phase 2: study planner & timetable
+ *
+ * programs → study_plans (one per starting cohort, from the CIT "Studienplan" pages)
+ *          → study_plan_entries (recommended modules / elective placeholders per semester)
+ * module_descriptions: module handbook details (TUM NAT API), 1:1 with modules
+ * courses → course_groups → course_events: lectures/tutorials with dates and rooms per semester;
+ * course_modules links courses to module numbers.
+ * --------------------------------------------------------------------------------------------- */
+
+export const programs = pgTable("programs", {
+  id: serial("id").primaryKey(),
+  studyId: text("study_id").notNull().unique(), // TUMonline study id, e.g. "163017030"
+  slug: text("slug").notNull().unique(), // URL-friendly, e.g. "bsc-informatics"
+  nameDe: text("name_de").notNull(),
+  nameEn: text("name_en").notNull(),
+  degree: text("degree").notNull(), // "B.Sc."
+  schoolId: integer("school_id").references(() => schools.id),
+  sourceUrl: text("source_url"),
+  ...timestamps,
+});
+
+export const studyPlans = pgTable(
+  "study_plans",
+  {
+    id: serial("id").primaryKey(),
+    programId: integer("program_id")
+      .notNull()
+      .references(() => programs.id, { onDelete: "cascade" }),
+    title: text("title").notNull(),
+    startFrom: text("start_from"), // first starting semester this plan applies to
+    startUntil: text("start_until"), // last starting semester (null = still current)
+    tumonlineCurriculumId: integer("tumonline_curriculum_id"),
+    footnotes: text("footnotes").array().notNull().default(sql`'{}'::text[]`),
+    requirements: jsonb("requirements").notNull().default(sql`'[]'::jsonb`), // [{ area, credits }]
+    sort: smallint("sort").notNull().default(0),
+    ...timestamps,
+  },
+  (t) => [unique("study_plans_program_title").on(t.programId, t.title)],
+);
+
+export const studyPlanEntries = pgTable(
+  "study_plan_entries",
+  {
+    id: serial("id").primaryKey(),
+    studyPlanId: integer("study_plan_id")
+      .notNull()
+      .references(() => studyPlans.id, { onDelete: "cascade" }),
+    semesterNo: smallint("semester_no").notNull(),
+    kind: text("kind").notNull(), // "module" | "placeholder"
+    moduleCode: text("module_code"),
+    title: text("title").notNull(),
+    credits: numeric("credits", { precision: 4, scale: 1, mode: "number" }).notNull(),
+    area: text("area"),
+    markers: text("markers").notNull().default(""),
+    alternativeGroup: smallint("alternative_group"),
+    sort: smallint("sort").notNull().default(0),
+  },
+  (t) => [index("study_plan_entries_plan_idx").on(t.studyPlanId)],
+);
+
+export const moduleDescriptions = pgTable("module_descriptions", {
+  moduleId: integer("module_id")
+    .primaryKey()
+    .references(() => modules.id, { onDelete: "cascade" }),
+  credits: numeric("credits", { precision: 4, scale: 1, mode: "number" }),
+  cycle: text("cycle"), // "winter" | "summer" | "both"
+  durationSemesters: smallint("duration_semesters"),
+  languages: text("languages").array().notNull().default(sql`'{}'::text[]`),
+  level: text("level"),
+  examRepeat: text("exam_repeat"),
+  contentDe: text("content_de"),
+  contentEn: text("content_en"),
+  outcomeDe: text("outcome_de"),
+  outcomeEn: text("outcome_en"),
+  preconditionDe: text("precondition_de"),
+  preconditionEn: text("precondition_en"),
+  examDe: text("exam_de"),
+  examEn: text("exam_en"),
+  contactHours: smallint("contact_hours"),
+  organisation: text("organisation"),
+  descriptionVersion: text("description_version"),
+  fetchedAt: timestamp("fetched_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const courses = pgTable(
+  "courses",
+  {
+    id: bigint("id", { mode: "number" }).primaryKey(), // TUMonline course id
+    semester: text("semester").notNull(),
+    titleDe: text("title_de"),
+    titleEn: text("title_en"),
+    activity: text("activity"), // VO, UE, VI, PR, SE …
+    activityName: text("activity_name"),
+    hoursPerWeek: numeric("hours_per_week", { precision: 4, scale: 1, mode: "number" }),
+    languages: text("languages").array().notNull().default(sql`'{}'::text[]`),
+    tumonlineUrl: text("tumonline_url"),
+    fetchedAt: timestamp("fetched_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("courses_semester_idx").on(t.semester)],
+);
+
+export const courseModules = pgTable(
+  "course_modules",
+  {
+    courseId: bigint("course_id", { mode: "number" })
+      .notNull()
+      .references(() => courses.id, { onDelete: "cascade" }),
+    moduleCode: text("module_code").notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.courseId, t.moduleCode] }), index("course_modules_code_idx").on(t.moduleCode)],
+);
+
+export const courseGroups = pgTable(
+  "course_groups",
+  {
+    id: bigint("id", { mode: "number" }).primaryKey(),
+    courseId: bigint("course_id", { mode: "number" })
+      .notNull()
+      .references(() => courses.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    maxStudents: integer("max_students"),
+  },
+  (t) => [index("course_groups_course_idx").on(t.courseId)],
+);
+
+export const courseEvents = pgTable(
+  "course_events",
+  {
+    id: bigint("id", { mode: "number" }).primaryKey(),
+    groupId: bigint("group_id", { mode: "number" })
+      .notNull()
+      .references(() => courseGroups.id, { onDelete: "cascade" }),
+    startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
+    endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
+    canceled: boolean("canceled").notNull().default(false),
+    type: text("type"),
+    roomShort: text("room_short"),
+    roomCode: text("room_code"),
+    roomNavUrl: text("room_nav_url"),
+    roomDescription: text("room_description"),
+  },
+  (t) => [index("course_events_group_idx").on(t.groupId)],
+);

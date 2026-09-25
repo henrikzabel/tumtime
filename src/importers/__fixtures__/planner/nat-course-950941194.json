@@ -1,0 +1,1056 @@
+{
+ "course_code": "0000005120",
+ "course_name": "Übungen zu Einführung in die Rechnerarchitektur - Gruppen Do, Fr (IN0004)",
+ "course_name_en": "Introduction to Computer Organization and Technology - Computer Architecture, Exercise Session - Groups Thu, Fri (IN0004)",
+ "course_id": 950941194,
+ "hoursperweek": "2.0",
+ "modified_tumonline": "2026-08-28T20:50:51.644170+02:00",
+ "activity": {
+  "activity_id": "UE",
+  "activity_name": "Übung",
+  "activity_name_en": "exercise"
+ },
+ "course_name_list": "0000005120: Übungen zu Einführung in die Rechnerarchitektur - Gruppen Do, Fr (IN0004) (Hien, Prinz, Schäffeler, Schulz, Shen, Wille)",
+ "course_name_list_en": "0000005120: Introduction to Computer Organization and Technology - Computer Architecture, Exercise Session - Groups Thu, Fri (IN0004) (Hien, Prinz, Schäffeler, Schulz, Shen, Wille)",
+ "semester": {
+  "semester_tag": "WS 2026/7",
+  "semester_title": "Wintersemester 2026/27",
+  "semester_title_en": "Winter Semester 2026/27",
+  "semester_key": "2026w",
+  "semester_period_start": "2026-10-01",
+  "semester_period_end": "2027-03-31",
+  "lecture_period_start": "2026-10-12",
+  "lecture_period_end": "2027-02-05"
+ },
+ "org": {
+  "org_id": 15435,
+  "org_code": "TUINI10",
+  "org_name": "Informatik 10 - Lehrstuhl für Rechnerarchitektur & Parallele Systeme (Prof. Schulz)",
+  "org_name_en": "Informatics 10 - Chair of Computer Architecture and Parallel Systems (Prof. Schulz)",
+  "org_url": "https://www.ce.cit.tum.de/caps",
+  "org_type": "Lehrstuhl",
+  "org_nameshort": null,
+  "org_nameshort_en": null,
+  "org_email": null,
+  "deleted": null,
+  "school": {
+   "org_id": 51897,
+   "org_code": "TUS1000",
+   "org_name": "TUM School of Computation, Information and Technology",
+   "org_name_en": "TUM School of Computation, Information and Technology",
+   "org_url": "https://www.cit.tum.de/"
+  },
+  "tumonline_url": "https://campus.tum.de/tumonline/wborg.display?PORGNR=15435"
+ },
+ "ghk": 90001676,
+ "instruction_languages": [
+  "de"
+ ],
+ "description": "siehe Modulbeschreibung IN0004",
+ "description_en": "see module description IN0004",
+ "teachingmethod": null,
+ "teachingmethod_en": null,
+ "note": null,
+ "note_en": null,
+ "credits": null,
+ "groups": [
+  {
+   "course_id": 950941194,
+   "group_id": 1353218,
+   "group_name": "Do-1200-3",
+   "max_students": 26,
+   "students_fix": null,
+   "anmv_id": 79397,
+   "events": [
+    {
+     "event_id": 892912331,
+     "eventseries_id": null,
+     "start": "2026-10-22T12:00:00+02:00",
+     "end": "2026-10-22T14:00:00+02:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912331"
+    },
+    {
+     "event_id": 892912332,
+     "eventseries_id": null,
+     "start": "2026-10-29T12:00:00+01:00",
+     "end": "2026-10-29T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912332"
+    },
+    {
+     "event_id": 892912333,
+     "eventseries_id": null,
+     "start": "2026-11-05T12:00:00+01:00",
+     "end": "2026-11-05T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912333"
+    },
+    {
+     "event_id": 892912334,
+     "eventseries_id": null,
+     "start": "2026-11-12T12:00:00+01:00",
+     "end": "2026-11-12T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912334"
+    },
+    {
+     "event_id": 892912335,
+     "eventseries_id": null,
+     "start": "2026-11-19T12:00:00+01:00",
+     "end": "2026-11-19T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912335"
+    },
+    {
+     "event_id": 892912336,
+     "eventseries_id": null,
+     "start": "2026-11-26T12:00:00+01:00",
+     "end": "2026-11-26T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912336"
+    },
+    {
+     "event_id": 892912337,
+     "eventseries_id": null,
+     "start": "2026-12-10T12:00:00+01:00",
+     "end": "2026-12-10T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912337"
+    },
+    {
+     "event_id": 892912338,
+     "eventseries_id": null,
+     "start": "2026-12-17T12:00:00+01:00",
+     "end": "2026-12-17T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912338"
+    },
+    {
+     "event_id": 892912339,
+     "eventseries_id": null,
+     "start": "2027-01-07T12:00:00+01:00",
+     "end": "2027-01-07T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912339"
+    },
+    {
+     "event_id": 892912340,
+     "eventseries_id": null,
+     "start": "2027-01-14T12:00:00+01:00",
+     "end": "2027-01-14T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912340"
+    },
+    {
+     "event_id": 892912341,
+     "eventseries_id": null,
+     "start": "2027-01-21T12:00:00+01:00",
+     "end": "2027-01-21T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912341"
+    },
+    {
+     "event_id": 892912342,
+     "eventseries_id": null,
+     "start": "2027-01-28T12:00:00+01:00",
+     "end": "2027-01-28T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912342"
+    },
+    {
+     "event_id": 892912343,
+     "eventseries_id": null,
+     "start": "2027-02-04T12:00:00+01:00",
+     "end": "2027-02-04T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 00.13.054",
+      "room_id": 57939,
+      "room_identifier": null,
+      "room_code": "5613.EG.054",
+      "nav_url": "https://nav.tum.de/room/5613.EG.054",
+      "ressource_id": 18291,
+      "description": "00.13.054, Seminarraum",
+      "schedule_url": null,
+      "floor": "EG"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912343"
+    }
+   ],
+   "register_url": "https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/slc.tm.cp/student/registrationProcedures/79397?$ctx=design=ca&courseId=950941194"
+  },
+  {
+   "course_id": 950941194,
+   "group_id": 1353219,
+   "group_name": "Fr-1500-2",
+   "max_students": 30,
+   "students_fix": null,
+   "anmv_id": 79397,
+   "events": [],
+   "register_url": "https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/slc.tm.cp/student/registrationProcedures/79397?$ctx=design=ca&courseId=950941194"
+  },
+  {
+   "course_id": 950941194,
+   "group_id": 1353220,
+   "group_name": "Do-1200-2",
+   "max_students": 30,
+   "students_fix": null,
+   "anmv_id": 79397,
+   "events": [
+    {
+     "event_id": 892912344,
+     "eventseries_id": null,
+     "start": "2026-10-15T12:00:00+02:00",
+     "end": "2026-10-15T14:00:00+02:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912344"
+    },
+    {
+     "event_id": 892912345,
+     "eventseries_id": null,
+     "start": "2026-10-22T12:00:00+02:00",
+     "end": "2026-10-22T14:00:00+02:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912345"
+    },
+    {
+     "event_id": 892912346,
+     "eventseries_id": null,
+     "start": "2026-10-29T12:00:00+01:00",
+     "end": "2026-10-29T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912346"
+    },
+    {
+     "event_id": 892912347,
+     "eventseries_id": null,
+     "start": "2026-11-05T12:00:00+01:00",
+     "end": "2026-11-05T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912347"
+    },
+    {
+     "event_id": 892912348,
+     "eventseries_id": null,
+     "start": "2026-11-12T12:00:00+01:00",
+     "end": "2026-11-12T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912348"
+    },
+    {
+     "event_id": 892912349,
+     "eventseries_id": null,
+     "start": "2026-11-19T12:00:00+01:00",
+     "end": "2026-11-19T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912349"
+    },
+    {
+     "event_id": 892912350,
+     "eventseries_id": null,
+     "start": "2026-11-26T12:00:00+01:00",
+     "end": "2026-11-26T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912350"
+    },
+    {
+     "event_id": 892912351,
+     "eventseries_id": null,
+     "start": "2026-12-10T12:00:00+01:00",
+     "end": "2026-12-10T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912351"
+    },
+    {
+     "event_id": 892912352,
+     "eventseries_id": null,
+     "start": "2026-12-17T12:00:00+01:00",
+     "end": "2026-12-17T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912352"
+    },
+    {
+     "event_id": 892912353,
+     "eventseries_id": null,
+     "start": "2027-01-07T12:00:00+01:00",
+     "end": "2027-01-07T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912353"
+    },
+    {
+     "event_id": 892912354,
+     "eventseries_id": null,
+     "start": "2027-01-14T12:00:00+01:00",
+     "end": "2027-01-14T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912354"
+    },
+    {
+     "event_id": 892912355,
+     "eventseries_id": null,
+     "start": "2027-01-21T12:00:00+01:00",
+     "end": "2027-01-21T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912355"
+    },
+    {
+     "event_id": 892912356,
+     "eventseries_id": null,
+     "start": "2027-01-28T12:00:00+01:00",
+     "end": "2027-01-28T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912356"
+    },
+    {
+     "event_id": 892912357,
+     "eventseries_id": null,
+     "start": "2027-02-04T12:00:00+01:00",
+     "end": "2027-02-04T14:00:00+01:00",
+     "topic": null,
+     "comment": null,
+     "eventtype": {
+      "eventtype_id": "REGULAR",
+      "eventtype": "Abhaltung",
+      "eventtype_en": "regular class"
+     },
+     "eventstatus": {
+      "eventstatus_id": "CONFIRMED",
+      "eventstatus": "fix",
+      "eventstatus_en": "confirmed",
+      "active": true,
+      "confirmed": true,
+      "canceled": false
+     },
+     "room": {
+      "room_short": "MI 01.06.020",
+      "room_id": 31256,
+      "room_identifier": null,
+      "room_code": "5606.01.020",
+      "nav_url": "https://nav.tum.de/room/5606.01.020",
+      "ressource_id": 15283,
+      "description": "01.06.020, Unterrichtsraum ohne Infrastruktur",
+      "schedule_url": null,
+      "floor": "01"
+     },
+     "lecturers": [],
+     "links": {},
+     "url_tumonline": "https://campus.tum.de/tumonline/!wbTermin.wbEdit?pTerminNr=892912357"
+    }
+   ],
+   "register_url": "https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/slc.tm.cp/student/registrationProcedures/79397?$ctx=design=ca&courseId=950941194"
+  }
+ ],
+ "exams": [],
+ "modules": [
+  {
+   "module_id": 452812,
+   "module_code": "IN0004",
+   "module_title": "Einführung in die Rechnerarchitektur",
+   "module_title_en": "Introduction to Computer Organization and Technology - Computer Architecture",
+   "module_credits": "8",
+   "module_short": null,
+   "module_short_en": null,
+   "module_subtitle": null,
+   "module_subtitle_en": null,
+   "module_valid_from": null,
+   "module_valid_through": null,
+   "module_responsible": null,
+   "module_version": null
+  }
+ ],
+ "roles": [],
+ "links": {},
+ "tumonline_url": "https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/slc.tm.cp/student/courses/950941194?$scrollTo=toc_overview"
+}

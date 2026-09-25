@@ -1,0 +1,327 @@
+{
+ "module_id": 455630,
+ "module_code": "IN0001",
+ "module_title": "Einführung in die Informatik",
+ "module_title_en": "Introduction to Informatics",
+ "module_credits": "6",
+ "module_short": null,
+ "module_short_en": null,
+ "module_subtitle": null,
+ "module_subtitle_en": null,
+ "module_valid_from": null,
+ "module_valid_through": null,
+ "module_responsible": null,
+ "module_version": null,
+ "description_id": 18430,
+ "description_version": "2026w",
+ "description_in_progress": false,
+ "module_levels": [
+  {
+   "title": "Bachelor-Niveau",
+   "title_en": "Bachelor’s level",
+   "short": "B",
+   "short_en": "B"
+  }
+ ],
+ "language_tags": [
+  "de"
+ ],
+ "module_languages": [
+  {
+   "title": "Deutsch",
+   "title_en": "German",
+   "short": "DE",
+   "short_en": "DE"
+  }
+ ],
+ "module_examrepeat": [
+  {
+   "title": "am Semesterende",
+   "title_en": "at the end of the semester",
+   "short": null,
+   "short_en": null
+  }
+ ],
+ "module_duration": {
+  "title": "Semestermodul",
+  "title_en": "semester module",
+  "short": "1",
+  "short_en": "1"
+ },
+ "module_cycle": {
+  "title": "im Wintersemester",
+  "title_en": "in winter semester",
+  "short": "W",
+  "short_en": "W"
+ },
+ "module_versions": [
+  {
+   "module_id": 455630,
+   "module_code": "IN0001",
+   "module_title": "Einführung in die Informatik",
+   "module_title_en": "Introduction to Informatics",
+   "module_credits": "6",
+   "module_short": null,
+   "module_short_en": null,
+   "module_subtitle": null,
+   "module_subtitle_en": null,
+   "module_valid_from": null,
+   "module_valid_through": null,
+   "module_responsible": null,
+   "module_version": null,
+   "description_id": 18430,
+   "description_version": "2026w",
+   "description_in_progress": false
+  },
+  {
+   "module_id": 455630,
+   "module_code": "IN0001",
+   "module_title": "Einführung in die Informatik",
+   "module_title_en": "Introduction to Informatics",
+   "module_credits": "6",
+   "module_short": null,
+   "module_short_en": null,
+   "module_subtitle": null,
+   "module_subtitle_en": null,
+   "module_valid_from": null,
+   "module_valid_through": null,
+   "module_responsible": null,
+   "module_version": null,
+   "description_id": 13787,
+   "description_version": "2024s",
+   "description_in_progress": false
+  },
+  {
+   "module_id": 455630,
+   "module_code": "IN0001",
+   "module_title": "Einführung in die Informatik",
+   "module_title_en": "Introduction to Informatics",
+   "module_credits": "6",
+   "module_short": null,
+   "module_short_en": null,
+   "module_subtitle": null,
+   "module_subtitle_en": null,
+   "module_valid_from": null,
+   "module_valid_through": null,
+   "module_responsible": null,
+   "module_version": null,
+   "description_id": 9548,
+   "description_version": "2011w",
+   "description_in_progress": false
+  }
+ ],
+ "org": {
+  "org_id": 53598,
+  "org_code": "TUS1DP2",
+  "org_name": "Department of Computer Science",
+  "org_name_en": "Department of Computer Science",
+  "org_url": null,
+  "org_type": "Department",
+  "org_nameshort": null,
+  "org_nameshort_en": null,
+  "org_email": null,
+  "deleted": null,
+  "school": {
+   "org_id": 51897,
+   "org_code": "TUS1000",
+   "org_name": "TUM School of Computation, Information and Technology",
+   "org_name_en": "TUM School of Computation, Information and Technology",
+   "org_url": "https://www.cit.tum.de/"
+  },
+  "tumonline_url": "https://campus.tum.de/tumonline/wborg.display?PORGNR=53598"
+ },
+ "catalog_tags": [
+  "bsc_political_science_interdisciplinary"
+ ],
+ "description_id_tumonline": 85403,
+ "description_status": "BE_OK",
+ "description_workload_praesenz": 60,
+ "module_content": "In dem Modul IN0001 werden beispielhaft folgende Inhalte behandelt:\r\n- Einführung \r\n   ++ Grundlegende Begriffe: Problem - Algorithmus - Programm\r\n   ++ Imperative Programmkonstrukte \r\n- Syntax und Semantik\r\n   ++ Syntax von Programmiersprachen: reguläre Ausdrücke und kontextfreie Grammatiken\r\n   ++ Semantik von Programmen: Kontrollfluss-Diagramme \r\n- Grundlegende Datenstrukturen I:\r\n   ++ Zahlen, Strings, Felder\r\n   ++ Sortieren durch Einfügen \r\n- Rekursion\r\n   ++ Binäre Suche\r\n   ++ Rekursionsarten \r\n- Grundlegende Datenstrukturen II:\r\n   ++ Objekte, Klassen, Methoden\r\n   ++ Listen, Keller und Schlangen \r\n- Objektorientierte Programmierung\r\n   ++ Vererbung\r\n   ++ abstrakte Klassen und Interfaces\r\n   ++ Polymorphie \r\n- Programmieren im Großen (Ausblick und Einbettung in ökonomische, gesellschaftliche und ethische Zusammenhänge)\r\n- Nebenläufige Programmierung und Threads",
+ "module_content_en": "The module IN0001 is concerned with topics such as:\r\n- Introduction\r\n  ++ Basic notions: Problem - algorithm - program\r\n  ++ Imperative programming constructs \r\n- Syntax and semantics\r\n  ++ Syntax of programming languages: regular expressions and contextfree grammers\r\n  ++ Semantics of programs: control-flow graphs \r\n- Basic data structures I\r\n  ++ Numbers, strings, arrays\r\n  ++ Insertion sort \r\n- Recursion\r\n  ++ Binary search\r\n  ++ Patterns of recursion\r\n- Basic data structures II\r\n  ++ Objects, classes, methods\r\n  ++ Lists, stacks, queues\r\n- Object-oriented programming\r\n  ++ Inheritance\r\n  ++ Abstract classes and interfaces\r\n  ++ Polymorphism\r\n - Programming in the large (perspectives and integration into economic, social and ethical contexts)\r\n - Concurrency and Threads",
+ "module_outcome": "Nach der erfolgreichen Teilnahme an diesem Modul verstehen die Teilnehmer die wesentlichen Konzepte der Informatik auf einem grundlegenden, praxis-orientierten, aber wissenschaftlichen Niveau und können mit ihnen verantwortungsvoll umgehen. \r\nKonzepte dieser Art sind etwa: Algorithmen, Syntax und Semantik, sowie Effizienz im Hinblick auf Speicherverbrauch oder Zeit.\r\nDie Teilnehmer sind dann in der Lage, in Java oder einer ähnlichen objektorientierten Sprache überschaubare algorithmische Probleme zu lösen und einfache verteilte und nebenläufige Anwendungen zu programmieren. Sie verstehen die diesen Programmiersprachen zugrundeliegenden Konzepte und Modelle und sind deshalb in der Lage, andere zuweisungs- und objektorientierte Programmiersprachen eigenständig zu erlernen.",
+ "module_outcome_en": "Upon successful completion of the module participants understand the essential concepts of computer science on a fundamental, practice-oriented, but scientific level and can handle them responsibly.\r\nConcepts of this kind are for example: Algorithms, syntax and semantics, as well as efficiency in terms of memory consumption or time.\r\nParticipants are then able to solve well-posed algorithmic problems and to implement basic distributed and concurrent applications in Java or a similar object-oriented language. They understand the underlying concepts and models and are therefore able to acquire skills in other imperative and object-oriented programming languages on their own.",
+ "module_precondition": "Praktikum: Grundlagen der Programmierung (IN0002) sollte gleichzeitig besucht werden",
+ "module_precondition_en": "Participants should attend IN0002 \"Fundamentals of Programming (Exercises & Laboratory)\" at the same time.",
+ "module_media": "Folienpräsentation, Tafelanschrieb, Online-Programmierung, Animationen, Vorlesungsaufzeichnung",
+ "module_media_en": "Slide show, blackboard, online programming experiments, animations, lecture recording",
+ "module_literature": "Heinisch, Müller-Hofmann, Goll: Java als erste Programmiersprache, Teubner, 2007\r\nDeitel, Harvey / Deitel, Paul: How to program Java Prentice-Hall, 2002\r\nFlanagan, David: Java in a Nutshell O'Reilly, 2002\r\nBishop, Judith: Java gently Prentice-Hall, 2001\r\nEckel, Bruce: Thinking in Java Prentice-Hall, 2002",
+ "module_literature_en": "Heinisch, Müller-Hofmann, Goll: Java als erste Programmiersprache, Teubner, 2007\r\nDeitel, Harvey / Deitel, Paul: How to program Java Prentice-Hall, 2002\r\nFlanagan, David: Java in a Nutshell O'Reilly, 2002\r\nBishop, Judith: Java gently Prentice-Hall, 2001\r\nEckel, Bruce: Thinking in Java Prentice-Hall, 2002",
+ "module_methods": "Vorlesung, kombiniert mit eigenem experimentellen Erarbeiten der Beispiele am Rechner und Erschließen weiterführender Literatur zur Klärung von technischen Detailfragen.",
+ "module_methods_en": "Lecture, combined with experimental assessment of examples at the computer and evaluation of further readings",
+ "module_exam": "Prüfungsart: Klausur (120 Minuten)\r\n\r\nDie Prüfungsleistung wird in Form einer Klausur von 120 Minuten erbracht. Wissensfragen überprüfen die Vertrautheit mit Konzepten der Informatik und der Programmierung, kleine Programmieraufgaben überprüfen die Fähigkeit, mit maßgeschneiderten Algorithmen Probleme zu lösen und verteilte Anwendungen zu realisieren.",
+ "module_exam_en": "Type of Assessment: exam (120 minutes)\r\n\r\nThe exam takes the form of 120 minutes written test. Questions allow to assess acquaintance with concepts of Informatics and programming, small programming tasks assess the ability to conceive appropriate algorithmic solutions and realize concurrent applications.",
+ "modified_tumonline": "2026-09-14T00:37:42.700219+02:00",
+ "version": "16.2.2",
+ "modified_description": "2026-08-31T11:23:21.324502+02:00",
+ "modified_description_tumonline": null,
+ "courses": {},
+ "exams": [
+  {
+   "course_code": "IN0001",
+   "course_name": "Einführung in die Informatik",
+   "course_name_en": "Introduction to Informatics",
+   "exam_id": 2048590,
+   "register_start": "2026-11-16T00:00:00+01:00",
+   "register_end": "2027-01-15T23:59:00+01:00",
+   "deregister_end": "2027-02-01T23:59:00+01:00",
+   "exam_start": "2027-02-08T08:00:00+01:00",
+   "exam_end": "2027-02-08T10:00:00+01:00",
+   "exammode": {
+    "exammode_short": "S",
+    "exammode": "Schriftlich",
+    "exammode_en": "Written"
+   },
+   "rooms": [
+    {
+     "room_short": "PH HS1",
+     "room_id": 10460,
+     "room_identifier": null,
+     "room_code": "5101.EG.501",
+     "nav_url": "https://nav.tum.de/room/5101.EG.501",
+     "ressource_id": 12587,
+     "description": "2501, Rudolf-Mößbauer-Hörsaal",
+     "schedule_url": null,
+     "floor": "EG"
+    },
+    {
+     "room_short": "Interims II 004",
+     "room_id": 68973,
+     "room_identifier": null,
+     "room_code": "5416.01.004",
+     "nav_url": "https://nav.tum.de/room/5416.01.004",
+     "ressource_id": 29593,
+     "description": "004, Hörsaal 1, Jürgen-Manchot \"Interims II\"",
+     "schedule_url": null,
+     "floor": "01"
+    },
+    {
+     "room_short": "1200",
+     "room_id": 7075,
+     "room_identifier": null,
+     "room_code": "0502.01.200",
+     "nav_url": "https://nav.tum.de/room/0502.01.200",
+     "ressource_id": 12505,
+     "description": "1200, Carl-von-Linde-Hörsaal",
+     "schedule_url": null,
+     "floor": "01"
+    },
+    {
+     "room_short": "CH 21010",
+     "room_id": 11195,
+     "room_identifier": null,
+     "room_code": "5401.01.101K",
+     "nav_url": "https://nav.tum.de/room/5401.01.101K",
+     "ressource_id": 12552,
+     "description": "CH 21010, Hans-Fischer-Hörsaal",
+     "schedule_url": null,
+     "floor": "01"
+    }
+   ],
+   "examiner": {
+    "firstname": null,
+    "lastname": null,
+    "title_pre": null,
+    "title_post": null,
+    "email": null,
+    "gender_id": 2,
+    "person_id": null,
+    "fullname": null,
+    "listname": "Zuleger, Florian",
+    "titlename": "Prof. Dr. Florian Zuleger",
+    "gender": {
+     "gender": "männlich",
+     "gender_en": "male",
+     "gendershort": "m",
+     "gendershort_en": "m"
+    },
+    "tumonline_vcard_url": "https://campus.tum.de/tumonline/visitenkarte.show_vcard?pPersonenGruppe=3&pPersonenId=1C81B0EC4DD25E28"
+   },
+   "student_count": 0,
+   "register_url": "https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/slc.xm.exr/exExamRegistration/2048590?$ctx=lang=de",
+   "register_url_en": "https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/slc.xm.exr/exExamRegistration/2048590?$ctx=lang=en"
+  },
+  {
+   "course_code": "IN0001",
+   "course_name": "Einführung in die Informatik",
+   "course_name_en": "Introduction to Informatics",
+   "exam_id": 2048686,
+   "register_start": "2027-03-08T00:00:00+01:00",
+   "register_end": "2027-03-22T23:59:00+01:00",
+   "deregister_end": "2027-03-23T23:59:00+01:00",
+   "exam_start": "2027-03-30T11:00:00+02:00",
+   "exam_end": "2027-03-30T13:00:00+02:00",
+   "exammode": {
+    "exammode_short": "S",
+    "exammode": "Schriftlich",
+    "exammode_en": "Written"
+   },
+   "rooms": [
+    {
+     "room_short": null,
+     "room_id": 7345,
+     "room_identifier": null,
+     "room_code": "0509.EG.980",
+     "nav_url": "https://nav.tum.de/room/0509.EG.980",
+     "ressource_id": 12521,
+     "description": "0980, Audimax",
+     "schedule_url": null,
+     "floor": "EG"
+    },
+    {
+     "room_short": null,
+     "room_id": 40771,
+     "room_identifier": null,
+     "room_code": "0507.03.750",
+     "nav_url": "https://nav.tum.de/room/0507.03.750",
+     "ressource_id": 12512,
+     "description": "2750, Karl Max von Bauernfeind Hörsaal",
+     "schedule_url": null,
+     "floor": "03"
+    }
+   ],
+   "examiner": {
+    "firstname": null,
+    "lastname": null,
+    "title_pre": null,
+    "title_post": null,
+    "email": null,
+    "gender_id": 2,
+    "person_id": null,
+    "fullname": null,
+    "listname": "Zuleger, Florian",
+    "titlename": "Prof. Dr. Florian Zuleger",
+    "gender": {
+     "gender": "männlich",
+     "gender_en": "male",
+     "gendershort": "m",
+     "gendershort_en": "m"
+    },
+    "tumonline_vcard_url": "https://campus.tum.de/tumonline/visitenkarte.show_vcard?pPersonenGruppe=3&pPersonenId=1C81B0EC4DD25E28"
+   },
+   "student_count": 0,
+   "register_url": "https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/slc.xm.exr/exExamRegistration/2048686?$ctx=lang=de",
+   "register_url_en": "https://campus.tum.de/tumonline/ee/ui/ca2/app/desktop/#/slc.xm.exr/exExamRegistration/2048686?$ctx=lang=en"
+  }
+ ],
+ "catalog_nodes": [
+  {
+   "node_valid_from": null,
+   "node_valid_through": null,
+   "catalog": {
+    "catalog_id": 1613780,
+    "catalog_tag": "bsc_political_science_interdisciplinary",
+    "catalog_title": "Fächerübergreifender Studienanteil im B.Sc. Politikwissenschaft",
+    "catalog_title_en": "Interdisciplinary Electives in B.Sc. Political Science",
+    "catalog_short": "bsc_political_science_interdisciplinary",
+    "catalog_short_en": "bsc_political_science_interdisciplinary",
+    "modified": "2025-11-07T16:53:04+01:00",
+    "catalog_code": null,
+    "catalog_credits": "30",
+    "catalog_remark": null,
+    "catalog_remark_en": null
+   }
+  }
+ ],
+ "tumonline_url": "https://campus.tum.de/tumonline/WBMODHB.wbShowMHBReadOnly?pKnotenNr=455630&pOrgNr=53598",
+ "local_url": "/ui/mhb/modules/detail?module_code=IN0001&description_version=2026w"
+}

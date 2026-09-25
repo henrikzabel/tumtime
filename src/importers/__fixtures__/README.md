@@ -7,3 +7,8 @@
 - `tumonline-exam-statistics.en.html`: a TUMonline "exam statistics" page (English UI, 2026),
   trimmed (styles/scripts/navigation removed) and anonymised (the profile name is replaced with
   "Max Mustermann"). The statistics block and Plotly chart markup are unchanged.
+- `planner/cit-studienplan-bsc-*.html`: the CIT "Studienplan" pages of B.Sc. Informatik and
+  B.Sc. Wirtschaftsinformatik (content area only, fetched 2026-09-25).
+- `planner/nat-module-IN0001.json`, `planner/nat-course-950941194.json`: responses of the public
+  TUM NAT API (`api.srv.nat.tum.de/api/v1/mhb/module/{code}`, `/course/{id}`), fetched 2026-09-25.
+  Staff names and e-mail addresses were removed; the course fixture keeps its first three groups.

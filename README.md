@@ -21,7 +21,7 @@ Requirements: Node.js ≥ 20.9, npm, and Docker (for the local database).
 ```bash
 npm install
 cp .env.example .env.local
-docker compose up -d   # local Postgres 16 on :5432
+docker compose up -d   # local Postgres 16 on :5433 (avoids clashing with a local Postgres)
 npm run db:migrate     # apply migrations (incl. pg_trgm extension)
 npm run db:seed        # schools + departments
 npm run dev            # http://localhost:3000

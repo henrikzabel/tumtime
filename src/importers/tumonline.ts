@@ -176,7 +176,7 @@ export function parseTumOnlineStatistics(html: string): TumOnlineParseResult {
     else if (cat.kind === "noShow") noShow += count;
     else if (cat.kind === "withdrawn") withdrawn += count;
     else if (cat.kind === "cheating") cheating += count;
-    else warnings.push(`Unrecognised category "${cat.label}" (${count}) was ignored.`);
+    else if (cat.kind === "unknown") warnings.push(`Unrecognised category "${cat.label}" (${count}) was ignored.`);
   }
 
   // --- Consistency checks ----------------------------------------------------------------------

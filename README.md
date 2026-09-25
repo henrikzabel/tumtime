@@ -21,8 +21,30 @@ Requirements: Node.js ≥ 20.9, npm, and Docker (for the local database).
 ```bash
 npm install
 cp .env.example .env.local
+docker compose up -d   # local Postgres 16 on :5432
+npm run db:migrate     # apply migrations (incl. pg_trgm extension)
+npm run db:seed        # schools + departments
 npm run dev            # http://localhost:3000
 ```
+
+### Production database (Supabase)
+
+Create a project in an EU region (e.g. Frankfurt, `eu-central-1`) and sign Supabase's DPA for GDPR.
+Set `DATABASE_URL` to the *transaction pooler* connection string and run `npm run db:migrate` once.
+
+## Data model
+
+`modules` (keyed by the stable TUM module number) is the central table that later phases also
+reference. Statistics live in two layers:
+
+- **`source_records`**: one normalised record per exam *per source* (`tum_info`, `aamin`, `upload`),
+  unique on (source, module number, semester, type).
+- **`exams` + `grade_counts`**: the public, merged view, rebuilt from `source_records`. If sources
+  disagree, the exam is marked `conflict` and hidden until an admin pins one source. Deleting a
+  source's records and re-merging removes that source completely.
+
+`grade_counts` holds graded outcomes only (`1.0`–`5.0` incl. steps like `1.4`, `B` = passed,
+`N` = failed); no-shows, withdrawals and cheating are separate columns on `exams`.
 
 ## Environment variables
 
@@ -40,6 +62,10 @@ npm run dev            # http://localhost:3000
 | `npm run lint` | ESLint |
 | `npm run typecheck` | Generate route types and run `tsc` |
 | `npm test` | Run the Vitest suite (parsers, importers) |
+| `npm run db:generate` | Generate a migration after changing `src/db/schema.ts` |
+| `npm run db:migrate` | Apply migrations |
+| `npm run db:seed` | Upsert schools and departments |
+| `npm run db:studio` | Open Drizzle Studio |
 
 ## Legal
 

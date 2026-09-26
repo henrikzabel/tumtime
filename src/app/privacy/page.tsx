@@ -18,9 +18,8 @@ export default function PrivacyPage() {
 
       <h2 className="pt-2 text-lg font-semibold text-foreground">Using the site without an account</h2>
       <p>
-        Exam statistics, the study planner, the timetable and the club directory work without an account. Study plans
-        and timetable choices are stored only in your browser (localStorage) and never sent to us unless you share a
-        link. We only publish aggregated exam statistics; distributions of very small exams are hidden. We never ask
+        Exam statistics, the course catalog and the club directory work without an account. We only publish
+        aggregated exam statistics; distributions of very small exams are hidden. We never ask
         for or store TUMonline credentials; uploaded TUMonline pages are reduced to aggregated numbers before anything
         is saved.
       </p>
@@ -30,6 +29,14 @@ export default function PrivacyPage() {
         To apply to clubs or manage a club you sign in with a one-time link sent to your TUM e-mail address. We store
         your e-mail address, the name you enter when applying, the time of your last login and a session cookie
         (<code>tumtime_session</code>, strictly necessary, 30 days). Login links expire after 15 minutes.
+      </p>
+
+      <h2 className="pt-2 text-lg font-semibold text-foreground">Schedules, degree plans and bookmarks</h2>
+      <p>
+        The scheduler, the degree planner and bookmarks require an account. We store the modules, tutorial groups and
+        plans you create so that you can use them on all your devices (Art. 6(1)(b) GDPR). They are kept until you
+        delete them or your account. If you turn on a share link, anyone with that link can view that one schedule or
+        plan (without your name or e-mail address); you can turn the link off at any time.
       </p>
 
       <h2 className="pt-2 text-lg font-semibold text-foreground">Club applications</h2>

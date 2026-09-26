@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 import { db } from "@/db";
-import { applications, clubClaims, clubForms, clubMembers, clubs, users } from "@/db/schema";
+import { applications, bookmarks, clubClaims, clubForms, clubMembers, clubs, degreePlans, schedules, users } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth/session";
 
 /** GDPR Art. 15/20: everything we store about the signed-in user, as JSON. */
@@ -11,7 +11,7 @@ export async function GET() {
   if (!user) return new NextResponse("Unauthorized", { status: 401 });
 
   const [account] = await db.select().from(users).where(eq(users.id, user.id));
-  const [apps, memberships, claims] = await Promise.all([
+  const [apps, memberships, claims, savedBookmarks, savedSchedules, savedPlans] = await Promise.all([
     db
       .select({
         club: clubs.name,
@@ -37,6 +37,23 @@ export async function GET() {
       .from(clubClaims)
       .innerJoin(clubs, eq(clubs.id, clubClaims.clubId))
       .where(eq(clubClaims.userId, user.id)),
+    db.select({ module: bookmarks.moduleCode, createdAt: bookmarks.createdAt }).from(bookmarks).where(eq(bookmarks.userId, user.id)),
+    db
+      .select({
+        name: schedules.name,
+        semester: schedules.semester,
+        modules: schedules.moduleCodes,
+        selection: schedules.selection,
+        shared: schedules.shareToken,
+        createdAt: schedules.createdAt,
+        updatedAt: schedules.updatedAt,
+      })
+      .from(schedules)
+      .where(eq(schedules.userId, user.id)),
+    db
+      .select({ name: degreePlans.name, plan: degreePlans.state, shared: degreePlans.shareToken, createdAt: degreePlans.createdAt, updatedAt: degreePlans.updatedAt })
+      .from(degreePlans)
+      .where(eq(degreePlans.userId, user.id)),
   ]);
 
   const data = {
@@ -45,6 +62,9 @@ export async function GET() {
     applications: apps,
     clubMemberships: memberships,
     clubClaims: claims,
+    bookmarks: savedBookmarks,
+    schedules: savedSchedules.map((s) => ({ ...s, shared: !!s.shared })),
+    degreePlans: savedPlans.map((p) => ({ ...p, shared: !!p.shared })),
   };
   return new NextResponse(JSON.stringify(data, null, 2), {
     headers: {

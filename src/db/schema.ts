@@ -497,3 +497,57 @@ export const applications = pgTable(
     index("applications_created_idx").on(t.createdAt),
   ],
 );
+
+/* ------------------------------------------------------------------------------------------------
+ * Personal planning data (login required): bookmarks, schedules, degree plans
+ * --------------------------------------------------------------------------------------------- */
+
+export const bookmarks = pgTable(
+  "bookmarks",
+  {
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    moduleCode: text("module_code").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.moduleCode] })],
+);
+
+/** A weekly schedule for one semester: chosen modules and, per lecture/tutorial choice, a group. */
+export const schedules = pgTable(
+  "schedules",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    semester: text("semester").notNull(), // e.g. "2026WS"
+    name: text("name").notNull(),
+    moduleCodes: text("module_codes").array().notNull().default(sql`'{}'::text[]`),
+    /** Choice key → group id (-1 = not attending). */
+    selection: jsonb("selection").$type<Record<string, number>>().notNull().default({}),
+    /** Random token for a read-only share link; null = not shared. */
+    shareToken: text("share_token").unique(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("schedules_user_idx").on(t.userId, t.semester)],
+);
+
+/** A degree plan (semesters with modules), stored as the planner's versioned JSON state. */
+export const degreePlans = pgTable(
+  "degree_plans",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    state: jsonb("state").notNull(),
+    shareToken: text("share_token").unique(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("degree_plans_user_idx").on(t.userId)],
+);

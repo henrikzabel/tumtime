@@ -1,8 +1,10 @@
+import { z } from "zod";
+
 import { formatSemesterShort, semesterKey, type Semester } from "@/lib/stats/semester";
 
 /*
- * Study plan state lives in the browser (no accounts). It is a small, versioned JSON document
- * that can be shared via URL.
+ * A degree plan is a small, versioned JSON document. It is stored per account (degree_plans) and
+ * can also be shared via URL.
  */
 
 export type PlanArea = string; // e.g. "Informatik", "Wahlmodule Informatik", "Überfachliche Grundlagen"
@@ -17,6 +19,8 @@ export type PlannedItem = {
   /** Items of the recommended plan that must be taken (vs. user-added extras). */
   required?: boolean;
   alternativeGroup?: number;
+  /** Free label, e.g. "retake", "maybe". */
+  label?: string;
 };
 
 export type PlanState = {
@@ -26,6 +30,8 @@ export type PlanState = {
   startSemester: Semester;
   /** Semester number (1-based) → items. */
   semesters: Record<number, PlannedItem[]>;
+  /** Optional names for semesters, e.g. "Exchange (Lund)". */
+  semesterNotes?: Record<number, string>;
 };
 
 export type StudyPlanEntryData = {
@@ -274,3 +280,30 @@ export function decodePlan(encoded: string): PlanState | null {
     return null;
   }
 }
+
+// --- Server-side validation -------------------------------------------------------------------
+
+const plannedItemSchema = z.object({
+  id: z.string().max(40),
+  kind: z.enum(["module", "placeholder"]),
+  moduleCode: z.string().max(30).optional(),
+  title: z.string().max(300),
+  credits: z.number().min(0).max(60),
+  area: z.string().max(200).nullable(),
+  required: z.boolean().optional(),
+  alternativeGroup: z.number().int().optional(),
+  label: z.string().max(40).optional(),
+});
+
+/** Validates a plan state received from the browser before it is stored. */
+export const planStateSchema = z.object({
+  version: z.literal(1),
+  program: z.string().max(80),
+  studyPlanId: z.number().int(),
+  startSemester: z.string().regex(/^\d{4}(WS|SS)$/),
+  semesters: z
+    .record(z.string().regex(/^\d{1,2}$/), z.array(plannedItemSchema).max(40))
+    .refine((s) => Object.keys(s).length <= 20, "Too many semesters"),
+  /** Optional names for semesters, e.g. "Exchange (Lund)". */
+  semesterNotes: z.record(z.string(), z.string().max(60)).optional(),
+});

@@ -10,6 +10,7 @@ import {
   encodePlan,
   fillPlaceholder,
   moveItem,
+  planStateSchema,
   removeItem,
   removeLastSemester,
   studyPlanFor,
@@ -128,5 +129,29 @@ describe("share links", () => {
   });
   it("rejects garbage", () => {
     expect(decodePlan("not-a-plan")).toBeNull();
+  });
+});
+
+describe("planStateSchema", () => {
+  const valid = {
+    version: 1,
+    program: "bsc-informatik",
+    studyPlanId: 3,
+    startSemester: "2025WS",
+    semesters: { "1": [{ id: "a", kind: "module", moduleCode: "IN0001", title: "Intro", credits: 6, area: null }] },
+    semesterNotes: { "5": "Exchange (Lund)" },
+  };
+
+  it("accepts a plan state", () => {
+    expect(planStateSchema.safeParse(valid).success).toBe(true);
+  });
+
+  it.each([
+    ["bad semester", { ...valid, startSemester: "2025" }],
+    ["too many credits", { ...valid, semesters: { "1": [{ ...valid.semesters["1"][0], credits: 999 }] } }],
+    ["unknown version", { ...valid, version: 2 }],
+    ["non-numeric semester key", { ...valid, semesters: { x: [] } }],
+  ])("rejects %s", (_, input) => {
+    expect(planStateSchema.safeParse(input).success).toBe(false);
   });
 });

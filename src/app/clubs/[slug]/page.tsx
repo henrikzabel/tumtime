@@ -65,7 +65,7 @@ export default async function ClubPage({ params }: PageProps<"/clubs/[slug]">) {
             {club.description ?? club.sourceDescription ?? "No description yet."}
           </div>
           {!club.description && club.sourceDescription && (
-            <p className="mt-2 text-[0.6875rem] text-muted-foreground">Description: TUM Student Club Gallery</p>
+            <p className="mt-2 text-xs text-muted-foreground">Description from the TUM Student Club Gallery.</p>
           )}
 
           <div className="mt-5 flex flex-wrap gap-2">
@@ -99,7 +99,7 @@ export default async function ClubPage({ params }: PageProps<"/clubs/[slug]">) {
                   {f.closesAt && <CardDescription>Apply until {formatDate(f.closesAt.toISOString().slice(0, 10))}</CardDescription>}
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {f.intro && <p className="line-clamp-4 text-xs/relaxed text-muted-foreground whitespace-pre-line">{f.intro}</p>}
+                  {f.intro && <p className="line-clamp-4 text-sm text-muted-foreground whitespace-pre-line">{f.intro}</p>}
                   <Link href={`/clubs/${club.slug}/apply/${f.id}`} className={buttonVariants({ size: "lg" })}>
                     Apply now
                   </Link>

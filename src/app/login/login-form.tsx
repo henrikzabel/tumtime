@@ -36,7 +36,7 @@ export function LoginForm({ next }: { next: string }) {
           className="h-9 rounded-md border border-input bg-input/20 px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
         />
       </label>
-      {state.status === "error" && <p className="text-xs/relaxed text-destructive">{state.message}</p>}
+      {state.status === "error" && <p className="text-sm text-destructive">{state.message}</p>}
       <Button type="submit" size="lg" className="w-full" disabled={pending}>
         {pending ? "Sending…" : "Send login link"}
       </Button>

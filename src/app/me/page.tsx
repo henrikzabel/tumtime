@@ -83,7 +83,7 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
                 <Link href={`/clubs/${a.clubSlug}`} className="block truncate text-sm font-medium hover:underline">
                   {a.clubName}
                 </Link>
-                <span className="text-[0.6875rem] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {a.formTitle} · sent {a.createdAt.toLocaleDateString("en-GB")}
                 </span>
               </div>

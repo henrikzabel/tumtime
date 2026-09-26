@@ -12,7 +12,7 @@ import { calendarBlocks, SKIP, type Selection } from "@/lib/schedule/selection";
 import { cn } from "@/lib/utils";
 
 const selectClass =
-  "h-7 rounded-md border border-input bg-input/20 px-2 text-xs/relaxed outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
+  "h-8 rounded-md border border-input bg-input/20 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
 
 /** Berkeleytime-style "Generate schedules": all clash-free group combinations, ranked. */
 export function GenerateDialog({

@@ -40,7 +40,7 @@ export default async function AdminPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {c.message && <p className="text-xs/relaxed whitespace-pre-line">{c.message}</p>}
+              {c.message && <p className="text-sm whitespace-pre-line">{c.message}</p>}
               <form action={reviewClaim} className="flex gap-2">
                 <input type="hidden" name="claimId" value={c.id} />
                 <Button type="submit" name="decision" value="approve">

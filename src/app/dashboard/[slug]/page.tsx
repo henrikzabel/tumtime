@@ -56,7 +56,7 @@ export default async function ClubDashboardPage({ params }: PageProps<"/dashboar
                   >
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-medium">{f.title}</span>
-                      <span className="text-[0.6875rem] text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         {(f.fields as unknown[]).length} questions · {n} applications
                         {f.closesAt ? ` · closes ${f.closesAt.toLocaleDateString("en-GB")}` : ""}
                       </span>

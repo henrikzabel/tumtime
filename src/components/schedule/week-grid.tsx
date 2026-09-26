@@ -57,7 +57,7 @@ export function WeekGrid({
           {hours.map((h) => (
             <div
               key={h}
-              className="absolute right-1 text-[0.625rem] text-muted-foreground tabular-nums"
+              className="absolute right-1 text-[0.6875rem] text-muted-foreground tabular-nums"
               style={{ top: top(h * 60) - 6 }}
             >
               {formatMinutes(h * 60)}
@@ -99,7 +99,7 @@ export function WeekGrid({
                     key={b.key}
                     title={`${b.title} · ${formatSlot(b.slot)}${b.slot.room ? ` · ${b.slot.room}` : ""}`}
                     className={cn(
-                      "absolute overflow-hidden rounded-md px-1.5 py-1 text-[0.625rem] leading-tight text-white shadow-xs",
+                      "absolute overflow-hidden rounded-md px-1.5 py-1 text-[0.6875rem] leading-tight text-white shadow-xs",
                       b.clash && "ring-2 ring-destructive ring-offset-1",
                     )}
                     style={{

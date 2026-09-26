@@ -108,7 +108,7 @@ export function ClubDirectory({ clubs }: { clubs: ClubListItem[] }) {
             </div>
             <div className="flex flex-1 flex-col gap-2 p-4">
               <h2 className="font-semibold tracking-tight group-hover:text-primary">{c.name}</h2>
-              {c.summary && <p className="line-clamp-3 text-xs/relaxed text-muted-foreground">{c.summary}</p>}
+              {c.summary && <p className="line-clamp-3 text-sm text-muted-foreground">{c.summary}</p>}
               <div className="mt-auto flex flex-wrap gap-1 pt-1">
                 {c.focusAreas.map((a) => (
                   <Badge key={a} variant="outline">

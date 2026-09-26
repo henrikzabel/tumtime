@@ -49,7 +49,7 @@ export default async function FormEditorPage({ params, searchParams }: PageProps
         ← {club.name}
       </Link>
       <h1 className="mt-1 text-2xl font-semibold tracking-tight">{form.id ? "Edit sign-up form" : "New sign-up form"}</h1>
-      {saved && <p className="mt-2 text-xs/relaxed text-primary">Form created.</p>}
+      {saved && <p className="mt-2 text-sm text-primary">Form created.</p>}
       <FormBuilder slug={slug} initial={form} />
     </div>
   );

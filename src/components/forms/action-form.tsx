@@ -32,10 +32,10 @@ export function ActionForm({
     >
       {typeof children === "function" ? children(state) : children}
       {state.error && (
-        <p className="text-xs/relaxed text-destructive">{state.error}</p>
+        <p className="text-sm text-destructive">{state.error}</p>
       )}
       {state.message && (
-        <p className="text-xs/relaxed text-primary">{state.message}</p>
+        <p className="text-sm text-primary">{state.message}</p>
       )}
       <Button type="submit" size="lg" disabled={pending}>
         {pending ? pendingLabel : submitLabel}

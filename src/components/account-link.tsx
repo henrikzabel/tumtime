@@ -19,7 +19,7 @@ export function AccountLink() {
   }, [pathname]);
 
   const cls =
-    "flex shrink-0 items-center gap-1.5 rounded-md px-2 py-1 text-xs/relaxed font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:px-2.5";
+    "flex shrink-0 items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-muted hover:text-foreground";
   if (me === undefined) return <span className="w-14" />;
   if (!me) {
     return (
@@ -30,7 +30,7 @@ export function AccountLink() {
   }
   return (
     <Link href="/me" className={cls} title={me.email}>
-      <UserRound className="size-3.5" />
+      <UserRound className="size-4" />
       <span className="hidden sm:inline">Account</span>
     </Link>
   );

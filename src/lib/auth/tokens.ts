@@ -34,11 +34,12 @@ export function allowedDomains(env = process.env.ALLOWED_EMAIL_DOMAINS): string[
     .filter(Boolean);
 }
 
+/** Tolerates quotes and comma/semicolon/whitespace separators, as often pasted into hosting dashboards. */
 export function adminEmails(env = process.env.ADMIN_EMAILS): Set<string> {
   return new Set(
     (env ?? "")
-      .split(",")
-      .map(normalizeEmail)
+      .split(/[\s,;]+/)
+      .map((e) => normalizeEmail(e.replace(/^["']+|["']+$/g, "")))
       .filter(Boolean),
   );
 }

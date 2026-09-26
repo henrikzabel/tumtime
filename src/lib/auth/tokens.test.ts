@@ -31,6 +31,7 @@ describe("tokens", () => {
 describe("adminEmails", () => {
   it("parses a comma-separated list", () => {
     expect([...adminEmails(" A@tum.de, b@mytum.de ,")]).toEqual(["a@tum.de", "b@mytum.de"]);
+    expect([...adminEmails('"A@tum.de"; b@mytum.de c@tum.de')]).toEqual(["a@tum.de", "b@mytum.de", "c@tum.de"]);
   });
 });
 

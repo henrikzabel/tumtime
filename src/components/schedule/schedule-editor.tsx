@@ -132,7 +132,7 @@ export function ScheduleEditor({
               className="-ml-1 min-w-0 rounded-md bg-transparent px-1 text-2xl font-semibold tracking-tight outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
             />
           </div>
-          <p className="text-xs/relaxed text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             {formatSemester(schedule.semester)} ·{" "}
             <span aria-live="polite">{saveState === "saving" ? "Saving…" : saveState === "error" ? "Couldn't save — retry" : "Saved"}</span>
           </p>
@@ -240,7 +240,7 @@ export function ScheduleEditor({
             ))}
           </ul>
           {unresolved.length > 0 && (
-            <p className="text-xs/relaxed text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Choose a group for {unresolved.length} course{unresolved.length > 1 ? "s" : ""}, or let{" "}
               <button type="button" className="font-medium text-primary hover:underline" onClick={() => setGenerating(true)}>
                 Generate
@@ -264,7 +264,7 @@ export function ScheduleEditor({
             />
           ))}
           {withoutDates.length > 0 && (
-            <p className="text-xs/relaxed text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               No regular dates published yet for {withoutDates.map((e) => (e.key.startsWith("C_") ? e.title : e.key)).join(", ")}.
             </p>
           )}

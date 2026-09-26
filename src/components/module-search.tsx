@@ -119,7 +119,7 @@ export function ModuleSearch({
         onKeyDown={onKeyDown}
         className={cn(
           "w-full border border-input bg-input/20 outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 dark:bg-input/30",
-          size === "lg" ? "h-12 rounded-lg bg-card pl-11 pr-4 text-base shadow-xs" : "h-7 rounded-md pl-8 pr-2 text-xs/relaxed",
+          size === "lg" ? "h-12 rounded-lg bg-card pl-11 pr-4 text-base shadow-xs" : "h-9 rounded-md pl-8 pr-2 text-sm",
         )}
       />
       {open && hits.length > 0 && (

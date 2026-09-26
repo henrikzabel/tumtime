@@ -409,6 +409,23 @@ export const clubs = pgTable(
     imageUrl: text("image_url"),
     contactEmail: text("contact_email"),
     instagram: text("instagram"),
+    linkedin: text("linkedin"),
+    /** One-line pitch shown in the directory list. */
+    tagline: text("tagline"),
+    foundedYear: smallint("founded_year"),
+    memberCount: integer("member_count"),
+    /** Typical time commitment of an active member, hours per week (range). */
+    hoursMin: smallint("hours_min"),
+    hoursMax: smallint("hours_max"),
+    languages: text("languages").array().notNull().default(sql`'{}'::text[]`), // "de" | "en"
+    audience: text("audience").array().notNull().default(sql`'{}'::text[]`), // see AUDIENCES in src/lib/clubs/profile.ts
+    /** Membership fee per year in euros; 0 = free, null = not specified. */
+    feeEuros: integer("fee_euros"),
+    recruitment: text("recruitment"), // see RECRUITMENT_MODES in src/lib/clubs/profile.ts
+    /** Facts, activities, FAQs, projects, resources and timeline; validated by `clubProfileSchema`. */
+    profile: jsonb("profile").notNull().default(sql`'{}'::jsonb`),
+    /** Org chart (flat list of roles with parent ids); validated by `clubStructureSchema`. */
+    structure: jsonb("structure").notNull().default(sql`'[]'::jsonb`),
     source: text("source").notNull().default("manual"), // "tum_gallery" | "manual"
     /** Still listed in the TUM gallery at the last import. */
     listed: boolean("listed").notNull().default(true),
@@ -495,6 +512,73 @@ export const applications = pgTable(
     index("applications_club_idx").on(t.clubId),
     index("applications_user_idx").on(t.userId),
     index("applications_created_idx").on(t.createdAt),
+  ],
+);
+
+/* ------------------------------------------------------------------------------------------------
+ * Club info sessions: a central "info session weeks" period (e.g. two weeks of evenings with a few
+ * rooms per night), club requests with preferences, and the scheduled sessions. Clubs can also add
+ * sessions outside a period.
+ * --------------------------------------------------------------------------------------------- */
+
+export const infoSessionPeriods = pgTable("info_session_periods", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description"),
+  startsOn: date("starts_on").notNull(),
+  endsOn: date("ends_on").notNull(),
+  /** ISO weekdays with sessions (1 = Monday). */
+  weekdays: smallint("weekdays").array().notNull().default(sql`'{1,2,3,4}'::smallint[]`),
+  /** Nightly time slots, Berlin wall-clock: [{ start: "18:00", end: "18:45" }]. */
+  slots: jsonb("slots").notNull().default(sql`'[]'::jsonb`),
+  /** Rooms used in parallel: [{ name, campus, capacity }]. */
+  venues: jsonb("venues").notNull().default(sql`'[]'::jsonb`),
+  status: text("status").notNull().default("draft"), // "draft" | "collecting" | "published"
+  ...timestamps,
+});
+
+export const infoSessionRequests = pgTable(
+  "info_session_requests",
+  {
+    id: serial("id").primaryKey(),
+    periodId: integer("period_id")
+      .notNull()
+      .references(() => infoSessionPeriods.id, { onDelete: "cascade" }),
+    clubId: integer("club_id")
+      .notNull()
+      .references(() => clubs.id, { onDelete: "cascade" }),
+    preferredDates: text("preferred_dates").array().notNull().default(sql`'{}'::text[]`),
+    avoidDates: text("avoid_dates").array().notNull().default(sql`'{}'::text[]`),
+    preferredTimes: text("preferred_times").array().notNull().default(sql`'{}'::text[]`),
+    campus: text("campus"),
+    language: text("language"),
+    notes: text("notes"),
+    ...timestamps,
+  },
+  (t) => [unique("info_session_requests_period_club").on(t.periodId, t.clubId)],
+);
+
+export const infoSessions = pgTable(
+  "info_sessions",
+  {
+    id: serial("id").primaryKey(),
+    clubId: integer("club_id")
+      .notNull()
+      .references(() => clubs.id, { onDelete: "cascade" }),
+    periodId: integer("period_id").references(() => infoSessionPeriods.id, { onDelete: "cascade" }),
+    startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
+    endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
+    venue: text("venue"),
+    campus: text("campus"),
+    onlineUrl: text("online_url"),
+    language: text("language"),
+    notes: text("notes"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    unique("info_sessions_period_slot").on(t.periodId, t.startsAt, t.venue),
+    index("info_sessions_club_idx").on(t.clubId),
+    index("info_sessions_starts_idx").on(t.startsAt),
   ],
 );
 

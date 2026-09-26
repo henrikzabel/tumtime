@@ -30,7 +30,7 @@ const DAYS = [
 ] as const;
 
 const selectClass =
-  "h-7 w-full rounded-md border border-input bg-input/20 px-2 text-xs/relaxed text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 dark:bg-input/30";
+  "h-8 w-full rounded-md border border-input bg-input/20 px-2 text-sm text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 dark:bg-input/30";
 
 /** Grade colour: green for good averages, amber/red for hard ones (text + tint, never colour alone). */
 export function gradeTone(avg: number | null): string {
@@ -100,7 +100,7 @@ export function CatalogBrowser({
             onClick={() => setShowFilters((v) => !v)}
             aria-expanded={showFilters}
             className={cn(
-              "ml-auto inline-flex h-7 items-center gap-1.5 rounded-md border px-2 text-xs/relaxed transition-colors hover:bg-muted",
+              "ml-auto inline-flex h-8 items-center gap-1.5 rounded-md border px-2 text-sm transition-colors hover:bg-muted",
               activeFilters > 0 && "border-primary text-primary",
             )}
           >
@@ -178,7 +178,7 @@ export function CatalogBrowser({
                       aria-pressed={on}
                       onClick={() => update({ days: on ? filters.days.filter((x) => x !== d) : [...filters.days, d].sort() })}
                       className={cn(
-                        "h-7 flex-1 rounded-md border text-xs/relaxed transition-colors",
+                        "h-8 flex-1 rounded-md border text-sm transition-colors",
                         on ? "border-primary bg-primary text-primary-foreground" : "hover:bg-muted",
                       )}
                     >
@@ -264,7 +264,7 @@ export function CatalogBrowser({
                     {bookmarkSet.has(e.key) && <Bookmark className="size-3 fill-current text-primary" aria-label="Bookmarked" />}
                   </div>
                   <div className="line-clamp-2 text-sm font-medium">{e.title}</div>
-                  <div className="mt-0.5 flex flex-wrap gap-x-2 text-[0.6875rem] text-muted-foreground">
+                  <div className="mt-0.5 flex flex-wrap gap-x-2 text-xs text-muted-foreground">
                     {e.languages.length > 0 && <span>{e.languages.join("/")}</span>}
                     {e.days.length > 0 && <span>{e.days.map((d) => DAYS.find(([n]) => n === d)?.[1] ?? "Sa").join(" ")}</span>}
                   </div>
@@ -279,7 +279,7 @@ export function CatalogBrowser({
                     </span>
                   )}
                   {e.fail !== null && (
-                    <span className="text-[0.6875rem] text-muted-foreground tabular-nums">{formatPercent(e.fail, 0)} fail</span>
+                    <span className="text-xs text-muted-foreground tabular-nums">{formatPercent(e.fail, 0)} fail</span>
                   )}
                 </div>
               </Link>

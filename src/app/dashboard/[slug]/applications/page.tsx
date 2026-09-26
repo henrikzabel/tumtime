@@ -137,7 +137,7 @@ export default async function ApplicationsPage({ params, searchParams }: PagePro
                         </option>
                       ))}
                     </select>
-                    <label className="flex items-center gap-1.5 text-[0.6875rem] text-muted-foreground">
+                    <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <input type="checkbox" name="notify" defaultChecked className="accent-[var(--primary)]" />
                       E-mail applicant on change
                     </label>

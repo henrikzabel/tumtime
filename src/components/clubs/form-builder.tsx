@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown, ArrowUp, Copy, Plus, Trash2 } from "lucide-react";
-import { useActionState, useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 
 import { FormFields } from "@/components/clubs/form-fields";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,11 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
   const [fields, setFields] = useState<FormField[]>(initial.fields);
   const [title, setTitle] = useState(initial.title);
   const [intro, setIntro] = useState(initial.intro);
+  // Controlled on purpose: React resets uncontrolled fields after a form action, which used to
+  // flip the status back to "draft" so the next save silently hid an open form.
+  const [status, setStatus] = useState(initial.status);
+  const [closesAt, setClosesAt] = useState(initial.closesAt);
+  const deadlinePassed = !!closesAt && closesAt < new Date().toISOString().slice(0, 10);
   const [state, action, pending] = useActionState<ActionState, FormData>(saveForm.bind(null, slug, initial.id), {});
 
   const update = (i: number, patch: Partial<FormField>) =>
@@ -45,7 +50,16 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
 
   return (
     <div className="mt-6 grid gap-6 lg:grid-cols-2">
-      <form action={action} className="space-y-4">
+      <form
+        // Submit via onSubmit instead of `action`: React resets forms after an action, and a reset
+        // snaps even a controlled <select> back to its first option ("Draft").
+        onSubmit={(e) => {
+          e.preventDefault();
+          const data = new FormData(e.currentTarget);
+          startTransition(() => action(data));
+        }}
+        className="space-y-4"
+      >
         <input type="hidden" name="fields" value={JSON.stringify(fields)} />
         <Card>
           <CardContent className="space-y-3">
@@ -60,7 +74,7 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
             <div className="grid gap-3 sm:grid-cols-2">
               <Label>
                 Status
-                <select name="status" defaultValue={initial.status} className={selectCls}>
+                <select name="status" value={status} onChange={(e) => setStatus(e.target.value)} className={selectCls}>
                   <option value="draft">Draft (hidden)</option>
                   <option value="open">Open — accepting applications</option>
                   <option value="closed">Closed</option>
@@ -68,9 +82,18 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
               </Label>
               <Label>
                 Deadline (optional)
-                <Input name="closesAt" type="date" defaultValue={initial.closesAt} />
+                <Input name="closesAt" type="date" value={closesAt} onChange={(e) => setClosesAt(e.target.value)} />
               </Label>
             </div>
+            {(status !== "open" || deadlinePassed) && (
+              <p className="rounded-md bg-muted px-3 py-2 text-xs/relaxed text-muted-foreground">
+                {status === "draft"
+                  ? "Draft: students can't see this form. Set the status to “Open” and save to accept applications."
+                  : status === "closed"
+                    ? "Closed: this form doesn't accept applications."
+                    : "The deadline has passed, so this form no longer accepts applications."}
+              </p>
+            )}
           </CardContent>
         </Card>
 
@@ -88,7 +111,7 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
                       options: CHOICE_TYPES.includes(type) ? (f.options?.length ? f.options : ["Option 1", "Option 2"]) : undefined,
                     });
                   }}
-                  className={`${selectCls} ml-auto h-7 text-xs`}
+                  className={`${selectCls} ml-auto h-8 text-sm`}
                   aria-label="Question type"
                 >
                   {Object.entries(FIELD_TYPES).map(([k, v]) => (
@@ -158,8 +181,8 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
           <Button type="submit" size="lg" disabled={pending}>
             {pending ? "Saving…" : "Save form"}
           </Button>
-          {state.error && <p className="text-xs/relaxed text-destructive">{state.error}</p>}
-          {state.message && <p className="text-xs/relaxed text-primary">{state.message}</p>}
+          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+          {state.message && <p className="text-sm text-primary">{state.message}</p>}
         </div>
       </form>
 

@@ -70,7 +70,7 @@ export default async function SharedPlanPage({
                     </span>
                   </div>
                   {plan.state.semesterNotes?.[n] && (
-                    <p className="text-[0.6875rem] text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       {plan.state.semesterNotes[n]}
                     </p>
                   )}
@@ -91,7 +91,7 @@ export default async function SharedPlanPage({
                           href={`/catalog/${term}/${i.moduleCode}`}
                           className="hover:underline"
                         >
-                          <span className="font-mono text-[0.6875rem] text-muted-foreground">
+                          <span className="font-mono text-xs text-muted-foreground">
                             {i.moduleCode}
                           </span>{" "}
                           <span className="font-medium">{i.title}</span>
@@ -101,7 +101,7 @@ export default async function SharedPlanPage({
                           {i.title}
                         </span>
                       )}
-                      <div className="mt-0.5 flex flex-wrap gap-1.5 text-[0.6875rem] text-muted-foreground">
+                      <div className="mt-0.5 flex flex-wrap gap-1.5 text-xs text-muted-foreground">
                         {i.credits} ECTS
                         {i.label && LABELS[i.label] && (
                           <span

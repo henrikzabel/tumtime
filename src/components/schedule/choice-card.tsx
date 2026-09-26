@@ -48,7 +48,7 @@ export function ChoiceCard({
   return (
     <Card size="sm" className={cn(inClash && "ring-destructive/60")}>
       <CardHeader>
-        <CardTitle className="flex items-start gap-2 text-xs/relaxed">
+        <CardTitle className="flex items-start gap-2 text-sm">
           <span
             className="mt-1 size-2 shrink-0 rounded-full"
             style={{ background: color }}
@@ -77,7 +77,7 @@ export function ChoiceCard({
       </CardHeader>
       <CardContent>
         {choice.options.length === 1 ? (
-          <p className="text-[0.6875rem] text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             {describe(choice.options[0].groupId)}
           </p>
         ) : (
@@ -88,7 +88,7 @@ export function ChoiceCard({
               }
               onChange={(e) => onSelect(Number(e.target.value))}
               className={cn(
-                "h-7 w-full rounded-md border border-input bg-input/20 px-2 text-xs/relaxed outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30",
+                "h-8 w-full rounded-md border border-input bg-input/20 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30",
                 !chosenGroup && !skipped && "border-primary/60",
               )}
               aria-label={`Group for ${choice.title}`}
@@ -105,7 +105,7 @@ export function ChoiceCard({
               <option value={SKIP}>Not attending</option>
             </select>
             {chosenGroup && (
-              <p className="mt-1 text-[0.6875rem] text-muted-foreground">
+              <p className="mt-1 text-xs text-muted-foreground">
                 {describe(chosenGroup)}
               </p>
             )}

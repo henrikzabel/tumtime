@@ -18,7 +18,12 @@ export default async function AdminPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <h1 className="text-2xl font-semibold tracking-tight">Admin</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-semibold tracking-tight">Admin</h1>
+        <Link href="/admin/info-sessions" className="text-sm text-primary underline-offset-4 hover:underline">
+          Plan info session weeks →
+        </Link>
+      </div>
       <h2 className="mt-8 text-lg font-semibold">Club claims ({pending.length} pending)</h2>
       <div className="mt-3 space-y-3">
         {pending.length === 0 && <p className="text-sm text-muted-foreground">No pending requests.</p>}
@@ -40,7 +45,7 @@ export default async function AdminPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {c.message && <p className="text-xs/relaxed whitespace-pre-line">{c.message}</p>}
+              {c.message && <p className="text-sm whitespace-pre-line">{c.message}</p>}
               <form action={reviewClaim} className="flex gap-2">
                 <input type="hidden" name="claimId" value={c.id} />
                 <Button type="submit" name="decision" value="approve">

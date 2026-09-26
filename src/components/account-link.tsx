@@ -19,7 +19,7 @@ export function AccountLink() {
   }, [pathname]);
 
   const cls =
-    "flex items-center gap-1.5 rounded-md px-2 py-1 text-xs/relaxed font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:px-2.5";
+    "flex shrink-0 items-center gap-1.5 rounded-md px-2 py-1 text-xs/relaxed font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:px-2.5";
   if (me === undefined) return <span className="w-14" />;
   if (!me) {
     return (

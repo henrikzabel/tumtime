@@ -9,6 +9,7 @@ import { logout } from "@/lib/auth/actions";
 import { requireUser } from "@/lib/auth/session";
 import { deleteAccount, withdrawApplication } from "@/lib/clubs/actions";
 import { getMyOverview } from "@/lib/clubs/queries";
+import { getBookmarkCodes, listDegreePlans, listSchedules } from "@/lib/planning/queries";
 import { STATUS_LABELS, type ApplicationStatus } from "@/lib/clubs/status";
 
 import { ConfirmButton } from "./confirm-button";
@@ -18,7 +19,12 @@ export const metadata: Metadata = { title: "Your account", robots: { index: fals
 export default async function MePage({ searchParams }: PageProps<"/me">) {
   const user = await requireUser("/me");
   const { applied } = await searchParams;
-  const { apps, memberships, claims } = await getMyOverview(user.id);
+  const [{ apps, memberships, claims }, schedules, plans, bookmarks] = await Promise.all([
+    getMyOverview(user.id),
+    listSchedules(user.id),
+    listDegreePlans(user.id),
+    getBookmarkCodes(user.id),
+  ]);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 md:py-10">
@@ -46,6 +52,19 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
           Application sent! You&apos;ll get an e-mail when the club updates its status.
         </p>
       )}
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        {[
+          { href: "/schedules", label: "Schedules", count: schedules.length },
+          { href: "/degree-planner", label: "Degree plans", count: plans.length },
+          { href: "/catalog?saved=1", label: "Bookmarks", count: bookmarks.length },
+        ].map((x) => (
+          <Link key={x.href} href={x.href} className="rounded-lg bg-card p-3 ring-1 ring-foreground/10 transition-shadow hover:ring-primary/40">
+            <div className="text-xs text-muted-foreground">{x.label}</div>
+            <div className="text-xl font-semibold tabular-nums">{x.count}</div>
+          </Link>
+        ))}
+      </div>
 
       <Card className="mt-6">
         <CardHeader>
@@ -120,7 +139,7 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
             <Download /> Download my data (JSON)
           </a>
           <form action={deleteAccount}>
-            <ConfirmButton message="Delete your account and all your applications permanently?" variant="destructive">
+            <ConfirmButton message="Delete your account with all applications, schedules, degree plans and bookmarks permanently?" variant="destructive">
               Delete account
             </ConfirmButton>
           </form>

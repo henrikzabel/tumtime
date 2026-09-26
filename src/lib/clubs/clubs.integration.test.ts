@@ -20,8 +20,7 @@ describe.skipIf(!url)("clubs & retention (integration)", () => {
     orm = await import("drizzle-orm");
     retention = await import("@/lib/retention");
     clubStore = await import("@/importers/clubs/store");
-    const { migrate } = await import("drizzle-orm/postgres-js/migrator");
-    await migrate(mod.db, { migrationsFolder: "./drizzle" });
+    // Migrations are applied once in vitest.global-setup.ts.
   });
 
   beforeEach(async () => {

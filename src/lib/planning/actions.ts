@@ -10,6 +10,7 @@ import { bookmarks, degreePlans, schedules } from "@/db/schema";
 import { requireUser } from "@/lib/auth/session";
 import { generateToken } from "@/lib/auth/tokens";
 import { planStateSchema } from "@/lib/planner/plan";
+import type { Semester } from "@/lib/stats/semester";
 
 const MAX_SCHEDULES = 40;
 const MAX_PLANS = 20;
@@ -195,4 +196,31 @@ export async function setDegreePlanSharing(id: string, shared: boolean): Promise
   const token = shared ? (row.shareToken ?? generateToken().slice(0, 22)) : null;
   await db.update(degreePlans).set({ shareToken: token }).where(eq(degreePlans.id, id));
   return token;
+}
+
+/** Onboarding form: create a plan from a program's recommended study plan (or an old share link). */
+export async function createDegreePlanFromForm(formData: FormData) {
+  await requireUser("/degree-planner/new");
+  const { getProgram } = await import("@/lib/planner/queries");
+  const { createPlan, decodePlan, studyPlanFor } = await import("@/lib/planner/plan");
+  const programSlug = String(formData.get("program") ?? "");
+  const start = semester.parse(String(formData.get("start") ?? ""));
+  const encoded = String(formData.get("plan") ?? "");
+  const data = await getProgram(programSlug);
+  if (!data || data.plans.length === 0) throw new Error("Unknown program.");
+
+  const imported = encoded ? decodePlan(encoded) : null;
+  const state =
+    imported && imported.program === programSlug
+      ? imported
+      : createPlan(programSlug, studyPlanFor(data.plans, start as Semester) ?? data.plans[0], start as Semester);
+  const planName = String(formData.get("name") ?? "").trim() || `${data.program.degree} ${data.program.nameEn}`;
+  const id = await createDegreePlan({ name: planName.slice(0, 60), state });
+  redirect(`/degree-planner/${id}`);
+}
+
+/** Create a schedule for one semester of a degree plan and open it in the scheduler. */
+export async function openSemesterInScheduler(term: string, moduleCodes: string[], planName: string) {
+  const id = await createSchedule({ semester: term, name: `${planName} · ${term}`.slice(0, 60), moduleCodes: moduleCodes.slice(0, 40) });
+  redirect(`/schedules/${id}`);
 }

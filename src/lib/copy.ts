@@ -5,14 +5,14 @@
  */
 export const copy = {
   siteName: "TUM Time",
-  tagline: "Exam statistics for TUM students, by students.",
+  tagline: "Course catalog, scheduler, degree planner, grades and clubs for TUM students, by students.",
   unofficialBanner:
     "Unofficial student project — not affiliated with or endorsed by the Technical University of Munich.",
   nav: {
-    search: "Search",
-    browse: "Browse",
-    compare: "Compare",
-    planner: "Planner",
+    catalog: "Catalog",
+    scheduler: "Scheduler",
+    degreePlanner: "Degree planner",
+    grades: "Grades",
     clubs: "Clubs",
     contribute: "Contribute",
   },

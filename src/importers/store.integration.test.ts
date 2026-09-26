@@ -21,8 +21,7 @@ describe.skipIf(!url)("store (integration)", () => {
     schema = await import("@/db/schema");
     store = await import("./store");
     orm = await import("drizzle-orm");
-    const { migrate } = await import("drizzle-orm/postgres-js/migrator");
-    await migrate(mod.db, { migrationsFolder: "./drizzle" });
+    // Migrations are applied once in vitest.global-setup.ts.
   });
 
   beforeEach(async () => {

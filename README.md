@@ -3,9 +3,20 @@
 An unofficial platform for students at the Technical University of Munich, inspired by
 [Berkeleytime](https://berkeleytime.com). **Not affiliated with TUM.**
 
-Phase 1 (in progress): **exam statistics**: grade distributions, averages and failure rates of TUM
-exams, with search, browsing and comparison. Later phases (study planner, study-abroad recognitions,
-club discovery) build on the same `modules` table.
+Features, modelled on Berkeleytime:
+
+- **Catalog** (`/catalog`): every module and course of a semester with descriptions, lecture and
+  tutorial groups, weekly times, rooms and grade statistics.
+- **Scheduler** (`/schedules`): weekly schedules with group pickers, clash detection, automatic
+  generation of clash-free schedules, comparison, share links and `.ics` export.
+- **Degree planner** (`/degree-planner`): plan all semesters from the official study plan, track
+  ECTS and requirements, labels, bookmarks.
+- **Grades** (`/browse`, `/compare`, `/modules/<code>`): grade distributions, averages and failure
+  rates of TUM exams.
+- **Clubs** (`/clubs`): all student clubs, custom sign-up forms and applications.
+
+Schedules, degree plans and bookmarks require signing in with a TUM e-mail address. Everything is
+built on the central `modules` table (study-abroad recognitions will follow).
 
 ## Tech stack
 
@@ -73,13 +84,15 @@ exam, their grade distributions must match exactly (or, without a distribution, 
 counts). If they differ, the exam is marked `conflict` and not published until an admin pins a
 source. Priority for filling in fields: `upload` > `aamin` > `tum_info`.
 
-## Study planner & timetable (Phase 2)
+## Degree planner & study plans
 
-`/planner` lets students start from the recommended study plan of their program, move modules
-between semesters, fill elective slots and track requirements (required modules, electives,
-Überfachliche Grundlagen, Anwendungsfach). Plans are stored in the browser (`localStorage`) and
-can be shared as a link. `/timetable` shows lectures and tutorial groups of the chosen modules on
-a weekly grid with clash detection and `.ics` export.
+`/degree-planner` starts from the recommended study plan of a program (onboarding: program → first
+semester), lets students move modules between semesters, fill elective slots, label modules
+(completed, retake, maybe, abroad), add semester notes, drag in bookmarked modules and track
+requirements (required modules, electives, Überfachliche Grundlagen, Anwendungsfach). Plans are
+stored per account; a revocable link shares a read-only view. The upcoming semester can be opened
+in the scheduler. Old browser-only plans are offered for import, and old `/planner` and
+`/timetable` links redirect.
 
 ```bash
 npm run import:planner                          # study plans, module handbook, courses of the upcoming semester

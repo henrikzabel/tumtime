@@ -293,6 +293,13 @@ export const courses = pgTable(
     hoursPerWeek: numeric("hours_per_week", { precision: 4, scale: 1, mode: "number" }),
     languages: text("languages").array().notNull().default(sql`'{}'::text[]`),
     tumonlineUrl: text("tumonline_url"),
+    description: text("description"),
+    teachingMethod: text("teaching_method"),
+    orgCode: text("org_code"),
+    orgName: text("org_name"),
+    schoolName: text("school_name"),
+    /** Last change in TUMonline; unchanged courses are skipped on re-import. */
+    modifiedAt: timestamp("modified_at", { withTimezone: true }),
     fetchedAt: timestamp("fetched_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [index("courses_semester_idx").on(t.semester)],

@@ -129,7 +129,29 @@ const natCourseSchema = z.object({
   semester: z.object({ semester_key: z.string() }),
   instruction_languages: z.array(z.string()).nullish(),
   tumonline_url: z.string().nullish(),
-  modules: z.array(z.object({ module_code: z.string() })).nullish(),
+  modified_tumonline: z.string().nullish(),
+  description: z.string().nullish(),
+  description_en: z.string().nullish(),
+  teachingmethod_en: z.string().nullish(),
+  teachingmethod: z.string().nullish(),
+  org: z
+    .object({
+      org_code: z.string().nullish(),
+      org_name: z.string().nullish(),
+      org_name_en: z.string().nullish(),
+      school: z.object({ org_name: z.string().nullish(), org_name_en: z.string().nullish() }).nullish(),
+    })
+    .nullish(),
+  modules: z
+    .array(
+      z.object({
+        module_code: z.string(),
+        module_title: z.string().nullish(),
+        module_title_en: z.string().nullish(),
+        module_credits: z.union([z.number(), z.string()]).nullish(),
+      }),
+    )
+    .nullish(),
   groups: z
     .array(
       z.object({
@@ -165,9 +187,21 @@ export type Course = {
   hoursPerWeek: number | null;
   languages: string[];
   moduleCodes: string[];
+  /** Titles and credits of the linked modules (as listed on the course). */
+  modules: CourseModuleRef[];
   tumonlineUrl: string | null;
+  /** Last change in TUMonline; used to skip unchanged courses on re-import. */
+  modifiedAt: string | null;
+  description: string | null;
+  teachingMethod: string | null;
+  orgCode: string | null;
+  orgName: string | null;
+  /** e.g. "TUM School of Computation, Information and Technology". */
+  schoolName: string | null;
   groups: CourseGroup[];
 };
+
+export type CourseModuleRef = { code: string; titleDe: string | null; titleEn: string | null; credits: number | null };
 
 export function parseNatCourse(raw: unknown): Course {
   const c = natCourseSchema.parse(raw);
@@ -184,7 +218,30 @@ export function parseNatCourse(raw: unknown): Course {
     hoursPerWeek: Number.isFinite(hours) ? hours : null,
     languages: (c.instruction_languages ?? []).map((l) => l.toUpperCase()),
     moduleCodes: [...new Set((c.modules ?? []).map((m) => m.module_code.trim().toUpperCase()))],
+    modules: [
+      ...new Map(
+        (c.modules ?? []).map((m) => {
+          const code = m.module_code.trim().toUpperCase();
+          const credits = m.module_credits === null || m.module_credits === undefined ? NaN : Number(m.module_credits);
+          return [
+            code,
+            {
+              code,
+              titleDe: text(m.module_title),
+              titleEn: text(m.module_title_en),
+              credits: Number.isFinite(credits) ? credits : null,
+            },
+          ] as const;
+        }),
+      ).values(),
+    ],
     tumonlineUrl: c.tumonline_url ?? null,
+    modifiedAt: c.modified_tumonline ?? null,
+    description: text(c.description_en) ?? text(c.description),
+    teachingMethod: text(c.teachingmethod_en) ?? text(c.teachingmethod),
+    orgCode: c.org?.org_code ?? null,
+    orgName: text(c.org?.org_name_en) ?? text(c.org?.org_name),
+    schoolName: text(c.org?.school?.org_name_en) ?? text(c.org?.school?.org_name),
     groups: (c.groups ?? []).map((g) => ({
       id: g.group_id,
       name: text(g.group_name) ?? "Group",

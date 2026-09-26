@@ -43,6 +43,23 @@ describe("parseNatCourse", () => {
 
   it("maps the course and its modules", () => {
     expect(c).toMatchObject({ id: 950941194, semester: "2026WS", activity: "UE", moduleCodes: ["IN0004"] });
+    expect(c.modules).toEqual([
+      {
+        code: "IN0004",
+        titleDe: expect.any(String),
+        titleEn: "Introduction to Computer Organization and Technology - Computer Architecture",
+        credits: 8,
+      },
+    ]);
+  });
+
+  it("keeps catalog metadata (organisation, school, last change)", () => {
+    expect(c).toMatchObject({
+      modifiedAt: "2026-08-28T20:50:51.644170+02:00",
+      orgCode: "TUINI10",
+      schoolName: "TUM School of Computation, Information and Technology",
+    });
+    expect(c.orgName).toMatch(/Computer Architecture and Parallel Systems/);
   });
 
   it("maps tutorial groups with their weekly events and rooms", () => {

@@ -93,6 +93,21 @@ dates and rooms). The importer is rate-limited; the NAT API can be slow for larg
 full run takes 10–20 minutes. Supported programs are configured in
 `src/importers/planner/programs.ts` (currently B.Sc. Informatik and B.Sc. Wirtschaftsinformatik).
 
+## Course catalog
+
+`npm run import:catalog` imports **all** courses of a semester from the TUM NAT API: lectures,
+tutorials and seminars with their groups, weekly dates, rooms, organisation/school and linked
+modules. The first run makes one request per course (~6,000, a few hours, rate-limited); later runs
+only refetch courses whose TUMonline "last modified" time changed and remove courses that
+disappeared. Runs can be interrupted and resumed.
+
+```bash
+npm run import:catalog                        # upcoming semester
+npm run import:catalog -- --semester 2027SS   # another semester
+npm run import:catalog -- --descriptions      # also fetch missing module handbook entries
+npm run import:catalog -- --limit 50          # quick partial run for development
+```
+
 ## Student clubs (Phase 4)
 
 `/clubs` lists all student clubs from the TUM Student Club Gallery (search, focus areas, campuses).
@@ -145,6 +160,7 @@ club's form definition on the server; CSV exports are protected against formula 
 | `npm run import:tum-info` | Import TUM Info statistics (see below) |
 | `npm run remove-source -- <source>` | Delete all data of one source |
 | `npm run import:planner` | Import study plans, module handbook and course dates (see above) |
+| `npm run import:catalog` | Import/refresh all courses of a semester (incremental) |
 | `npm run import:clubs` | Import/refresh student clubs from the TUM gallery |
 | `npm run cleanup` | Delete expired applications, login links and sessions |
 

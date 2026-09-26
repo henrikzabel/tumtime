@@ -19,6 +19,11 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
   const [fields, setFields] = useState<FormField[]>(initial.fields);
   const [title, setTitle] = useState(initial.title);
   const [intro, setIntro] = useState(initial.intro);
+  // Controlled on purpose: React resets uncontrolled fields after a form action, which used to
+  // flip the status back to "draft" so the next save silently hid an open form.
+  const [status, setStatus] = useState(initial.status);
+  const [closesAt, setClosesAt] = useState(initial.closesAt);
+  const deadlinePassed = !!closesAt && closesAt < new Date().toISOString().slice(0, 10);
   const [state, action, pending] = useActionState<ActionState, FormData>(saveForm.bind(null, slug, initial.id), {});
 
   const update = (i: number, patch: Partial<FormField>) =>
@@ -60,7 +65,7 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
             <div className="grid gap-3 sm:grid-cols-2">
               <Label>
                 Status
-                <select name="status" defaultValue={initial.status} className={selectCls}>
+                <select name="status" value={status} onChange={(e) => setStatus(e.target.value)} className={selectCls}>
                   <option value="draft">Draft (hidden)</option>
                   <option value="open">Open — accepting applications</option>
                   <option value="closed">Closed</option>
@@ -68,9 +73,18 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
               </Label>
               <Label>
                 Deadline (optional)
-                <Input name="closesAt" type="date" defaultValue={initial.closesAt} />
+                <Input name="closesAt" type="date" value={closesAt} onChange={(e) => setClosesAt(e.target.value)} />
               </Label>
             </div>
+            {(status !== "open" || deadlinePassed) && (
+              <p className="rounded-md bg-muted px-3 py-2 text-xs/relaxed text-muted-foreground">
+                {status === "draft"
+                  ? "Draft: students can't see this form. Set the status to “Open” and save to accept applications."
+                  : status === "closed"
+                    ? "Closed: this form doesn't accept applications."
+                    : "The deadline has passed, so this form no longer accepts applications."}
+              </p>
+            )}
           </CardContent>
         </Card>
 

@@ -61,7 +61,11 @@ export default async function ClubDashboardPage({ params }: PageProps<"/dashboar
                         {f.closesAt ? ` · closes ${f.closesAt.toLocaleDateString("en-GB")}` : ""}
                       </span>
                     </span>
-                    <Badge variant={STATUS_BADGE[f.status] ?? "outline"}>{f.status}</Badge>
+                    {f.status === "open" && f.closesAt && f.closesAt <= new Date() ? (
+                      <Badge variant="secondary">deadline passed</Badge>
+                    ) : (
+                      <Badge variant={STATUS_BADGE[f.status] ?? "outline"}>{f.status === "draft" ? "draft (hidden)" : f.status}</Badge>
+                    )}
                   </Link>
                 );
               })}

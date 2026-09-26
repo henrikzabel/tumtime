@@ -195,6 +195,7 @@ export async function saveForm(slug: string, formId: number | null, _prev: Actio
   }
   revalidatePath(`/clubs/${slug}`);
   revalidatePath("/clubs");
+  revalidatePath(`/dashboard/${slug}`, "layout");
   if (!formId) redirect(`/dashboard/${slug}/forms/${id}?saved=1`);
   return { ok: true, message: "Form saved." };
 }

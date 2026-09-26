@@ -152,15 +152,28 @@ export type TimetableCourse = {
   groups: { id: number; name: string; maxStudents: number | null; events: TimetableEvent[] }[];
 };
 
-/** Courses (with groups and dates) of the given modules in one semester. */
-export async function getTimetableCourses(semester: string, codes: string[]): Promise<TimetableCourse[]> {
+/**
+ * Courses (with groups and dates) of the given modules in one semester, plus standalone courses
+ * given by id (catalog entries without a module; they get the key "C_<id>" as module code).
+ */
+export async function getTimetableCourses(semester: string, codes: string[], courseIds: number[] = []): Promise<TimetableCourse[]> {
   const unique = [...new Set(codes.map((c) => c.toUpperCase()))].slice(0, 60);
-  if (unique.length === 0) return [];
-  const links = await db
-    .select({ courseId: courseModules.courseId, moduleCode: courseModules.moduleCode })
-    .from(courseModules)
-    .innerJoin(courses, eq(courses.id, courseModules.courseId))
-    .where(and(eq(courses.semester, semester), inArray(courseModules.moduleCode, unique)));
+  const standalone = [...new Set(courseIds)].slice(0, 60);
+  if (unique.length === 0 && standalone.length === 0) return [];
+  const links = unique.length
+    ? await db
+        .select({ courseId: courseModules.courseId, moduleCode: courseModules.moduleCode })
+        .from(courseModules)
+        .innerJoin(courses, eq(courses.id, courseModules.courseId))
+        .where(and(eq(courses.semester, semester), inArray(courseModules.moduleCode, unique)))
+    : [];
+  if (standalone.length) {
+    const own = await db
+      .select({ id: courses.id })
+      .from(courses)
+      .where(and(eq(courses.semester, semester), inArray(courses.id, standalone)));
+    links.push(...own.map((c) => ({ courseId: c.id, moduleCode: `C_${c.id}` })));
+  }
   const ids = [...new Set(links.map((l) => l.courseId))];
   if (ids.length === 0) return [];
 

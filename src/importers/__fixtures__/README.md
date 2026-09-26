@@ -12,3 +12,6 @@
 - `planner/nat-module-IN0001.json`, `planner/nat-course-950941194.json`: responses of the public
   TUM NAT API (`api.srv.nat.tum.de/api/v1/mhb/module/{code}`, `/course/{id}`), fetched 2026-09-25.
   Staff names and e-mail addresses were removed; the course fixture keeps its first three groups.
+- `clubs/tum-club-gallery.page1.html`: first page of the TUM Student Club Gallery
+  (https://www.tum.de/en/community/campus-life/student-clubs-gallery), filters, cards and
+  pagination only, fetched 2026-09-26.

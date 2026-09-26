@@ -340,3 +340,153 @@ export const courseEvents = pgTable(
   },
   (t) => [index("course_events_group_idx").on(t.groupId)],
 );
+
+/* ------------------------------------------------------------------------------------------------
+ * Accounts (magic-link login, TUM e-mail addresses only)
+ * --------------------------------------------------------------------------------------------- */
+
+export const users = pgTable("users", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  email: text("email").notNull().unique(), // lower-cased
+  name: text("name"),
+  role: text("role").notNull().default("student"), // "student" | "admin"
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  lastLoginAt: timestamp("last_login_at", { withTimezone: true }),
+});
+
+/** One-time login links; only a SHA-256 hash of the token is stored. */
+export const loginTokens = pgTable(
+  "login_tokens",
+  {
+    tokenHash: text("token_hash").primaryKey(),
+    email: text("email").notNull(),
+    redirectTo: text("redirect_to"),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    usedAt: timestamp("used_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("login_tokens_email_idx").on(t.email, t.createdAt)],
+);
+
+/** Sessions; the cookie holds a random id, the database only its hash. */
+export const sessions = pgTable(
+  "sessions",
+  {
+    idHash: text("id_hash").primaryKey(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("sessions_user_idx").on(t.userId)],
+);
+
+/* ------------------------------------------------------------------------------------------------
+ * Phase 4: student clubs
+ * --------------------------------------------------------------------------------------------- */
+
+export const clubs = pgTable(
+  "clubs",
+  {
+    id: serial("id").primaryKey(),
+    slug: text("slug").notNull().unique(),
+    name: text("name").notNull().unique(),
+    /** Short description from the TUM gallery (credited to TUM). */
+    sourceDescription: text("source_description"),
+    /** Description written by the club after claiming its profile. */
+    description: text("description"),
+    focusAreas: text("focus_areas").array().notNull().default(sql`'{}'::text[]`),
+    locations: text("locations").array().notNull().default(sql`'{}'::text[]`),
+    website: text("website"),
+    imageUrl: text("image_url"),
+    contactEmail: text("contact_email"),
+    instagram: text("instagram"),
+    source: text("source").notNull().default("manual"), // "tum_gallery" | "manual"
+    /** Still listed in the TUM gallery at the last import. */
+    listed: boolean("listed").notNull().default(true),
+    ...timestamps,
+  },
+  (t) => [index("clubs_name_trgm").using("gin", sql`${t.name} gin_trgm_ops`)],
+);
+
+export const clubMembers = pgTable(
+  "club_members",
+  {
+    clubId: integer("club_id")
+      .notNull()
+      .references(() => clubs.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    role: text("role").notNull().default("admin"), // "owner" | "admin"
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.clubId, t.userId] })],
+);
+
+export const clubClaims = pgTable(
+  "club_claims",
+  {
+    id: serial("id").primaryKey(),
+    clubId: integer("club_id")
+      .notNull()
+      .references(() => clubs.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    position: text("position").notNull(), // role in the club, e.g. "Board member"
+    message: text("message"),
+    status: text("status").notNull().default("pending"), // "pending" | "approved" | "rejected"
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
+  },
+  (t) => [index("club_claims_status_idx").on(t.status)],
+);
+
+/** Custom sign-up forms; `fields` is validated against `formFieldSchema` (src/lib/clubs/forms.ts). */
+export const clubForms = pgTable(
+  "club_forms",
+  {
+    id: serial("id").primaryKey(),
+    clubId: integer("club_id")
+      .notNull()
+      .references(() => clubs.id, { onDelete: "cascade" }),
+    title: text("title").notNull(),
+    intro: text("intro"),
+    fields: jsonb("fields").notNull().default(sql`'[]'::jsonb`),
+    status: text("status").notNull().default("draft"), // "draft" | "open" | "closed"
+    closesAt: timestamp("closes_at", { withTimezone: true }),
+    ...timestamps,
+  },
+  (t) => [index("club_forms_club_idx").on(t.clubId)],
+);
+
+export const applications = pgTable(
+  "applications",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    formId: integer("form_id")
+      .notNull()
+      .references(() => clubForms.id, { onDelete: "cascade" }),
+    clubId: integer("club_id")
+      .notNull()
+      .references(() => clubs.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    applicantName: text("applicant_name").notNull(),
+    applicantEmail: text("applicant_email").notNull(),
+    answers: jsonb("answers").notNull(),
+    status: text("status").notNull().default("submitted"), // "submitted" | "in_review" | "accepted" | "rejected"
+    clubNote: text("club_note"), // internal note, never shown to the applicant
+    statusChangedAt: timestamp("status_changed_at", { withTimezone: true }).notNull().defaultNow(),
+    ...timestamps,
+  },
+  (t) => [
+    unique("applications_form_user").on(t.formId, t.userId),
+    index("applications_club_idx").on(t.clubId),
+    index("applications_user_idx").on(t.userId),
+    index("applications_created_idx").on(t.createdAt),
+  ],
+);

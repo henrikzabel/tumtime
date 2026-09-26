@@ -1,11 +1,13 @@
 import Link from "next/link";
 
+import { AccountLink } from "@/components/account-link";
 import { copy } from "@/lib/copy";
 
 const navItems = [
   { href: "/browse", label: copy.nav.browse },
   { href: "/compare", label: copy.nav.compare },
   { href: "/planner", label: copy.nav.planner },
+  { href: "/clubs", label: copy.nav.clubs },
   { href: "/contribute", label: copy.nav.contribute },
 ] as const;
 
@@ -37,6 +39,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          <AccountLink />
         </nav>
       </div>
     </header>

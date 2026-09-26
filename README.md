@@ -93,12 +93,41 @@ dates and rooms). The importer is rate-limited; the NAT API can be slow for larg
 full run takes 10–20 minutes. Supported programs are configured in
 `src/importers/planner/programs.ts` (currently B.Sc. Informatik and B.Sc. Wirtschaftsinformatik).
 
+## Student clubs (Phase 4)
+
+`/clubs` lists all student clubs from the TUM Student Club Gallery (search, focus areas, campuses).
+Club members can **claim** a profile (`/clubs/<slug>/claim`); an admin approves it in `/admin`.
+Club managers then use `/dashboard/<slug>` to edit their profile, build **custom sign-up forms**
+(short/long text, e-mail, link, number, date, single/multiple choice, checkbox; draft/open/closed,
+deadline) and review applications (status, internal notes, e-mail notifications, CSV export).
+Students apply at `/clubs/<slug>/apply/<formId>` and follow their applications in `/me`.
+
+```bash
+npm run import:clubs     # import/refresh clubs from the TUM gallery (~30 requests, rate-limited)
+npm run cleanup          # delete expired data (also runs daily via Vercel Cron: /api/cron/cleanup)
+```
+
+**Accounts:** passwordless login with one-time links, only for TUM e-mail addresses (`tum.de`,
+`mytum.de` and subdomains). Tokens and session ids are stored hashed. Without `RESEND_API_KEY`,
+e-mails (including login links) are printed to the server console, which is handy locally. Admins
+are configured via `ADMIN_EMAILS`.
+
+**Privacy:** applications are deleted 6 months after submission; users can withdraw applications,
+download their data (`/api/me/export`) and delete their account. Answers are validated against the
+club's form definition on the server; CSV exports are protected against formula injection.
+
 ## Environment variables
 
 | Variable | Required | Description |
 | --- | --- | --- |
 | `DATABASE_URL` | yes | Postgres connection string |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | no | Enables privacy-friendly Plausible analytics for this domain |
+| `APP_URL` | prod | Public base URL used in e-mail links (e.g. `https://tumtime.example`) |
+| `RESEND_API_KEY` | prod | Resend API key; without it e-mails are logged to the console |
+| `EMAIL_FROM` | prod | Sender, e.g. `TUM Time <noreply@tumtime.example>` (domain verified in Resend) |
+| `ADMIN_EMAILS` | yes | Comma-separated admin e-mail addresses (approve club claims) |
+| `ALLOWED_EMAIL_DOMAINS` | no | Login domains, default `tum.de,mytum.de` |
+| `CRON_SECRET` | prod | Secret for the daily cleanup cron (Vercel sets the header automatically) |
 
 ## Scripts
 
@@ -116,9 +145,13 @@ full run takes 10–20 minutes. Supported programs are configured in
 | `npm run import:tum-info` | Import TUM Info statistics (see below) |
 | `npm run remove-source -- <source>` | Delete all data of one source |
 | `npm run import:planner` | Import study plans, module handbook and course dates (see above) |
+| `npm run import:clubs` | Import/refresh student clubs from the TUM gallery |
+| `npm run cleanup` | Delete expired applications, login links and sessions |
 
 ## Legal
 
 - Footer and top banner state that the project is unofficial and not affiliated with TUM.
 - `/imprint` and `/privacy` are placeholders to be filled in by the operator.
 - Only aggregated statistics are stored and shown; no personal data.
+- Club applications are personal data: consent at submission, 6-month retention, export and
+  deletion in `/me`. `/privacy` contains a draft that the operator must complete.

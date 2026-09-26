@@ -7,10 +7,11 @@ import { z } from "zod";
 
 import { db } from "@/db";
 import { applications, clubClaims, clubForms, clubMembers, clubs, users } from "@/db/schema";
-import { destroySession, getCurrentUser, requireAdmin, requireUser, type CurrentUser } from "@/lib/auth/session";
+import { destroySession, getCurrentUser, requireAdmin, requireUser } from "@/lib/auth/session";
 import { adminEmails } from "@/lib/auth/tokens";
 import { appUrl, sendEmail } from "@/lib/email";
 
+import { getManagedClub } from "./queries";
 import { answersFromFormData, formatAnswer, formFieldsSchema, validateAnswers, type FormField } from "./forms";
 import { APPLICATION_STATUSES, type ApplicationStatus } from "./status";
 
@@ -18,17 +19,7 @@ export type ActionState = { ok?: boolean; error?: string; fieldErrors?: Record<s
 
 const FOOTER = "\n\n— TUM Time (unofficial student project, not affiliated with TUM)";
 
-/** The club if the user may manage it (club member or site admin); otherwise null. */
-async function managedClub(slug: string, user: CurrentUser) {
-  const [club] = await db.select().from(clubs).where(eq(clubs.slug, slug));
-  if (!club) return null;
-  if (user.role === "admin") return club;
-  const [m] = await db
-    .select()
-    .from(clubMembers)
-    .where(and(eq(clubMembers.clubId, club.id), eq(clubMembers.userId, user.id)));
-  return m ? club : null;
-}
+const managedClub = getManagedClub;
 
 async function clubRecipients(clubId: number, contactEmail: string | null): Promise<string[]> {
   const members = await db
@@ -229,13 +220,16 @@ export async function submitApplication(slug: string, formId: number, _prev: Act
   if (!row || row.form.status !== "open" || (row.form.closesAt && row.form.closesAt < new Date())) {
     return { error: "This form is not accepting applications." };
   }
+  // Collect all problems at once so the applicant can fix everything in one go.
   const name = String(formData.get("applicant_name") ?? "").trim();
-  if (name.length < 2 || name.length > 120) return { fieldErrors: { applicant_name: "Please enter your name." } };
-  if (formData.get("privacy") !== "on") return { fieldErrors: { privacy: "Please accept the privacy notice." } };
-
   const fields = row.form.fields as FormField[];
   const result = validateAnswers(fields, answersFromFormData(fields, formData));
-  if (!result.ok) return { fieldErrors: result.errors, error: "Please check the highlighted fields." };
+  const fieldErrors: Record<string, string> = result.ok ? {} : { ...result.errors };
+  if (name.length < 2 || name.length > 120) fieldErrors.applicant_name = "Please enter your name.";
+  if (formData.get("privacy") !== "on") fieldErrors.privacy = "Please accept the privacy notice.";
+  if (!result.ok || Object.keys(fieldErrors).length) {
+    return { fieldErrors, error: "Please check the highlighted fields." };
+  }
 
   const inserted = await db
     .insert(applications)

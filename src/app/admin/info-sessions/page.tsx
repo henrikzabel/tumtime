@@ -35,7 +35,7 @@ export default async function InfoSessionPeriodsPage() {
           >
             <span>
               <span className="block text-sm font-medium">{p.title}</span>
-              <span className="text-[0.6875rem] text-muted-foreground">{formatRange(p.startsOn, p.endsOn)}</span>
+              <span className="text-xs text-muted-foreground">{formatRange(p.startsOn, p.endsOn)}</span>
             </span>
             <Badge variant={p.status === "published" ? "default" : "outline"}>{PERIOD_STATUSES[p.status]}</Badge>
           </Link>

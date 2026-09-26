@@ -111,7 +111,7 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
                       options: CHOICE_TYPES.includes(type) ? (f.options?.length ? f.options : ["Option 1", "Option 2"]) : undefined,
                     });
                   }}
-                  className={`${selectCls} ml-auto h-7 text-xs`}
+                  className={`${selectCls} ml-auto h-8 text-sm`}
                   aria-label="Question type"
                 >
                   {Object.entries(FIELD_TYPES).map(([k, v]) => (
@@ -181,8 +181,8 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
           <Button type="submit" size="lg" disabled={pending}>
             {pending ? "Saving…" : "Save form"}
           </Button>
-          {state.error && <p className="text-xs/relaxed text-destructive">{state.error}</p>}
-          {state.message && <p className="text-xs/relaxed text-primary">{state.message}</p>}
+          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+          {state.message && <p className="text-sm text-primary">{state.message}</p>}
         </div>
       </form>
 

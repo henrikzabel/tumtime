@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 const PAGE = 80;
 
 const selectClass =
-  "h-7 w-full rounded-md border border-input bg-input/20 px-2 text-xs/relaxed text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 dark:bg-input/30";
+  "h-8 w-full rounded-md border border-input bg-input/20 px-2 text-sm text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 dark:bg-input/30";
 
 
 function Toggle({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
@@ -33,7 +33,7 @@ function Toggle({ on, onClick, children }: { on: boolean; onClick: () => void; c
       aria-pressed={on}
       onClick={onClick}
       className={cn(
-        "inline-flex h-6 items-center gap-1 rounded-full border px-2 text-[0.6875rem] font-medium transition-colors",
+        "inline-flex h-7 items-center gap-1 rounded-full border px-2.5 text-xs font-medium transition-colors",
         on ? "border-primary bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
     >
@@ -177,7 +177,7 @@ export function ClubBrowser({ clubs, banner }: { clubs: ClubListItem[]; banner?:
                       aria-pressed={on}
                       onClick={() => update({ hours: on ? filters.hours.filter((h) => h !== b.value) : [...filters.hours, b.value] })}
                       className={cn(
-                        "h-7 flex-1 rounded-md border text-xs/relaxed transition-colors",
+                        "h-8 flex-1 rounded-md border text-sm transition-colors",
                         on ? "border-primary bg-primary text-primary-foreground" : "hover:bg-muted",
                       )}
                     >
@@ -205,7 +205,7 @@ export function ClubBrowser({ clubs, banner }: { clubs: ClubListItem[]; banner?:
                 <X className="size-3" /> Clear filters
               </button>
             )}
-            <p className="col-span-2 text-[0.6875rem] text-muted-foreground">
+            <p className="col-span-2 text-xs text-muted-foreground">
               Time, language and audience filters only include clubs that filled in their profile.
             </p>
           </div>
@@ -258,11 +258,11 @@ export function ClubBrowser({ clubs, banner }: { clubs: ClubListItem[]; banner?:
                   <div className="flex items-start gap-2">
                     <span className="line-clamp-1 flex-1 text-sm font-medium">{c.name}</span>
                     {isRecruiting(c) && (
-                      <span className="shrink-0 rounded-full bg-primary/12 px-1.5 text-[0.625rem] font-semibold text-primary">Recruiting</span>
+                      <span className="shrink-0 rounded-full bg-primary/12 px-1.5 text-xs font-semibold text-primary">Recruiting</span>
                     )}
                   </div>
                   <p className="line-clamp-1 text-xs/relaxed text-muted-foreground">{c.tagline ?? c.summary ?? c.focusAreas.join(", ")}</p>
-                  <div className="mt-0.5 flex flex-wrap gap-x-2 text-[0.6875rem] text-muted-foreground">
+                  <div className="mt-0.5 flex flex-wrap gap-x-2 text-xs text-muted-foreground">
                     {hours && (
                       <span className="inline-flex items-center gap-0.5">
                         <Clock className="size-3" /> {hours}

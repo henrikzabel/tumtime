@@ -59,23 +59,27 @@ export default function HomePage() {
               key={m.code}
               href={`/modules/${m.code}`}
               title={m.name}
-              className="rounded-full border bg-card px-3 py-0.5 font-mono text-xs transition-colors hover:bg-accent"
+              className="rounded-full border bg-card px-3 py-1 font-mono text-xs transition-colors hover:bg-accent"
             >
               {m.code}
             </Link>
           ))}
         </div>
       </section>
-      <section className="mx-auto grid max-w-6xl gap-3 px-4 pb-20 sm:grid-cols-2 lg:grid-cols-5" aria-label="Features">
-        {FEATURES.map((f) => (
-          <Link key={f.href} href={f.href} className="group rounded-xl bg-card p-4 ring-1 ring-foreground/10 transition-shadow hover:ring-primary/40">
-            <f.icon className="size-5 text-primary" />
-            <h2 className="mt-2 font-semibold">
-              {f.title} <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">{f.text}</p>
-          </Link>
-        ))}
+      <section className="mx-auto max-w-6xl px-4 pb-20" aria-label="Features">
+        <ul className="grid border-t sm:grid-cols-2 lg:grid-cols-5">
+          {FEATURES.map((f) => (
+            <li key={f.href} className="border-b sm:odd:border-r lg:border-r lg:border-b-0 lg:last:border-r-0">
+              <Link href={f.href} className="group block h-full p-5 transition-colors hover:bg-muted/50">
+                <h2 className="flex items-center gap-2 font-semibold group-hover:text-primary">
+                  <f.icon className="size-4.5 text-primary" aria-hidden />
+                  {f.title}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
     </>
   );

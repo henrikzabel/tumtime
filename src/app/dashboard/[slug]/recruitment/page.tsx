@@ -166,7 +166,7 @@ export default async function RecruitmentPage({ params }: PageProps<"/dashboard/
                         </Button>
                       </form>
                     )}
-                    <p className="text-[0.6875rem] text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       The organisers schedule all clubs at once so that clubs with the same focus never run in parallel —
                       students can visit every club they&apos;re interested in.
                     </p>
@@ -197,7 +197,7 @@ export default async function RecruitmentPage({ params }: PageProps<"/dashboard/
                       <span className="block text-sm font-medium">
                         {formatLongDay(toBerlin(s.startsAt).date)}, {toBerlin(s.startsAt).time}–{toBerlin(s.endsAt).time}
                       </span>
-                      <span className="text-[0.6875rem] text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         {[s.venue, s.campus, s.onlineUrl ? "online" : null, s.language?.toUpperCase()].filter(Boolean).join(" · ")}
                       </span>
                     </span>

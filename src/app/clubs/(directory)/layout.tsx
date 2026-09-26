@@ -31,7 +31,7 @@ export default async function ClubsLayout({ children }: LayoutProps<"/clubs">) {
                   <CalendarRange className="size-5 shrink-0 text-primary" />
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-medium">{current.title}</span>
-                    <span className="text-[0.6875rem] text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {formatRange(current.startsOn, current.endsOn)} · every evening, all clubs in one place
                     </span>
                   </span>

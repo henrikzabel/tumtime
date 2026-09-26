@@ -207,7 +207,7 @@ export function DegreePlanner({
             aria-label="Plan name"
             className="-ml-1 block w-full min-w-0 rounded-md bg-transparent px-1 text-2xl font-semibold tracking-tight outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
           />
-          <p className="text-xs/relaxed text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             {program.degree} {program.nameEn} · started{" "}
             {termLabel(state.startSemester, 1)} · {studyPlan.title} ·{" "}
             <span aria-live="polite">
@@ -451,7 +451,7 @@ export function DegreePlanner({
                         : "Drag into a semester"
                     }
                   >
-                    <span className="font-mono text-[0.6875rem] text-muted-foreground">
+                    <span className="font-mono text-xs text-muted-foreground">
                       {b.code}
                     </span>{" "}
                     {b.title}
@@ -482,7 +482,7 @@ export function DegreePlanner({
               )}
             </details>
           )}
-          <p className="text-xs/relaxed text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Unofficial — always check your FPSO and TUMonline.
           </p>
         </aside>
@@ -543,7 +543,7 @@ function RequirementsPanel({
           max={BACHELOR_CREDITS}
           className="mt-1"
         />
-        <p className="mt-1 text-[0.6875rem] text-muted-foreground">
+        <p className="mt-1 text-xs text-muted-foreground">
           {completed} ECTS completed · {progress.concreteCredits} ECTS in chosen
           modules
         </p>
@@ -557,7 +557,7 @@ function RequirementsPanel({
         </div>
         <ProgressBar value={req.planned} max={req.total} className="mt-1" />
         {req.missing.length > 0 && (
-          <p className="mt-1 text-[0.6875rem] text-destructive">
+          <p className="mt-1 text-xs text-destructive">
             Missing: {req.missing.join(", ")}
           </p>
         )}
@@ -576,7 +576,7 @@ function RequirementsPanel({
             </span>
           </summary>
           <ProgressBar value={r.planned} max={r.required} className="mt-1" />
-          <p className="mt-1 text-[0.6875rem] text-muted-foreground">
+          <p className="mt-1 text-xs text-muted-foreground">
             {r.planned >= r.required
               ? "Fulfilled by your plan."
               : `${r.required - r.planned} ECTS still to plan.`}
@@ -675,7 +675,7 @@ function SemesterColumn({
             isPlanningTerm ? "Next semester" : "Add a note (e.g. abroad)"
           }
           aria-label={`Note for semester ${number}`}
-          className="mt-0.5 w-full bg-transparent text-[0.6875rem] text-muted-foreground outline-none placeholder:text-muted-foreground/60"
+          className="mt-0.5 w-full bg-transparent text-xs text-muted-foreground outline-none placeholder:text-muted-foreground/60"
         />
       </header>
       <div className="flex-1 space-y-1.5 p-2">
@@ -703,7 +703,7 @@ function SemesterColumn({
             <select
               value={area}
               onChange={(e) => setArea(e.target.value)}
-              className="h-7 w-full rounded-md border border-input bg-background px-2 text-xs/relaxed"
+              className="h-8 w-full rounded-md border border-input bg-background px-2 text-sm"
               aria-label="Counts towards"
             >
               {areaOptions.map((a) => (
@@ -793,13 +793,13 @@ function PlanItemCard({
               href={`/catalog/${term}/${encodeURIComponent(item.moduleCode!)}`}
               className="block hover:underline"
             >
-              <span className="font-mono text-[0.6875rem] text-muted-foreground">
+              <span className="font-mono text-xs text-muted-foreground">
                 {item.moduleCode}
               </span>{" "}
               <span className="font-medium">{info?.nameEn ?? item.title}</span>
             </Link>
           )}
-          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[0.6875rem] text-muted-foreground">
+          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-muted-foreground">
             <span className="tabular-nums">{item.credits} ECTS</span>
             {label && (
               <span className={cn("rounded px-1 font-medium", label.className)}>
@@ -822,7 +822,7 @@ function PlanItemCard({
             )}
           </div>
           {warning && (
-            <div className="mt-1 flex items-center gap-1 text-[0.6875rem] text-amber-700 dark:text-amber-400">
+            <div className="mt-1 flex items-center gap-1 text-xs text-amber-700 dark:text-amber-400">
               <AlertTriangle className="size-3" /> {warning}
             </div>
           )}

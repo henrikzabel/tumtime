@@ -16,9 +16,9 @@ function RoleCard({ node, level }: { node: RoleNode; level: number }) {
       <div className={cn("text-xs/relaxed", node.holder ? "text-foreground" : "text-muted-foreground italic")}>
         {node.holder || (node.open ? "Open position" : "—")}
       </div>
-      {node.description && <p className="mt-1 text-[0.6875rem] text-muted-foreground">{node.description}</p>}
+      {node.description && <p className="mt-1 text-xs text-muted-foreground">{node.description}</p>}
       {node.open && (
-        <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-primary/12 px-1.5 text-[0.625rem] font-semibold text-primary">
+        <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-primary/12 px-1.5 text-xs font-semibold text-primary">
           <UserPlus className="size-2.5" /> Looking for people
         </span>
       )}

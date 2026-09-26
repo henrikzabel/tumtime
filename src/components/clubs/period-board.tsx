@@ -118,7 +118,7 @@ export function PeriodBoard({
 
       {weeks.map((week) => (
         <div key={week[0]} className="overflow-x-auto">
-          <table className="w-full min-w-[40rem] table-fixed border-separate border-spacing-1 text-[0.6875rem]">
+          <table className="w-full min-w-[40rem] table-fixed border-separate border-spacing-1 text-xs">
             <thead>
               <tr>
                 <th className="w-14" />
@@ -164,7 +164,7 @@ export function PeriodBoard({
                                 )}
                               >
                                 <span className="truncate font-medium">{club?.name ?? (id !== undefined ? `#${id}` : "")}</span>
-                                <span className="truncate text-[0.625rem] text-muted-foreground">{v.name}</span>
+                                <span className="truncate text-xs text-muted-foreground">{v.name}</span>
                               </button>
                             );
                           })}

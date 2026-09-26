@@ -50,7 +50,7 @@ export function RecruitmentTimeline({ items, term }: { items: TimelineItem[]; te
                   {it.state === "past" && <span className="sr-only"> (passed)</span>}
                 </span>
                 {it.lines.map((l) => (
-                  <span key={l} className="mt-0.5 px-2 text-[0.6875rem] tracking-wide text-muted-foreground/80 uppercase">
+                  <span key={l} className="mt-0.5 px-2 text-xs tracking-wide text-muted-foreground/80 uppercase">
                     {l}
                   </span>
                 ))}

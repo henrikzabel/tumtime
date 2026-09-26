@@ -112,10 +112,10 @@ export function InfoSessionSchedule({
         <Link href={`/clubs/${s.clubSlug}`} className="block text-xs/snug font-semibold hover:text-primary">
           {s.clubName}
         </Link>
-        <div className="text-[0.625rem] text-muted-foreground">
+        <div className="text-xs text-muted-foreground">
           {[compact ? null : `${s.start}–${s.end}`, s.venue, s.language?.toUpperCase()].filter(Boolean).join(" · ")}
         </div>
-        {!compact && s.tagline && <div className="mt-0.5 line-clamp-2 text-[0.625rem]">{s.tagline}</div>}
+        {!compact && s.tagline && <div className="mt-0.5 line-clamp-2 text-xs">{s.tagline}</div>}
         <button
           type="button"
           onClick={() => toggleStar(s.id)}
@@ -199,7 +199,7 @@ export function InfoSessionSchedule({
               <tbody>
                 {slots.map((slot) => (
                   <tr key={slot.start}>
-                    <th className="align-top text-[0.6875rem] font-normal text-muted-foreground tabular-nums">
+                    <th className="align-top text-xs font-normal text-muted-foreground tabular-nums">
                       {slot.start}
                       <br />
                       {slot.end}

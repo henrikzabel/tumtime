@@ -197,7 +197,7 @@ export default async function ClubPage({ params, searchParams }: PageProps<"/clu
             {club.description ?? club.sourceDescription ?? "No description yet."}
           </div>
           {!club.description && club.sourceDescription && (
-            <p className="mt-2 text-[0.6875rem] text-muted-foreground">Description: TUM Student Club Gallery</p>
+            <p className="mt-2 text-xs text-muted-foreground">Description from the TUM Student Club Gallery.</p>
           )}
           {profile.activities.length > 0 && (
             <ListSection title="What they do">
@@ -265,7 +265,7 @@ export default async function ClubPage({ params, searchParams }: PageProps<"/clu
                         Apply until {formatDate(toBerlin(f.closesAt).date)}
                       </p>
                     )}
-                    {f.intro && <p className="line-clamp-4 text-xs/relaxed whitespace-pre-line text-muted-foreground">{f.intro}</p>}
+                    {f.intro && <p className="line-clamp-4 text-sm whitespace-pre-line text-muted-foreground">{f.intro}</p>}
                     <Link href={`/clubs/${club.slug}/apply/${f.id}`} className={cn(buttonVariants({ size: "lg" }), "mt-auto w-fit")}>
                       Apply now
                     </Link>
@@ -339,7 +339,7 @@ export default async function ClubPage({ params, searchParams }: PageProps<"/clu
       {tab === "team" && (
         <section className="mt-8">
           <OrgChart roles={roles} />
-          <p className="mt-4 text-center text-[0.6875rem] text-muted-foreground">Maintained by the club. Dashed roles are looking for people.</p>
+          <p className="mt-4 text-center text-xs text-muted-foreground">Maintained by the club. Dashed roles are looking for people.</p>
         </section>
       )}
 

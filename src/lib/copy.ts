@@ -23,9 +23,9 @@ export const copy = {
     privacy: "Privacy policy",
   },
   home: {
-    heading: "How hard is that exam, really?",
+    heading: "Plan your semester at TUM.",
     subheading:
-      "Browse grade distributions, averages and failure rates of TUM exams across semesters — and compare modules side by side.",
+      "Find courses, build a clash-free week, plan your degree — and see how hard each exam really is before you sign up.",
     searchPlaceholder: "Search by module number or name, e.g. IN0001 or Analysis",
   },
 } as const;

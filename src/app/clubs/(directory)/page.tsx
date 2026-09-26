@@ -44,7 +44,7 @@ export default async function ClubsHome() {
             <CalendarRange /> Info session schedule
           </Link>
         </div>
-        <p className="mt-8 text-[0.6875rem] text-muted-foreground">
+        <p className="mt-8 text-xs text-muted-foreground">
           Club list and short descriptions:{" "}
           <a
             href="https://www.tum.de/en/community/campus-life/student-clubs-gallery"

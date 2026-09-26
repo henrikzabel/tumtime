@@ -18,19 +18,21 @@ export default async function CatalogHome({ params }: PageProps<"/catalog/[semes
           {modules.toLocaleString("en")} modules and {(entries.length - modules).toLocaleString("en")} further courses.
           Select one to see its description, lecture and tutorial times and grade statistics.
         </p>
-        <ul className="mt-6 grid gap-3 text-left text-sm sm:grid-cols-3">
-          <li className="rounded-lg border p-3">
-            <BookOpen className="mb-1 size-4 text-primary" />
+        <ul className="mx-auto mt-6 flex w-fit flex-col gap-2 text-left text-sm">
+          <li className="flex items-center gap-2.5">
+            <BookOpen className="size-4 shrink-0 text-primary" />
             Module handbook descriptions
           </li>
-          <li className="rounded-lg border p-3">
-            <CalendarDays className="mb-1 size-4 text-primary" />
-            Weekly dates &amp; rooms
+          <li className="flex items-center gap-2.5">
+            <CalendarDays className="size-4 shrink-0 text-primary" />
+            Weekly dates and rooms
           </li>
-          <li className="rounded-lg border p-3">
-            <ChartColumn className="mb-1 size-4 text-primary" />
-            Grades for {withGrades.toLocaleString("en")} modules
-          </li>
+          {withGrades > 0 && (
+            <li className="flex items-center gap-2.5">
+              <ChartColumn className="size-4 shrink-0 text-primary" />
+              Grade statistics for {withGrades.toLocaleString("en")} {withGrades === 1 ? "module" : "modules"}
+            </li>
+          )}
         </ul>
       </div>
     </div>

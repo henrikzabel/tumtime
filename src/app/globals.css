@@ -4,9 +4,9 @@
 
 /*
  * Design tokens from the shadcn/ui preset b1D3CJHe:
- *   style mira · base color neutral · theme green · font Inter · icons lucide · radius default
+ *   style mira · base color neutral · font Inter · icons lucide · radius default
  *   menu color default-translucent · menu accent subtle
- * Values copied from the shadcn registry (neutral base + green theme). Chart colours are our own,
+ * Neutral values copied from the shadcn registry; primary is TUM Blue (#0065bd). Chart colours are our own,
  * validated for colour-vision deficiency (the preset's neutral chart ramp cannot tell series apart).
  */
 :root {
@@ -18,8 +18,8 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.527 0.154 150.069);
-  --primary-foreground: oklch(0.982 0.018 155.826);
+  --primary: #0065bd; /* TUM Blue */
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.97 0 0);
@@ -32,8 +32,8 @@
   --ring: oklch(0.708 0 0);
 
   /* Chart series, fixed order — validated all-pairs for CVD on white. */
-  --chart-1: #008236;
-  --chart-2: #2a78d6;
+  --chart-1: #0065bd;
+  --chart-2: #008236;
   --chart-3: #d55181;
   --chart-4: #eda100;
   --chart-grid: oklch(0.94 0 0);
@@ -51,8 +51,8 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.448 0.119 151.328);
-  --primary-foreground: oklch(0.982 0.018 155.826);
+  --primary: #3070b3; /* lighter TUM blue: readable as text on dark, still 5:1 under white */
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);

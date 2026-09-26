@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown, ArrowUp, Copy, Plus, Trash2 } from "lucide-react";
-import { useActionState, useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 
 import { FormFields } from "@/components/clubs/form-fields";
 import { Button } from "@/components/ui/button";
@@ -50,7 +50,16 @@ export function FormBuilder({ slug, initial }: { slug: string; initial: Initial 
 
   return (
     <div className="mt-6 grid gap-6 lg:grid-cols-2">
-      <form action={action} className="space-y-4">
+      <form
+        // Submit via onSubmit instead of `action`: React resets forms after an action, and a reset
+        // snaps even a controlled <select> back to its first option ("Draft").
+        onSubmit={(e) => {
+          e.preventDefault();
+          const data = new FormData(e.currentTarget);
+          startTransition(() => action(data));
+        }}
+        className="space-y-4"
+      >
         <input type="hidden" name="fields" value={JSON.stringify(fields)} />
         <Card>
           <CardContent className="space-y-3">

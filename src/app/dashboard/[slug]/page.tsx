@@ -35,7 +35,12 @@ export default async function ClubDashboardPage({ params }: PageProps<"/dashboar
     { label: "FAQs", href: "/profile#faqs", done: profile.faqs.length > 0 },
     { label: "Team structure", href: "/structure", done: readStructure(club.structure).length > 0 },
     { label: "Recruitment timeline or info session", href: "/recruitment", done: profile.timeline.length > 0 || sessions.length > 0 },
-    { label: "An open sign-up form", href: "", done: forms.some((f) => f.status === "open") },
+    {
+      label: "An open sign-up form",
+      // Straight into the editor: the newest form if there is one, otherwise a new form.
+      href: forms[0] ? `/forms/${forms[0].id}` : "/forms/new",
+      done: forms.some((f) => f.status === "open"),
+    },
   ];
   const done = checklist.filter((c) => c.done).length;
 

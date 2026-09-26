@@ -70,7 +70,7 @@ export async function confirmLogin(_prev: ConfirmState, formData: FormData): Pro
   const [user] = await db
     .insert(users)
     .values({ email: row.email, role, lastLoginAt: new Date() })
-    .onConflictDoUpdate({ target: users.email, set: { lastLoginAt: new Date(), ...(role === "admin" ? { role } : {}) } })
+    .onConflictDoUpdate({ target: users.email, set: { lastLoginAt: new Date(), role } })
     .returning({ id: users.id });
   await createSession(user.id);
   redirect(safeRedirect(row.redirectTo));

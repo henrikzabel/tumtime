@@ -8,7 +8,7 @@ import { cache } from "react";
 import { db } from "@/db";
 import { sessions, users } from "@/db/schema";
 
-import { generateToken, hashToken, SESSION_TTL_DAYS } from "./tokens";
+import { adminEmails, generateToken, hashToken, SESSION_TTL_DAYS } from "./tokens";
 
 export const SESSION_COOKIE = "tumtime_session";
 
@@ -24,7 +24,9 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
     .from(sessions)
     .innerJoin(users, eq(users.id, sessions.userId))
     .where(and(eq(sessions.idHash, hashToken(raw)), gt(sessions.expiresAt, new Date())));
-  return row ? { ...row, role: row.role === "admin" ? "admin" : "student" } : null;
+  // ADMIN_EMAILS is authoritative on every request, so adding or removing an admin takes effect
+  // immediately (the stored role is only a record of the last login).
+  return row ? { ...row, role: adminEmails().has(row.email) ? "admin" : "student" } : null;
 });
 
 /** Require a signed-in user; otherwise redirect to the login page (and back afterwards). */

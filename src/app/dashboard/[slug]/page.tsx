@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Inbox, Plus } from "lucide-react";
+import { Circle, CircleCheck, Inbox, Plus } from "lucide-react";
 
-import { ActionForm } from "@/components/forms/action-form";
+import { DashboardNav } from "@/components/clubs/dashboard/dashboard-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input, Label, Textarea } from "@/components/ui/input";
 import { requireUser } from "@/lib/auth/session";
-import { removeMember, updateClubProfile } from "@/lib/clubs/actions";
+import { removeMember } from "@/lib/clubs/actions";
+import { getClubSessions } from "@/lib/clubs/info-session-queries";
+import { readProfile, readStructure } from "@/lib/clubs/profile";
 import { getClubDashboard, getManagedClub } from "@/lib/clubs/queries";
 
 export const metadata: Metadata = { title: "Club dashboard", robots: { index: false } };
@@ -24,18 +25,31 @@ export default async function ClubDashboardPage({ params }: PageProps<"/dashboar
   const { forms, members, counts } = await getClubDashboard(club.id);
   const total = counts.reduce((s, c) => s + c.n, 0);
   const fresh = counts.filter((c) => c.status === "submitted").reduce((s, c) => s + c.n, 0);
+  const profile = readProfile(club.profile);
+  const sessions = await getClubSessions(club.id);
+  const checklist = [
+    { label: "Write a tagline and description", href: "/profile", done: !!club.tagline && !!club.description },
+    { label: "Time commitment per week", href: "/profile", done: club.hoursMin !== null || club.hoursMax !== null },
+    { label: "Languages and who can join", href: "/profile", done: club.languages.length > 0 && club.audience.length > 0 },
+    { label: "Key facts (fees, meetings, requirements)", href: "/profile#facts", done: profile.facts.length > 0 || club.feeEuros !== null },
+    { label: "FAQs", href: "/profile#faqs", done: profile.faqs.length > 0 },
+    { label: "Team structure", href: "/structure", done: readStructure(club.structure).length > 0 },
+    { label: "Recruitment timeline or info session", href: "/recruitment", done: profile.timeline.length > 0 || sessions.length > 0 },
+    { label: "An open sign-up form", href: "", done: forms.some((f) => f.status === "open") },
+  ];
+  const done = checklist.filter((c) => c.done).length;
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:py-10">
-      <Link href={`/clubs/${slug}`} className="text-xs/relaxed text-muted-foreground hover:text-foreground">
-        ← Public profile
-      </Link>
-      <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{club.name}</h1>
+      <DashboardNav slug={slug} name={club.name} />
+      <div className="mt-4 flex flex-wrap items-center gap-2">
         <Link href={`/dashboard/${slug}/applications`} className={buttonVariants({ size: "lg" })}>
           <Inbox /> Applications ({total}
           {fresh ? `, ${fresh} new` : ""})
         </Link>
+        <span className="text-xs/relaxed text-muted-foreground">
+          Profile {done}/{checklist.length} complete
+        </span>
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
@@ -73,35 +87,20 @@ export default async function ClubDashboardPage({ params }: PageProps<"/dashboar
 
           <Card>
             <CardHeader>
-              <CardTitle>Club profile</CardTitle>
-              <CardDescription>Shown on your public page instead of the TUM gallery text.</CardDescription>
+              <CardTitle>Make your profile stand out</CardTitle>
+              <CardDescription>Students filter by time commitment, language and audience — clubs without these details are hidden by those filters.</CardDescription>
             </CardHeader>
             <CardContent>
-              <ActionForm action={updateClubProfile.bind(null, slug)} submitLabel="Save profile">
-                <Label>
-                  Description
-                  <Textarea
-                    name="description"
-                    rows={8}
-                    maxLength={5000}
-                    defaultValue={club.description ?? club.sourceDescription ?? ""}
-                  />
-                </Label>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <Label>
-                    Website
-                    <Input name="website" type="url" defaultValue={club.website ?? ""} placeholder="https://" />
-                  </Label>
-                  <Label>
-                    Instagram
-                    <Input name="instagram" type="url" defaultValue={club.instagram ?? ""} placeholder="https://instagram.com/…" />
-                  </Label>
-                </div>
-                <Label>
-                  Contact e-mail (public; also receives new applications)
-                  <Input name="contactEmail" type="email" defaultValue={club.contactEmail ?? ""} />
-                </Label>
-              </ActionForm>
+              <ul className="space-y-1.5">
+                {checklist.map((c) => (
+                  <li key={c.label}>
+                    <Link href={`/dashboard/${slug}${c.href}`} className="flex items-center gap-2 text-sm hover:text-primary">
+                      {c.done ? <CircleCheck className="size-4 text-primary" /> : <Circle className="size-4 text-muted-foreground" />}
+                      <span className={c.done ? "text-muted-foreground line-through decoration-muted-foreground/40" : ""}>{c.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
         </div>
@@ -109,7 +108,7 @@ export default async function ClubDashboardPage({ params }: PageProps<"/dashboar
         <Card className="h-fit">
           <CardHeader>
             <CardTitle>Team</CardTitle>
-            <CardDescription>People who can manage this club. New managers request access via “Claim”.</CardDescription>
+            <CardDescription>People who can manage this club on TUM Time. New managers request access via “Claim”. (The public hierarchy is edited under “Team structure”.)</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             {members.map((m) => (

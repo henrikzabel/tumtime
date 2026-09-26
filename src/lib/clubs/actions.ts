@@ -13,6 +13,19 @@ import { appUrl, sendEmail } from "@/lib/email";
 
 import { getManagedClub } from "./queries";
 import { answersFromFormData, formatAnswer, formFieldsSchema, validateAnswers, type FormField } from "./forms";
+import {
+  AUDIENCES,
+  clubProfileSchema,
+  clubStructureSchema,
+  LANGUAGES,
+  readProfile,
+  RECRUITMENT_MODES,
+  type Audience,
+  type ClubProfile,
+  type Language,
+  type ProfileSection,
+  type RecruitmentMode,
+} from "./profile";
 import { APPLICATION_STATUSES, type ApplicationStatus } from "./status";
 
 export type ActionState = { ok?: boolean; error?: string; fieldErrors?: Record<string, string>; message?: string };
@@ -117,32 +130,109 @@ const optionalUrl = z
   .refine((v) => v === "" || /^https?:\/\/\S+\.\S+$/i.test(v), "Links must start with https://")
   .transform((v) => v || null);
 
-const profileSchema = z.object({
-  description: z.string().trim().max(5000).transform((v) => v || null),
-  website: optionalUrl,
-  instagram: optionalUrl,
-  contactEmail: z
+const intOrNull = (min: number, max: number, what: string) =>
+  z
     .string()
     .trim()
-    .max(254)
-    .refine((v) => v === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), "Invalid e-mail address")
-    .transform((v) => v || null),
-});
+    .transform((v) => (v === "" ? null : Number(v)))
+    .refine((v) => v === null || (Number.isInteger(v) && v >= min && v <= max), `${what} must be a whole number between ${min} and ${max}`);
+
+const profileSchema = z
+  .object({
+    tagline: z.string().trim().max(140).transform((v) => v || null),
+    description: z.string().trim().max(5000).transform((v) => v || null),
+    website: optionalUrl,
+    instagram: optionalUrl,
+    linkedin: optionalUrl,
+    contactEmail: z
+      .string()
+      .trim()
+      .max(254)
+      .refine((v) => v === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), "Invalid e-mail address")
+      .transform((v) => v || null),
+    foundedYear: intOrNull(1868, new Date().getFullYear(), "Founding year"),
+    memberCount: intOrNull(1, 100000, "Number of members"),
+    hoursMin: intOrNull(0, 80, "Hours per week"),
+    hoursMax: intOrNull(0, 80, "Hours per week"),
+    feeEuros: intOrNull(0, 10000, "Membership fee"),
+    languages: z.array(z.enum(Object.keys(LANGUAGES) as [Language, ...Language[]])),
+    audience: z.array(z.enum(Object.keys(AUDIENCES) as [Audience, ...Audience[]])),
+    recruitment: z
+      .enum(["", ...Object.keys(RECRUITMENT_MODES)] as ["", ...RecruitmentMode[]])
+      .transform((v) => (v === "" ? null : v)),
+  })
+  .refine((v) => v.hoursMin === null || v.hoursMax === null || v.hoursMin <= v.hoursMax, "The minimum hours can't exceed the maximum");
 
 export async function updateClubProfile(slug: string, _prev: ActionState, formData: FormData): Promise<ActionState> {
-  const user = await requireUser(`/dashboard/${slug}`);
+  const user = await requireUser(`/dashboard/${slug}/profile`);
   const club = await managedClub(slug, user);
   if (!club) return { error: "You don't have access to this club." };
+  const str = (k: string) => String(formData.get(k) ?? "");
   const parsed = profileSchema.safeParse({
-    description: formData.get("description") ?? "",
-    website: formData.get("website") ?? "",
-    instagram: formData.get("instagram") ?? "",
-    contactEmail: formData.get("contactEmail") ?? "",
+    tagline: str("tagline"),
+    description: str("description"),
+    website: str("website"),
+    instagram: str("instagram"),
+    linkedin: str("linkedin"),
+    contactEmail: str("contactEmail"),
+    foundedYear: str("foundedYear"),
+    memberCount: str("memberCount"),
+    hoursMin: str("hoursMin"),
+    hoursMax: str("hoursMax"),
+    feeEuros: str("feeEuros"),
+    languages: formData.getAll("languages").map(String),
+    audience: formData.getAll("audience").map(String),
+    recruitment: str("recruitment"),
   });
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   await db.update(clubs).set(parsed.data).where(eq(clubs.id, club.id));
-  revalidatePath(`/clubs/${slug}`);
+  revalidateClub(slug);
   return { ok: true, message: "Profile saved." };
+}
+
+function revalidateClub(slug: string) {
+  revalidatePath(`/clubs/${slug}`);
+  revalidatePath("/clubs");
+}
+
+const SECTIONS = ["facts", "activities", "faqs", "projects", "resources", "timeline"] as const satisfies readonly ProfileSection[];
+
+/** Save one list section of the profile (FAQs, projects …); the list arrives as JSON in `items`. */
+export async function saveProfileSection(slug: string, section: ProfileSection, _prev: ActionState, formData: FormData): Promise<ActionState> {
+  const user = await requireUser(`/dashboard/${slug}/profile`);
+  const club = await managedClub(slug, user);
+  if (!club) return { error: "You don't have access to this club." };
+  if (!SECTIONS.includes(section)) return { error: "Unknown section." };
+  let items: unknown;
+  try {
+    items = JSON.parse(String(formData.get("items") ?? "[]"));
+  } catch {
+    return { error: "Invalid data." };
+  }
+  const parsed = clubProfileSchema.shape[section].safeParse(items);
+  if (!parsed.success) return { error: parsed.error.issues[0].message };
+  const profile: ClubProfile = { ...readProfile(club.profile), [section]: parsed.data };
+  if (section === "timeline") profile.timelineTerm = String(formData.get("timelineTerm") ?? "").trim().slice(0, 40);
+  await db.update(clubs).set({ profile }).where(eq(clubs.id, club.id));
+  revalidateClub(slug);
+  return { ok: true, message: "Saved." };
+}
+
+export async function saveStructure(slug: string, _prev: ActionState, formData: FormData): Promise<ActionState> {
+  const user = await requireUser(`/dashboard/${slug}/structure`);
+  const club = await managedClub(slug, user);
+  if (!club) return { error: "You don't have access to this club." };
+  let roles: unknown;
+  try {
+    roles = JSON.parse(String(formData.get("roles") ?? "[]"));
+  } catch {
+    return { error: "Invalid data." };
+  }
+  const parsed = clubStructureSchema.safeParse(roles);
+  if (!parsed.success) return { error: parsed.error.issues[0].message };
+  await db.update(clubs).set({ structure: parsed.data }).where(eq(clubs.id, club.id));
+  revalidateClub(slug);
+  return { ok: true, message: "Structure saved." };
 }
 
 // --- Sign-up forms -------------------------------------------------------------------------------

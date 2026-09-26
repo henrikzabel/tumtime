@@ -13,7 +13,9 @@ Features, modelled on Berkeleytime:
   ECTS and requirements, labels, bookmarks.
 - **Grades** (`/browse`, `/compare`, `/modules/<code>`): grade distributions, averages and failure
   rates of TUM exams.
-- **Clubs** (`/clubs`): all student clubs, custom sign-up forms and applications.
+- **Clubs** (`/clubs`): directory of all student clubs with filters (time per week, language,
+  audience, fee, campus), recruitment timelines, team structures, FAQs, sign-up forms and a central
+  **info session schedule** (`/clubs/info-sessions`).
 
 Schedules, degree plans and bookmarks require signing in with a TUM e-mail address. Everything is
 built on the central `modules` table (study-abroad recognitions will follow).
@@ -123,12 +125,37 @@ npm run import:catalog -- --limit 50          # quick partial run for developmen
 
 ## Student clubs (Phase 4)
 
-`/clubs` lists all student clubs from the TUM Student Club Gallery (search, focus areas, campuses).
+`/clubs` is a two-pane directory like the catalog: the club list with search and filters on the
+left (focus area, campus, hours per week, language, "open to", free membership, recruiting now,
+upcoming info session; shareable via the URL), the selected club on the right with tabs
+**Overview** (key-fact tiles, description, activities), **Join** (how to join, time commitment,
+open forms, info sessions, open positions), **Team** (org chart), **FAQs**, **Projects** and
+**Resources**. A horizontal **recruitment timeline** combines the club's own milestones, its info
+sessions and form deadlines.
+
 Club members can **claim** a profile (`/clubs/<slug>/claim`); an admin approves it in `/admin`.
-Club managers then use `/dashboard/<slug>` to edit their profile, build **custom sign-up forms**
+Club managers then use `/dashboard/<slug>` to edit their profile (basics used by the filters, key
+facts, activities, FAQs, projects, resources), their **team structure** (roles/teams with holders,
+"looking for people" flags), their recruitment timeline and info sessions, build **custom sign-up forms**
 (short/long text, e-mail, link, number, date, single/multiple choice, checkbox; draft/open/closed,
 deadline) and review applications (status, internal notes, e-mail notifications, CSV export).
 Students apply at `/clubs/<slug>/apply/<formId>` and follow their applications in `/me`.
+
+### Info session weeks
+
+A proposal for TUM and the clubs: a shared window (e.g. two weeks, Mon–Thu evenings, a few rooms in
+parallel) in which every club presents itself. Admins create a period in `/admin/info-sessions`
+(nights, time slots, rooms with campus/capacity) and open it for requests. Clubs send preferences
+from their dashboard (preferred/blocked nights, times, campus, language). **Auto-schedule** assigns
+every club one slot: blocked nights are never used, preferences and campus are respected where
+possible, clubs sharing a focus area never run in parallel, and nights are evenly filled
+(`src/lib/clubs/info-sessions.ts`, tested). Admins adjust on a planning board (click a club, click
+a room to move/swap), then publish the weekly plan at `/clubs/info-sessions` — with filters,
+"tonight", a starred personal plan (stored in the browser) and a print layout. Clubs can also add
+their own sessions outside a period.
+
+**Later (not built yet):** Apple Calendar, Google Calendar and Sonaa integrations for info
+sessions and the personal plan.
 
 ```bash
 npm run import:clubs     # import/refresh clubs from the TUM gallery (~30 requests, rate-limited)

@@ -43,6 +43,13 @@
       "when": 1790448792051,
       "tag": "0005_planning_accounts",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790455957650,
+      "tag": "0006_clubs_directory_info_sessions",
+      "breakpoints": true
     }
   ]
 }

@@ -3,8 +3,11 @@ import "server-only";
 import { and, asc, desc, eq, gt, isNull, or, sql } from "drizzle-orm";
 
 import { db } from "@/db";
-import { applications, clubClaims, clubForms, clubMembers, clubs, users } from "@/db/schema";
+import { applications, clubClaims, clubForms, clubMembers, clubs, infoSessionPeriods, infoSessions, users } from "@/db/schema";
 import type { CurrentUser } from "@/lib/auth/session";
+
+import type { ClubListItem } from "./directory";
+import { readStructure } from "./profile";
 
 /** A form accepts applications if it is open and not past its deadline. */
 export const formIsOpen = and(
@@ -12,16 +15,13 @@ export const formIsOpen = and(
   or(isNull(clubForms.closesAt), gt(clubForms.closesAt, sql`now()`)),
 );
 
-export type ClubListItem = {
-  slug: string;
-  name: string;
-  summary: string | null;
-  focusAreas: string[];
-  locations: string[];
-  imageUrl: string | null;
-  recruiting: boolean;
-  claimed: boolean;
-};
+export type { ClubListItem } from "./directory";
+
+/**
+ * `clubs.id` spelled out: inside select fields drizzle renders columns unqualified, so a bare
+ * "id" in a correlated subquery would bind to the subquery's own table (e.g. club_forms.id).
+ */
+const CLUB_ID = sql.raw(`"clubs"."id"`);
 
 export async function listClubs(): Promise<ClubListItem[]> {
   const rows = await db
@@ -30,11 +30,24 @@ export async function listClubs(): Promise<ClubListItem[]> {
       name: clubs.name,
       description: clubs.description,
       sourceDescription: clubs.sourceDescription,
+      tagline: clubs.tagline,
       focusAreas: clubs.focusAreas,
       locations: clubs.locations,
       imageUrl: clubs.imageUrl,
-      recruiting: sql<boolean>`exists (select 1 from ${clubForms} where ${clubForms.clubId} = ${clubs.id} and ${formIsOpen})`,
-      claimed: sql<boolean>`exists (select 1 from ${clubMembers} where ${clubMembers.clubId} = ${clubs.id})`,
+      hoursMin: clubs.hoursMin,
+      hoursMax: clubs.hoursMax,
+      languages: clubs.languages,
+      audience: clubs.audience,
+      feeEuros: clubs.feeEuros,
+      memberCount: clubs.memberCount,
+      recruitment: clubs.recruitment,
+      structure: clubs.structure,
+      recruiting: sql<boolean>`exists (select 1 from ${clubForms} where ${clubForms.clubId} = ${CLUB_ID} and ${formIsOpen})`,
+      claimed: sql<boolean>`exists (select 1 from ${clubMembers} where ${clubMembers.clubId} = ${CLUB_ID})`,
+      nextInfoSession: sql<string | null>`(select min(s.starts_at) from info_sessions s
+        left join info_session_periods p on p.id = s.period_id
+        where s.club_id = ${CLUB_ID} and s.ends_at > now() and (s.period_id is null or p.status = 'published'))`,
+      nextDeadline: sql<string | null>`(select min(${clubForms.closesAt}) from ${clubForms} where ${clubForms.clubId} = ${CLUB_ID} and ${formIsOpen})`,
     })
     .from(clubs)
     .where(eq(clubs.listed, true))
@@ -43,11 +56,22 @@ export async function listClubs(): Promise<ClubListItem[]> {
     slug: r.slug,
     name: r.name,
     summary: firstSentences(r.description) ?? r.sourceDescription,
+    tagline: r.tagline,
     focusAreas: r.focusAreas,
     locations: r.locations,
     imageUrl: r.imageUrl,
+    hoursMin: r.hoursMin,
+    hoursMax: r.hoursMax,
+    languages: r.languages as ClubListItem["languages"],
+    audience: r.audience as ClubListItem["audience"],
+    feeEuros: r.feeEuros,
+    memberCount: r.memberCount,
+    recruitment: r.recruitment as ClubListItem["recruitment"],
     recruiting: r.recruiting,
     claimed: r.claimed,
+    nextInfoSession: r.nextInfoSession ? new Date(r.nextInfoSession).toISOString() : null,
+    nextDeadline: r.nextDeadline ? new Date(r.nextDeadline).toISOString() : null,
+    openRoles: readStructure(r.structure).filter((x) => x.open).length,
   }));
 }
 
@@ -60,15 +84,38 @@ function firstSentences(text: string | null, max = 220): string | null {
 export async function getClubBySlug(slug: string) {
   const [club] = await db.select().from(clubs).where(eq(clubs.slug, slug));
   if (!club) return null;
-  const [openForms, members] = await Promise.all([
+  const [openForms, members, sessions] = await Promise.all([
     db
       .select({ id: clubForms.id, title: clubForms.title, intro: clubForms.intro, closesAt: clubForms.closesAt })
       .from(clubForms)
       .where(and(eq(clubForms.clubId, club.id), formIsOpen))
       .orderBy(desc(clubForms.createdAt)),
     db.select({ userId: clubMembers.userId, role: clubMembers.role }).from(clubMembers).where(eq(clubMembers.clubId, club.id)),
+    // Public sessions from the last 60 days on (older ones don't belong on the current timeline).
+    db
+      .select({
+        id: infoSessions.id,
+        startsAt: infoSessions.startsAt,
+        endsAt: infoSessions.endsAt,
+        venue: infoSessions.venue,
+        campus: infoSessions.campus,
+        onlineUrl: infoSessions.onlineUrl,
+        language: infoSessions.language,
+        notes: infoSessions.notes,
+        periodTitle: infoSessionPeriods.title,
+      })
+      .from(infoSessions)
+      .leftJoin(infoSessionPeriods, eq(infoSessionPeriods.id, infoSessions.periodId))
+      .where(
+        and(
+          eq(infoSessions.clubId, club.id),
+          gt(infoSessions.endsAt, sql`now() - interval '60 days'`),
+          or(isNull(infoSessions.periodId), eq(infoSessionPeriods.status, "published")),
+        ),
+      )
+      .orderBy(asc(infoSessions.startsAt)),
   ]);
-  return { club, openForms, members };
+  return { club, openForms, members, sessions };
 }
 
 // --- Club dashboard ----------------------------------------------------------------------------
@@ -134,7 +181,7 @@ export async function getPendingClaims() {
       clubName: clubs.name,
       clubSlug: clubs.slug,
       email: users.email,
-      claimed: sql<boolean>`exists (select 1 from ${clubMembers} where ${clubMembers.clubId} = ${clubs.id})`,
+      claimed: sql<boolean>`exists (select 1 from ${clubMembers} where ${clubMembers.clubId} = ${CLUB_ID})`,
     })
     .from(clubClaims)
     .innerJoin(clubs, eq(clubs.id, clubClaims.clubId))

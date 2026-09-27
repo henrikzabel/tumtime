@@ -58,7 +58,7 @@ export default async function ComparePage({ searchParams }: PageProps<"/compare"
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 md:py-10">
-      <h1 className="text-3xl font-semibold tracking-tight">Compare</h1>
+      <h1 className="text-3xl font-semibold">Compare</h1>
       <p className="mt-1 text-muted-foreground">
         Overlay the grade distributions of up to four modules or semesters. Shares are in percent of participants, so
         exams of different size are comparable.

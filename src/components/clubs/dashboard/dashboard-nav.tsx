@@ -21,8 +21,8 @@ export function DashboardNav({ slug, name }: { slug: string; name: string }) {
       <Link href={`/clubs/${slug}`} className="text-xs/relaxed text-muted-foreground hover:text-foreground">
         ← Public profile
       </Link>
-      <h1 className="mt-1 text-2xl font-semibold tracking-tight md:text-3xl">{name}</h1>
-      <nav className="mt-4 flex gap-1 overflow-x-auto border-b text-sm [scrollbar-width:none]" aria-label="Club dashboard">
+      <h1 className="mt-1 text-2xl font-semibold md:text-3xl">{name}</h1>
+      <nav className="mt-4 flex gap-1 overflow-x-auto text-sm [scrollbar-width:none]" aria-label="Club dashboard">
         {ITEMS.map((item) => {
           const href = `${base}${item.href}`;
           const active = item.href === "" ? pathname === base || pathname.startsWith(`${base}/forms`) : pathname.startsWith(href);
@@ -32,8 +32,8 @@ export function DashboardNav({ slug, name }: { slug: string; name: string }) {
               href={href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "-mb-px shrink-0 border-b-2 px-3 py-2 transition-colors",
-                active ? "border-primary font-medium text-foreground" : "border-transparent text-muted-foreground hover:text-foreground",
+                "shrink-0 rounded-md px-3 py-1.5 font-medium transition-colors",
+                active ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
             >
               {item.label}

@@ -21,7 +21,7 @@ export default async function InfoSessionPeriodsPage() {
       <Link href="/admin" className="text-xs/relaxed text-muted-foreground hover:text-foreground">
         ← Admin
       </Link>
-      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Info session weeks</h1>
+      <h1 className="mt-1 text-2xl font-semibold">Info session weeks</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
         A central period (e.g. two weeks, every evening) where all clubs present themselves. Clubs request slots with their
         preferences, you auto-schedule them without topic clashes, adjust by hand and publish the weekly plan.
@@ -31,7 +31,7 @@ export default async function InfoSessionPeriodsPage() {
           <Link
             key={p.id}
             href={`/admin/info-sessions/${p.id}`}
-            className="flex items-center justify-between gap-3 rounded-md px-3 py-2 ring-1 ring-foreground/10 hover:bg-muted/50"
+            className="flex items-center justify-between gap-3 rounded-md px-3 py-2 ring-1 ring-border hover:bg-muted/50"
           >
             <span>
               <span className="block text-sm font-medium">{p.title}</span>

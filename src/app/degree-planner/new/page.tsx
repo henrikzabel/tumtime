@@ -47,7 +47,7 @@ export default async function NewDegreePlanPage({
       >
         ← My plans
       </Link>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight">
+      <h1 className="mt-2 text-3xl font-semibold">
         New degree plan
       </h1>
       <p className="mt-1 text-muted-foreground">
@@ -64,7 +64,7 @@ export default async function NewDegreePlanPage({
             {programs.map((p) => (
               <label
                 key={p.slug}
-                className="flex cursor-pointer items-start gap-3 rounded-lg bg-card p-3 ring-1 ring-foreground/10 has-checked:ring-2 has-checked:ring-primary"
+                className="flex cursor-pointer items-start gap-3 rounded-xl bg-card p-3 ring-1 ring-border has-checked:ring-2 has-checked:ring-primary"
               >
                 <input
                   type="radio"
@@ -98,7 +98,7 @@ export default async function NewDegreePlanPage({
               <select
                 name="start"
                 defaultValue={planning}
-                className="h-8 rounded-md border border-input bg-input/20 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
+                className="h-9 rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15"
               >
                 {startOptions(planning).map((o) => (
                   <option key={o} value={o}>

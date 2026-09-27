@@ -86,7 +86,7 @@ export default async function CatalogEntryPage({ params, searchParams }: PagePro
               </Link>
             ))}
           </div>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-balance md:text-3xl">{detail.title}</h1>
+          <h1 className="mt-2 text-2xl font-semibold text-balance md:text-3xl">{detail.title}</h1>
           {detail.titleDe && <p className="mt-0.5 text-sm text-muted-foreground">{detail.titleDe}</p>}
           <p className="mt-1 text-xs/relaxed text-muted-foreground">
             {[detail.school, detail.department].filter(Boolean).join(" · ")}

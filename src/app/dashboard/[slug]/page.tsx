@@ -71,7 +71,7 @@ export default async function ClubDashboardPage({ params }: PageProps<"/dashboar
                   <Link
                     key={f.id}
                     href={`/dashboard/${slug}/forms/${f.id}`}
-                    className="flex items-center justify-between gap-3 rounded-md px-3 py-2 ring-1 ring-foreground/10 hover:bg-muted/50"
+                    className="flex items-center justify-between gap-3 rounded-md px-3 py-2 ring-1 ring-border hover:bg-muted/50"
                   >
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-medium">{f.title}</span>

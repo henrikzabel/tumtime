@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export function CatalogShell({ list, children }: { list: ReactNode; children: ReactNode }) {
   const selected = useSelectedLayoutSegment() !== null;
   return (
-    <div className="grid h-[calc(100dvh-8.75rem)] min-h-[32rem] md:h-[calc(100dvh-5.3125rem)] md:grid-cols-[minmax(20rem,26rem)_1fr]">
+    <div className="grid h-[calc(100dvh-8.75rem)] min-h-[32rem] md:h-[calc(100dvh-1.75rem)] md:grid-cols-[minmax(20rem,26rem)_1fr]">
       <aside className={cn("min-h-0 border-r bg-card/40", selected && "hidden md:block")}>{list}</aside>
       <section className={cn("min-h-0 overflow-y-auto", !selected && "hidden md:block")}>{children}</section>
     </div>

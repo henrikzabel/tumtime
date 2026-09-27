@@ -26,7 +26,7 @@ export default async function SchedulesPage() {
     <div className="mx-auto max-w-5xl px-4 py-8">
       <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">Scheduler</h1>
+          <h1 className="text-2xl font-semibold md:text-3xl">Scheduler</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Build weekly schedules from lectures and tutorial groups, let TUM Time generate clash-free combinations, compare
             them and export to your calendar.
@@ -51,7 +51,7 @@ export default async function SchedulesPage() {
               <select
                 name="semester"
                 defaultValue={preferred}
-                className="h-8 rounded-md border border-input bg-input/20 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
+                className="h-9 rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15"
               >
                 {semesters.map((s) => (
                   <option key={s} value={s}>

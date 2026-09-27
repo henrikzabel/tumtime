@@ -48,7 +48,7 @@ export default async function BrowsePage({ searchParams }: PageProps<"/browse">)
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 md:py-10">
-      <h1 className="text-3xl font-semibold tracking-tight">Browse modules</h1>
+      <h1 className="text-3xl font-semibold">Browse modules</h1>
       <p className="mt-1 text-muted-foreground">
         Averages and failure rates are weighted by the number of participants across all exams on record.
       </p>
@@ -91,7 +91,7 @@ export default async function BrowsePage({ searchParams }: PageProps<"/browse">)
         </div>
       </Suspense>
 
-      <div className="mt-4 overflow-x-auto rounded-lg bg-card ring-1 ring-foreground/10">
+      <div className="mt-4 overflow-x-auto rounded-xl bg-card ring-1 ring-border">
         <table className="w-full text-xs/relaxed">
           <thead className="border-b bg-muted/50 text-left text-xs text-muted-foreground">
             <tr>

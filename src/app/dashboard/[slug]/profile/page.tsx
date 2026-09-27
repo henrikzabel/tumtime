@@ -14,7 +14,7 @@ import { getManagedClub } from "@/lib/clubs/queries";
 export const metadata: Metadata = { title: "Club profile", robots: { index: false } };
 
 const selectCls =
-  "h-8 w-full rounded-md border border-input bg-input/20 px-2 text-sm font-normal outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
+  "h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm font-normal outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15";
 
 function Check({ name, value, label, checked }: { name: string; value: string; label: string; checked: boolean }) {
   return (

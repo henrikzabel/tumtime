@@ -94,7 +94,7 @@ export function PeriodBoard({
 
   return (
     <div className={cn("space-y-4", pending && "opacity-60")}>
-      <div className="sticky top-12 z-10 flex min-h-10 flex-wrap items-center gap-2 rounded-md bg-background/95 p-2 text-xs/relaxed ring-1 ring-foreground/10 backdrop-blur">
+      <div className="sticky top-12 z-10 md:top-2 flex min-h-10 flex-wrap items-center gap-2 rounded-md bg-background/95 p-2 text-xs/relaxed ring-1 ring-border backdrop-blur">
         {sel ? (
           <>
             <span>
@@ -207,7 +207,7 @@ export function PeriodBoard({
       <label className="flex max-w-md flex-col gap-1 text-xs/relaxed font-medium">
         Add a club without a request
         <select
-          className="h-8 rounded-md border border-input bg-input/20 px-2 text-sm font-normal"
+          className="h-9 rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm font-normal"
           value=""
           onChange={(e) => e.target.value && setSelected(Number(e.target.value))}
         >

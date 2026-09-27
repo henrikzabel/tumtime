@@ -49,7 +49,7 @@ export default function HomePage() {
   return (
     <>
       <section className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 pt-20 pb-12 text-center md:pt-28">
-        <h1 className="text-4xl font-semibold tracking-tight text-balance md:text-5xl">{copy.home.heading}</h1>
+        <h1 className="text-4xl font-semibold text-balance md:text-5xl">{copy.home.heading}</h1>
         <p className="max-w-2xl text-lg text-balance text-muted-foreground">{copy.home.subheading}</p>
         <ModuleSearch placeholder={copy.home.searchPlaceholder} autoFocus />
         <div className="flex flex-wrap justify-center gap-2 text-sm">

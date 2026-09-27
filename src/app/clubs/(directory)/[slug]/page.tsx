@@ -116,7 +116,7 @@ export default async function ClubPage({ params, searchParams }: PageProps<"/clu
       </Link>
 
       <header className="flex flex-col gap-4 sm:flex-row sm:items-start">
-        <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-muted ring-1 ring-foreground/10">
+        <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-muted ring-1 ring-border">
           {club.imageUrl ? (
             <Image src={club.imageUrl} alt="" fill priority sizes="80px" className="object-cover" />
           ) : (
@@ -124,7 +124,7 @@ export default async function ClubPage({ params, searchParams }: PageProps<"/clu
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <h1 className="text-2xl font-semibold tracking-tight text-balance md:text-3xl">{club.name}</h1>
+          <h1 className="text-2xl font-semibold text-balance md:text-3xl">{club.name}</h1>
           {club.tagline && <p className="mt-0.5 text-sm text-muted-foreground">{club.tagline}</p>}
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
             {club.focusAreas.map((a) => (
@@ -254,7 +254,7 @@ export default async function ClubPage({ params, searchParams }: PageProps<"/clu
           </div>
 
           <section>
-            <h2 className="text-lg font-semibold tracking-tight">Applications</h2>
+            <h2 className="text-lg font-semibold">Applications</h2>
             {openForms.length > 0 ? (
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 {openForms.map((f) => (
@@ -281,7 +281,7 @@ export default async function ClubPage({ params, searchParams }: PageProps<"/clu
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold tracking-tight">Info sessions</h2>
+            <h2 className="text-lg font-semibold">Info sessions</h2>
             {upcoming.length > 0 ? (
               <ul className="mt-3 space-y-2">
                 {upcoming.map((s) => (
@@ -319,7 +319,7 @@ export default async function ClubPage({ params, searchParams }: PageProps<"/clu
 
           {openRoles.length > 0 && (
             <section>
-              <h2 className="text-lg font-semibold tracking-tight">Open positions</h2>
+              <h2 className="text-lg font-semibold">Open positions</h2>
               <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                 {openRoles.map((r) => (
                   <li key={r.id} className="flex gap-3 rounded-lg border border-dashed border-primary/60 p-3">

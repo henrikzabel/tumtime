@@ -28,7 +28,7 @@ export default async function CompareSchedulesPage({ searchParams }: PageProps<"
       <Link href="/schedules" className="text-xs/relaxed text-muted-foreground hover:text-foreground">
         ← My schedules
       </Link>
-      <h1 className="text-2xl font-semibold tracking-tight">Compare schedules</h1>
+      <h1 className="text-2xl font-semibold">Compare schedules</h1>
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         {(["a", "b"] as const).map((param, i) => (
           <section key={param} className="min-w-0 space-y-3">

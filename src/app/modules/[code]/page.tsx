@@ -75,7 +75,7 @@ export default async function ModulePage({
             </Badge>
             {mod.ects ? <Badge variant="outline">{mod.ects} ECTS</Badge> : null}
           </div>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-balance md:text-4xl">
+          <h1 className="mt-2 text-3xl font-semibold text-balance md:text-4xl">
             {mod.nameEn ?? mod.nameDe ?? mod.code}
           </h1>
           {mod.nameEn && mod.nameDe && mod.nameDe !== mod.nameEn ? (

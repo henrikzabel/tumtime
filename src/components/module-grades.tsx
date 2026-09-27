@@ -145,7 +145,7 @@ export function ModuleGrades({
 
       <section className="mt-10">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold tracking-tight">Exams</h2>
+          <h2 className="text-xl font-semibold">Exams</h2>
           <div className="flex gap-1 rounded-lg border bg-muted/50 p-1 text-sm">
             {TYPE_FILTERS.map((f) => (
               <Link

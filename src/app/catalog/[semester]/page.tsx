@@ -13,7 +13,7 @@ export default async function CatalogHome({ params }: PageProps<"/catalog/[semes
   return (
     <div className="grid h-full place-items-center p-8">
       <div className="max-w-md text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">{formatSemester(semester)}</h1>
+        <h1 className="text-2xl font-semibold">{formatSemester(semester)}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {modules.toLocaleString("en")} modules and {(entries.length - modules).toLocaleString("en")} further courses.
           Select one to see its description, lecture and tutorial times and grade statistics.

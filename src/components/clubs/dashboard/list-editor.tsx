@@ -23,7 +23,7 @@ type Item = Record<string, string>;
 const SPANS: Record<number, string> = { 2: "sm:col-span-2", 3: "sm:col-span-3", 4: "sm:col-span-4", 6: "sm:col-span-6" };
 
 const selectCls =
-  "h-8 w-full rounded-md border border-input bg-input/20 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
+  "h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15";
 
 /** Edit a list of small records (FAQs, projects, facts …) and save it as JSON in one go. */
 export function ListEditor({
@@ -83,7 +83,7 @@ export function ListEditor({
       )}
       {items.length === 0 && emptyText && <p className="text-xs/relaxed text-muted-foreground">{emptyText}</p>}
       {items.map((item, i) => (
-        <div key={i} className="rounded-md p-3 ring-1 ring-foreground/10">
+        <div key={i} className="rounded-md p-3 ring-1 ring-border">
           <div className="grid gap-2 sm:grid-cols-6">
             {fields.map((f) => {
               const common = {

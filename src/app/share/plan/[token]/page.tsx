@@ -40,7 +40,7 @@ export default async function SharedPlanPage({
           {data ? ` · ${data.program.degree} ${data.program.nameEn}` : ""} ·
           from {termLabel(plan.state.startSemester, 1)}
         </p>
-        <h1 className="text-2xl font-semibold tracking-tight">{plan.name}</h1>
+        <h1 className="text-2xl font-semibold">{plan.name}</h1>
         {progress && (
           <p className="mt-1 text-sm text-muted-foreground">
             {progress.totalCredits} ECTS planned ·{" "}
@@ -55,7 +55,7 @@ export default async function SharedPlanPage({
             return (
               <section
                 key={n}
-                className="w-64 shrink-0 rounded-lg bg-card ring-1 ring-foreground/10"
+                className="w-64 shrink-0 rounded-xl bg-card ring-1 ring-border"
               >
                 <header className="border-b px-3 py-2">
                   <div className="flex justify-between text-sm font-semibold">
@@ -83,7 +83,7 @@ export default async function SharedPlanPage({
                         "rounded-md p-2 text-xs/relaxed ring-1",
                         i.kind === "placeholder"
                           ? "border border-dashed border-primary/40 bg-primary/5 ring-transparent"
-                          : "ring-foreground/10",
+                          : "ring-border",
                       )}
                     >
                       {i.moduleCode ? (

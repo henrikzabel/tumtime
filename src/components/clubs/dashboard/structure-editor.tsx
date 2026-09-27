@@ -11,7 +11,7 @@ import { saveStructure, type ActionState } from "@/lib/clubs/actions";
 import { defaultStructure, descendantIds, MAX_ROLES, newRoleId, roleTree, type ClubRole, type RoleNode } from "@/lib/clubs/profile";
 
 const selectCls =
-  "h-7 rounded-md border border-input bg-input/20 px-1.5 text-xs outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
+  "h-7 rounded-lg border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-1.5 text-xs outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15";
 
 const TEMPLATES: Record<string, () => ClubRole[]> = {
   "Board + teams": () => {
@@ -59,7 +59,7 @@ export function StructureEditor({ slug, initial }: { slug: string; initial: Club
     const blocked = descendantIds(roles, node.id);
     return (
       <Fragment key={node.id}>
-        <li className="rounded-md p-2 ring-1 ring-foreground/10" style={{ marginLeft: `${Math.min(depth, 6) * 1.25}rem` }}>
+        <li className="rounded-md p-2 ring-1 ring-border" style={{ marginLeft: `${Math.min(depth, 6) * 1.25}rem` }}>
           <div className="flex flex-wrap items-center gap-1.5">
             {depth > 0 && <CornerDownRight className="size-3.5 text-muted-foreground" />}
             <Input

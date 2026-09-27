@@ -19,7 +19,7 @@ export default async function AdminPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-semibold tracking-tight">Admin</h1>
+        <h1 className="text-2xl font-semibold">Admin</h1>
         <Link href="/admin/info-sessions" className="text-sm text-primary underline-offset-4 hover:underline">
           Plan info session weeks →
         </Link>

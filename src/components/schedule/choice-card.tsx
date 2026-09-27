@@ -88,7 +88,7 @@ export function ChoiceCard({
               }
               onChange={(e) => onSelect(Number(e.target.value))}
               className={cn(
-                "h-8 w-full rounded-md border border-input bg-input/20 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30",
+                "h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15",
                 !chosenGroup && !skipped && "border-primary/60",
               )}
               aria-label={`Group for ${choice.title}`}

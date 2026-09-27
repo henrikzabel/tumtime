@@ -12,7 +12,7 @@ import { calendarBlocks, SKIP, type Selection } from "@/lib/schedule/selection";
 import { cn } from "@/lib/utils";
 
 const selectClass =
-  "h-8 rounded-md border border-input bg-input/20 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30";
+  "h-9 rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15";
 
 /** Berkeleytime-style "Generate schedules": all clash-free group combinations, ranked. */
 export function GenerateDialog({
@@ -57,7 +57,7 @@ export function GenerateDialog({
 
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-labelledby="gen-title">
-      <div className="flex max-h-[90dvh] w-full max-w-5xl flex-col overflow-hidden rounded-xl bg-background shadow-xl ring-1 ring-foreground/10">
+      <div className="flex max-h-[90dvh] w-full max-w-5xl flex-col overflow-hidden rounded-xl bg-background shadow-xl ring-1 ring-border">
         <div className="flex items-center justify-between border-b px-4 py-3">
           <h2 id="gen-title" className="flex items-center gap-2 font-semibold">
             <Sparkles className="size-4 text-primary" /> Generate schedules

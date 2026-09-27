@@ -16,7 +16,7 @@ export default async function ClubsHome() {
   return (
     <div className="grid h-full place-items-center p-8">
       <div className="max-w-lg text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">Student clubs at TUM</h1>
+        <h1 className="text-2xl font-semibold">Student clubs at TUM</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {clubs.length} student initiatives. Pick one on the left to see what they do, how much time it takes, who runs it and
           how to join.

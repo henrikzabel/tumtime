@@ -129,7 +129,7 @@ export function ScheduleEditor({
               onBlur={() => name.trim() && name !== schedule.name && persist({ name: name.trim() })}
               maxLength={60}
               aria-label="Schedule name"
-              className="-ml-1 min-w-0 rounded-md bg-transparent px-1 text-2xl font-semibold tracking-tight outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
+              className="-ml-1 min-w-0 rounded-md bg-transparent px-1 font-cal text-2xl outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
             />
           </div>
           <p className="text-sm text-muted-foreground">
@@ -222,7 +222,7 @@ export function ScheduleEditor({
           <EntrySearch semester={schedule.semester} exclude={keys} onSelect={(key) => setKeys([...keys, key])} />
           <ul className="flex flex-wrap gap-1.5">
             {entries.map((e) => (
-              <li key={e.key} className="flex items-center gap-1.5 rounded-full bg-card py-0.5 pr-1 pl-2.5 text-xs/relaxed ring-1 ring-foreground/10">
+              <li key={e.key} className="flex items-center gap-1.5 rounded-full bg-card py-0.5 pr-1 pl-2.5 text-xs/relaxed ring-1 ring-border">
                 <span className="size-2 rounded-full" style={{ background: colorOf(e.key) }} />
                 <Link href={`/catalog/${schedule.semester}/${e.key}`} className="max-w-48 truncate hover:underline" title={e.title}>
                   {e.key.startsWith("C_") ? e.title : e.key}

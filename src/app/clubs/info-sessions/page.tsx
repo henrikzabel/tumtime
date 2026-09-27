@@ -53,7 +53,7 @@ export default async function InfoSessionsPage({ searchParams }: PageProps<"/clu
           <header className="mt-2 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs font-semibold tracking-wide text-primary uppercase">Info session weeks</p>
-              <h1 className="text-3xl font-semibold tracking-tight">{period.title}</h1>
+              <h1 className="text-3xl font-semibold">{period.title}</h1>
               <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
                 {period.description ??
                   "Every evening a few clubs present themselves in parallel — clubs with the same focus never clash, so you can meet all the ones you care about."}
@@ -94,7 +94,7 @@ export default async function InfoSessionsPage({ searchParams }: PageProps<"/clu
         </>
       ) : (
         <header className="mt-2">
-          <h1 className="text-3xl font-semibold tracking-tight">Club info sessions</h1>
+          <h1 className="text-3xl font-semibold">Club info sessions</h1>
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
             There is no central info session schedule right now. Below are the sessions clubs announced themselves.
           </p>
@@ -102,7 +102,7 @@ export default async function InfoSessionsPage({ searchParams }: PageProps<"/clu
       )}
 
       <section className="mt-12 print:hidden">
-        <h2 className="text-lg font-semibold tracking-tight">More info sessions</h2>
+        <h2 className="text-lg font-semibold">More info sessions</h2>
         <p className="text-xs/relaxed text-muted-foreground">Announced by the clubs themselves, next 60 days.</p>
         {others.length > 0 ? (
           <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -129,7 +129,7 @@ export default async function InfoSessionsPage({ searchParams }: PageProps<"/clu
       </section>
 
       <section className="mt-12 rounded-lg border p-6 print:hidden">
-        <h2 className="text-lg font-semibold tracking-tight">Why info session weeks?</h2>
+        <h2 className="text-lg font-semibold">Why info session weeks?</h2>
         <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
           Today every club schedules its own info session — often on the same evenings, spread over many weeks, and hard to
           find. A shared two-week window at the start of the semester gives first-semesters one place to discover the whole

@@ -28,7 +28,7 @@ export default async function SharedSchedulePage({
       <p className="text-xs/relaxed text-muted-foreground">
         Shared schedule · {formatSemester(semester)}
       </p>
-      <h1 className="text-2xl font-semibold tracking-tight">{schedule.name}</h1>
+      <h1 className="text-2xl font-semibold">{schedule.name}</h1>
       <div className="mt-6">
         <ScheduleView
           entries={entries}

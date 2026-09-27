@@ -118,15 +118,15 @@ export function ModuleSearch({
         onFocus={() => hits.length && setOpen(true)}
         onKeyDown={onKeyDown}
         className={cn(
-          "w-full border border-input bg-input/20 outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 dark:bg-input/30",
-          size === "lg" ? "h-12 rounded-lg bg-card pl-11 pr-4 text-base shadow-xs" : "h-9 rounded-md pl-8 pr-2 text-sm",
+          "w-full border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15",
+          size === "lg" ? "h-12 rounded-xl bg-card pl-11 pr-4 text-base shadow-xs" : "h-9 rounded-md pl-8 pr-2 text-sm",
         )}
       />
       {open && hits.length > 0 && (
         <ul
           id={listId}
           role="listbox"
-          className="absolute z-50 mt-1.5 w-full overflow-hidden rounded-lg bg-popover/85 p-1 text-left text-popover-foreground shadow-md ring-1 ring-foreground/10 backdrop-blur-2xl backdrop-saturate-150"
+          className="absolute z-50 mt-1.5 w-full overflow-hidden rounded-lg bg-popover/85 p-1 text-left text-popover-foreground shadow-md ring-1 ring-border backdrop-blur-2xl backdrop-saturate-150"
         >
           {hits.map((hit, i) => (
             <li
@@ -152,7 +152,7 @@ export function ModuleSearch({
         </ul>
       )}
       {showEmpty && (
-        <div className="absolute z-50 mt-1.5 w-full rounded-lg bg-popover/85 px-3 py-2.5 text-left text-xs/relaxed text-muted-foreground shadow-md ring-1 ring-foreground/10 backdrop-blur-2xl">
+        <div className="absolute z-50 mt-1.5 w-full rounded-lg bg-popover/85 px-3 py-2.5 text-left text-xs/relaxed text-muted-foreground shadow-md ring-1 ring-border backdrop-blur-2xl">
           No modules found for “{query.trim()}”.
         </div>
       )}

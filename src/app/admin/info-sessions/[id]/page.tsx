@@ -69,7 +69,7 @@ export default async function PlanPeriodPage({ params }: PageProps<"/admin/info-
         ← Info session weeks
       </Link>
       <div className="mt-1 flex flex-wrap items-center gap-3">
-        <h1 className="text-2xl font-semibold tracking-tight">{period.title}</h1>
+        <h1 className="text-2xl font-semibold">{period.title}</h1>
         <Badge variant={period.status === "published" ? "default" : "outline"}>{PERIOD_STATUSES[period.status]}</Badge>
       </div>
       <p className="mt-1 text-sm text-muted-foreground">

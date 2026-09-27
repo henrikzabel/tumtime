@@ -30,7 +30,7 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
     <div className="mx-auto max-w-3xl px-4 py-8 md:py-10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Your account</h1>
+          <h1 className="text-2xl font-semibold">Your account</h1>
           <p className="text-sm text-muted-foreground">{user.email}</p>
         </div>
         <div className="flex gap-2">
@@ -59,7 +59,7 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
           { href: "/degree-planner", label: "Degree plans", count: plans.length },
           { href: "/catalog?saved=1", label: "Bookmarks", count: bookmarks.length },
         ].map((x) => (
-          <Link key={x.href} href={x.href} className="rounded-lg bg-card p-3 ring-1 ring-foreground/10 transition-shadow hover:ring-primary/40">
+          <Link key={x.href} href={x.href} className="rounded-xl bg-card p-3 ring-1 ring-border transition-shadow hover:ring-primary/40">
             <div className="text-xs text-muted-foreground">{x.label}</div>
             <div className="text-xl font-semibold tabular-nums">{x.count}</div>
           </Link>
@@ -78,7 +78,7 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
             </p>
           )}
           {apps.map((a) => (
-            <div key={a.id} className="flex items-center justify-between gap-3 rounded-md px-3 py-2 ring-1 ring-foreground/10">
+            <div key={a.id} className="flex items-center justify-between gap-3 rounded-md px-3 py-2 ring-1 ring-border">
               <div className="min-w-0">
                 <Link href={`/clubs/${a.clubSlug}`} className="block truncate text-sm font-medium hover:underline">
                   {a.clubName}
@@ -113,7 +113,7 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
               <Link
                 key={m.slug}
                 href={`/dashboard/${m.slug}`}
-                className="flex items-center justify-between rounded-md px-3 py-2 text-sm ring-1 ring-foreground/10 hover:bg-muted/50"
+                className="flex items-center justify-between rounded-md px-3 py-2 text-sm ring-1 ring-border hover:bg-muted/50"
               >
                 {m.name} <span className="text-xs/relaxed text-muted-foreground">Open dashboard →</span>
               </Link>

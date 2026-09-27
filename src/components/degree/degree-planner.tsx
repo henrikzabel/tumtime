@@ -205,7 +205,7 @@ export function DegreePlanner({
             }
             maxLength={60}
             aria-label="Plan name"
-            className="-ml-1 block w-full min-w-0 rounded-md bg-transparent px-1 text-2xl font-semibold tracking-tight outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
+            className="-ml-1 block w-full min-w-0 rounded-md bg-transparent px-1 font-cal text-2xl outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
           />
           <p className="text-sm text-muted-foreground">
             {program.degree} {program.nameEn} · started{" "}
@@ -419,7 +419,7 @@ export function DegreePlanner({
 
         <aside className="space-y-4">
           <RequirementsPanel progress={progress} completed={completed} />
-          <section className="rounded-lg bg-card p-3 ring-1 ring-foreground/10">
+          <section className="rounded-xl bg-card p-3 ring-1 ring-border">
             <h2 className="flex items-center gap-1.5 text-sm font-semibold">
               <Bookmark className="size-3.5" /> Bookmarks
             </h2>
@@ -442,7 +442,7 @@ export function DegreePlanner({
                       e.dataTransfer.effectAllowed = "copy";
                     }}
                     className={cn(
-                      "cursor-grab rounded-md px-2 py-1 text-xs/relaxed ring-1 ring-foreground/10 active:cursor-grabbing",
+                      "cursor-grab rounded-md px-2 py-1 text-xs/relaxed ring-1 ring-border active:cursor-grabbing",
                       planned.has(b.code) && "opacity-50",
                     )}
                     title={
@@ -529,7 +529,7 @@ function RequirementsPanel({
 }) {
   const { requiredModules: req } = progress;
   return (
-    <section className="space-y-3 rounded-lg bg-card p-3 ring-1 ring-foreground/10">
+    <section className="space-y-3 rounded-xl bg-card p-3 ring-1 ring-border">
       <h2 className="text-sm font-semibold">Requirements</h2>
       <div>
         <div className="flex items-baseline justify-between text-xs/relaxed">
@@ -633,7 +633,7 @@ function SemesterColumn({
     <section
       aria-label={`Semester ${number}`}
       className={cn(
-        "flex w-72 shrink-0 flex-col rounded-lg bg-card ring-1 ring-foreground/10 transition-shadow",
+        "flex w-72 shrink-0 flex-col rounded-xl bg-card ring-1 ring-border transition-shadow",
         isPlanningTerm && "ring-primary/50",
         dragOver && "ring-2 ring-primary/60",
       )}
@@ -703,7 +703,7 @@ function SemesterColumn({
             <select
               value={area}
               onChange={(e) => setArea(e.target.value)}
-              className="h-8 w-full rounded-md border border-input bg-background px-2 text-sm"
+              className="h-9 w-full rounded-[10px] border border-input bg-background px-2 text-sm"
               aria-label="Counts towards"
             >
               {areaOptions.map((a) => (
@@ -780,7 +780,7 @@ function PlanItemCard({
         "group/item cursor-grab rounded-md p-2 text-xs/relaxed ring-1 transition-colors active:cursor-grabbing",
         isPlaceholder
           ? "border border-dashed border-primary/40 bg-primary/5 ring-transparent"
-          : "bg-background ring-foreground/10",
+          : "bg-background ring-border",
         item.label === "done" && "bg-primary/5",
       )}
     >

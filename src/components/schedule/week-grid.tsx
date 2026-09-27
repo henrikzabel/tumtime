@@ -34,7 +34,7 @@ export function WeekGrid({
   return (
     <div
       className={cn(
-        "h-fit overflow-x-auto rounded-lg bg-card ring-1 ring-foreground/10",
+        "h-fit overflow-x-auto rounded-xl bg-card ring-1 ring-border",
         !compact && "lg:sticky lg:top-16",
       )}
     >

@@ -69,7 +69,7 @@ export function CompareView({ series }: { series: CompareSeries[] }) {
     <div className="mt-6 space-y-4">
       <div className="flex flex-wrap items-start gap-3">
         {series.map((s, i) => (
-          <div key={`${s.code}-${i}`} className="flex min-w-64 flex-1 items-start gap-3 rounded-lg bg-card p-3 ring-1 ring-foreground/10 md:max-w-sm">
+          <div key={`${s.code}-${i}`} className="flex min-w-64 flex-1 items-start gap-3 rounded-xl bg-card p-3 ring-1 ring-border md:max-w-sm">
             <span className="mt-1.5 size-3 shrink-0 rounded-full" style={{ background: COLORS[i] }} />
             <div className="min-w-0 flex-1">
               <div className="font-mono text-xs text-muted-foreground">{s.code}</div>
@@ -79,7 +79,7 @@ export function CompareView({ series }: { series: CompareSeries[] }) {
               <select
                 value={s.selector}
                 onChange={(e) => navigate(items.map((it, j) => (j === i ? { ...it, selector: e.target.value } : it)))}
-                className="mt-2 h-8 w-full rounded-md border border-input bg-input/20 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
+                className="mt-2 h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15"
                 aria-label={`Exam for ${s.code}`}
               >
                 {s.options.map((o) => (
@@ -164,7 +164,7 @@ export function CompareView({ series }: { series: CompareSeries[] }) {
             </CardContent>
           </Card>
 
-          <div className="overflow-x-auto rounded-lg bg-card ring-1 ring-foreground/10">
+          <div className="overflow-x-auto rounded-xl bg-card ring-1 ring-border">
             <table className="w-full text-xs/relaxed">
               <thead className="border-b bg-muted/50 text-left text-xs text-muted-foreground">
                 <tr>

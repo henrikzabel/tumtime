@@ -18,7 +18,7 @@ export function RecruitmentTimeline({ items, term }: { items: TimelineItem[]; te
   if (items.length === 0) return null;
   return (
     <section aria-labelledby="timeline-heading">
-      <h2 id="timeline-heading" className="flex items-baseline gap-2 text-lg font-semibold tracking-tight">
+      <h2 id="timeline-heading" className="flex items-baseline gap-2 text-lg font-semibold">
         Recruitment timeline {term && <span className="text-sm font-normal text-muted-foreground">{term}</span>}
       </h2>
       <div className="-mx-4 mt-4 overflow-x-auto px-4 pb-2">

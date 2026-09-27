@@ -48,7 +48,7 @@ export default async function ApplicationsPage({ params, searchParams }: PagePro
   const chip = (active: boolean) =>
     cn(
       "rounded-full px-2.5 py-0.5 text-xs/relaxed ring-1 transition-colors",
-      active ? "bg-primary text-primary-foreground ring-primary" : "bg-card text-muted-foreground ring-foreground/10 hover:text-foreground",
+      active ? "bg-primary text-primary-foreground ring-primary" : "bg-card text-muted-foreground ring-border hover:text-foreground",
     );
 
   return (
@@ -57,7 +57,7 @@ export default async function ApplicationsPage({ params, searchParams }: PagePro
         ← {club.name}
       </Link>
       <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <h1 className="text-2xl font-semibold tracking-tight">Applications</h1>
+        <h1 className="text-2xl font-semibold">Applications</h1>
         <a href={`/dashboard/${slug}/applications/export${formFilter ? `?form=${formFilter}` : ""}`} className={buttonVariants({ variant: "outline", size: "lg" })}>
           <Download /> Export CSV
         </a>
@@ -128,7 +128,7 @@ export default async function ApplicationsPage({ params, searchParams }: PagePro
                     <select
                       name="status"
                       defaultValue={a.status}
-                      className="h-8 w-full rounded-md border border-input bg-input/20 px-2 text-sm"
+                      className="h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm"
                       aria-label="Status"
                     >
                       {APPLICATION_STATUSES.map((s) => (

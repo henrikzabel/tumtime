@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { applications, bookmarks, clubClaims, clubForms, clubMembers, clubs, degreePlans, schedules, users } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth/session";
+import { listMySubmissions } from "@/lib/contribute/submissions";
+import { getMyReviews } from "@/lib/reviews/reviews";
 
 /** GDPR Art. 15/20: everything we store about the signed-in user, as JSON. */
 export async function GET() {
@@ -56,6 +58,8 @@ export async function GET() {
       .where(eq(degreePlans.userId, user.id)),
   ]);
 
+  const [reviews, uploads] = await Promise.all([getMyReviews(db, user.id), listMySubmissions(db, user.id)]);
+
   const data = {
     exportedAt: new Date().toISOString(),
     account: { email: account.email, name: account.name, role: account.role, createdAt: account.createdAt, lastLoginAt: account.lastLoginAt },
@@ -65,6 +69,8 @@ export async function GET() {
     bookmarks: savedBookmarks,
     schedules: savedSchedules.map((s) => ({ ...s, shared: !!s.shared })),
     degreePlans: savedPlans.map((p) => ({ ...p, shared: !!p.shared })),
+    moduleReviews: reviews,
+    pendingUploads: uploads,
   };
   return new NextResponse(JSON.stringify(data, null, 2), {
     headers: {

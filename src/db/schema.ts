@@ -183,18 +183,29 @@ export const sourceRecords = pgTable(
  * Student uploads awaiting moderation. Only the *parsed, aggregated* numbers are stored — never the
  * uploaded HTML, which contains the uploader's name.
  */
-export const submissions = pgTable("submissions", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  status: submissionStatus("status").notNull().default("pending"),
-  moduleCode: text("module_code").notNull(),
-  semester: text("semester").notNull(),
-  type: examType("type").notNull(),
-  data: jsonb("data").notNull(),
-  parserVersion: text("parser_version").notNull(),
-  reviewNote: text("review_note"),
-  reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-});
+export const submissions = pgTable(
+  "submissions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    status: submissionStatus("status").notNull().default("pending"),
+    /**
+     * Uploader, kept only while the submission is pending (so they can see and withdraw it and we can
+     * rate-limit). Cleared on review: which exam someone took is not something we need to keep.
+     */
+    userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
+    moduleCode: text("module_code").notNull(),
+    semester: text("semester").notNull(),
+    type: examType("type").notNull(),
+    data: jsonb("data").notNull(),
+    /** Consistency warnings from the parser, shown to the reviewer. */
+    warnings: text("warnings").array().notNull().default(sql`'{}'::text[]`),
+    parserVersion: text("parser_version").notNull(),
+    reviewNote: text("review_note"),
+    reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("submissions_status_idx").on(t.status, t.createdAt), index("submissions_user_idx").on(t.userId)],
+);
 
 /* ------------------------------------------------------------------------------------------------
  * Phase 2: study planner & timetable
@@ -634,4 +645,42 @@ export const degreePlans = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [index("degree_plans_user_idx").on(t.userId)],
+);
+
+/* ------------------------------------------------------------------------------------------------
+ * Module reviews (Berkeleytime-style ratings). One review per user, module and semester taken.
+ * Ratings are published immediately and only ever shown aggregated; the optional comment is shown
+ * (without name) only after an admin approved it.
+ * --------------------------------------------------------------------------------------------- */
+
+export const moduleReviews = pgTable(
+  "module_reviews",
+  {
+    id: serial("id").primaryKey(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    moduleId: integer("module_id")
+      .notNull()
+      .references(() => modules.id, { onDelete: "cascade" }),
+    semester: text("semester").notNull(), // semester the module was taken, e.g. "2025SS"
+    usefulness: smallint("usefulness").notNull(), // 1 (not useful) … 5 (very useful)
+    difficulty: smallint("difficulty").notNull(), // 1 (very easy) … 5 (very hard)
+    workload: smallint("workload").notNull(), // 1 (very light) … 5 (very heavy)
+    attendanceRequired: boolean("attendance_required"),
+    lecturesRecorded: boolean("lectures_recorded"),
+    comment: text("comment"),
+    commentStatus: text("comment_status"), // null (no comment) | "pending" | "approved" | "rejected"
+    ...timestamps,
+  },
+  (t) => [
+    unique("module_reviews_user_module_semester").on(t.userId, t.moduleId, t.semester),
+    index("module_reviews_module_idx").on(t.moduleId),
+    index("module_reviews_comment_status_idx").on(t.commentStatus),
+    check("module_reviews_semester_format", sql`${t.semester} ~ '^[0-9]{4}(WS|SS)$'`),
+    check(
+      "module_reviews_ratings_range",
+      sql`${t.usefulness} between 1 and 5 and ${t.difficulty} between 1 and 5 and ${t.workload} between 1 and 5`,
+    ),
+  ],
 );

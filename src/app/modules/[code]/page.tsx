@@ -4,9 +4,12 @@ import { notFound } from "next/navigation";
 import { ArrowLeftRight } from "lucide-react";
 
 import { ModuleGrades } from "@/components/module-grades";
+import { ModuleReviews } from "@/components/reviews/module-reviews";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
+import { db } from "@/db";
 import { getModuleDetail } from "@/lib/queries";
+import { getModuleReviewSummary } from "@/lib/reviews/reviews";
 import { formatSemesterShort, type Semester } from "@/lib/stats/semester";
 
 export const revalidate = 3600;
@@ -31,11 +34,18 @@ export default async function ModulePage({
   searchParams,
 }: PageProps<"/modules/[code]">) {
   const { code } = await params;
-  const { type } = await searchParams;
+  const { type, rsem } = await searchParams;
   const detail = await getModuleDetail(decodeURIComponent(code));
   if (!detail) notFound();
 
   const { module: mod, exams, formerNames } = detail;
+  const reviewSemester = typeof rsem === "string" && /^\d{4}(WS|SS)$/.test(rsem) ? rsem : undefined;
+  const reviews = await getModuleReviewSummary(db, mod.id, reviewSemester);
+  const query = (params: Record<string, string | undefined>) => {
+    const q = new URLSearchParams(Object.entries(params).filter((e): e is [string, string] => !!e[1]));
+    return q.size ? `?${q}` : "?";
+  };
+  const typeParam = typeof type === "string" ? type : undefined;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 md:py-10">
@@ -108,9 +118,16 @@ export default async function ModulePage({
         <ModuleGrades
           exams={exams}
           type={type}
-          filterHref={(t) => (t ? `?type=${t}` : "?")}
+          filterHref={(t) => query({ type: t, rsem: reviewSemester })}
         />
       </div>
+
+      <ModuleReviews
+        code={mod.code}
+        summary={reviews}
+        semester={reviewSemester}
+        filterHref={(s) => `${query({ type: typeParam, rsem: s })}#reviews-heading`}
+      />
     </div>
   );
 }

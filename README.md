@@ -13,6 +13,11 @@ Features, modelled on Berkeleytime:
   ECTS and requirements, labels, bookmarks.
 - **Grades** (`/browse`, `/compare`, `/modules/<code>`): grade distributions, averages and failure
   rates of TUM exams.
+- **Contribute** (`/contribute`): students upload the TUMonline "exam statistics" page; the
+  aggregated numbers are reviewed by an admin (`/admin/submissions`) before they go live.
+- **Reviews** (`/modules/<code>/review`): Berkeleytime-style ratings (usefulness, difficulty,
+  workload, attendance, recordings) with an optional comment that is moderated
+  (`/admin/reviews`) before it appears.
 - **Clubs** (`/clubs`): directory of all student clubs with filters (time per week, language,
   audience, fee, campus), recruitment timelines, team structures, FAQs, sign-up forms and a central
   **info session schedule** (`/clubs/info-sessions`).
@@ -58,6 +63,16 @@ reference. Statistics live in two layers:
 
 `grade_counts` holds graded outcomes only (`1.0`–`5.0` incl. steps like `1.4`, `B` = passed,
 `N` = failed); no-shows, withdrawals and cheating are separate columns on `exams`.
+
+### Student uploads
+
+`/contribute` accepts a saved TUMonline statistics page (or pasted HTML). The browser cuts out the
+`<xm-exam-statistics>` block before sending, so the uploader's name in the page header never
+reaches the server; the server parses it with `src/importers/tumonline.ts` and stores only the
+numbers in `submissions`. Re-uploads replace one's own pending upload, and numbers that are
+already pending or published are not queued twice. Approving a submission saves it as source
+`upload` and re-merges the module (disagreeing sources become a `conflict`). The uploader link is
+removed on review, and reviewed submissions are purged after six months.
 
 ## Importing data
 

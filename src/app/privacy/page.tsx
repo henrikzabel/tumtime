@@ -39,6 +39,23 @@ export default function PrivacyPage() {
         plan (without your name or e-mail address); you can turn the link off at any time.
       </p>
 
+      <h2 className="pt-2 text-lg font-semibold text-foreground">Statistics uploads</h2>
+      <p>
+        When you upload a TUMonline statistics page, your browser cuts out the statistics block and only that block is
+        sent; the rest of the page (including your name) never leaves your device. We extract the aggregated grade
+        counts and discard the uploaded markup. While the upload waits for review it is linked to your account so you
+        can withdraw it; that link is removed when it is reviewed. Reviewed uploads contain only aggregated numbers and
+        are deleted after six months (published numbers stay on the site).
+      </p>
+
+      <h2 className="pt-2 text-lg font-semibold text-foreground">Module reviews</h2>
+      <p>
+        If you review a module, we store your ratings, the semester you took it and your optional comment together
+        with your account, so that you can edit or delete the review (Art. 6(1)(a) GDPR). Ratings are only published
+        as averages; comments are published without your name after a manual check. Reviews are kept until you delete
+        them or your account.
+      </p>
+
       <h2 className="pt-2 text-lg font-semibold text-foreground">Club applications</h2>
       <p>
         When you apply, your name, e-mail address and answers are stored and shared with the club you apply to (its

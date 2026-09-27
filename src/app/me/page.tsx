@@ -5,11 +5,17 @@ import { Download, LogOut } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { db } from "@/db";
 import { logout } from "@/lib/auth/actions";
 import { requireUser } from "@/lib/auth/session";
 import { deleteAccount, withdrawApplication } from "@/lib/clubs/actions";
 import { getMyOverview } from "@/lib/clubs/queries";
+import { withdrawUpload } from "@/lib/contribute/actions";
+import { listMySubmissions } from "@/lib/contribute/submissions";
 import { getBookmarkCodes, listDegreePlans, listSchedules } from "@/lib/planning/queries";
+import { removeReview } from "@/lib/reviews/actions";
+import { getMyReviews } from "@/lib/reviews/reviews";
+import { formatSemesterShort, type Semester } from "@/lib/stats/semester";
 import { STATUS_LABELS, type ApplicationStatus } from "@/lib/clubs/status";
 
 import { ConfirmButton } from "./confirm-button";
@@ -19,11 +25,13 @@ export const metadata: Metadata = { title: "Your account", robots: { index: fals
 export default async function MePage({ searchParams }: PageProps<"/me">) {
   const user = await requireUser("/me");
   const { applied } = await searchParams;
-  const [{ apps, memberships, claims }, schedules, plans, bookmarks] = await Promise.all([
+  const [{ apps, memberships, claims }, schedules, plans, bookmarks, reviews, uploads] = await Promise.all([
     getMyOverview(user.id),
     listSchedules(user.id),
     listDegreePlans(user.id),
     getBookmarkCodes(user.id),
+    getMyReviews(db, user.id),
+    listMySubmissions(db, user.id),
   ]);
 
   return (
@@ -127,11 +135,63 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
         </Card>
       )}
 
+      {(reviews.length > 0 || uploads.length > 0) && (
+        <Card className="mt-4">
+          <CardHeader>
+            <CardTitle>Your reviews and uploads</CardTitle>
+            <CardDescription>
+              Reviews are shown anonymously. Uploads are unlinked from your account once they have been reviewed.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {reviews.map((r) => (
+              <div key={r.id} className="flex items-center justify-between gap-3 rounded-md px-3 py-2 ring-1 ring-foreground/10">
+                <div className="min-w-0">
+                  <Link href={`/modules/${r.moduleCode}/review`} className="block truncate text-sm font-medium hover:underline">
+                    {r.moduleCode} {r.moduleName}
+                  </Link>
+                  <span className="text-xs text-muted-foreground">
+                    Review · {formatSemesterShort(r.semester as Semester)}
+                    {r.commentStatus === "pending" ? " · comment waiting for review" : ""}
+                    {r.commentStatus === "rejected" ? " · comment not published" : ""}
+                  </span>
+                </div>
+                <form action={removeReview}>
+                  <input type="hidden" name="reviewId" value={r.id} />
+                  <input type="hidden" name="moduleCode" value={r.moduleCode} />
+                  <ConfirmButton message="Delete this review?" variant="ghost" size="sm">
+                    Delete
+                  </ConfirmButton>
+                </form>
+              </div>
+            ))}
+            {uploads.map((u) => (
+              <div key={u.id} className="flex items-center justify-between gap-3 rounded-md px-3 py-2 ring-1 ring-foreground/10">
+                <div className="min-w-0">
+                  <span className="block truncate text-sm font-medium">
+                    {u.moduleCode} · {formatSemesterShort(u.semester as Semester)} · {u.type}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    Statistics upload · waiting for review since {u.createdAt.toLocaleDateString("en-GB")}
+                  </span>
+                </div>
+                <form action={withdrawUpload}>
+                  <input type="hidden" name="submissionId" value={u.id} />
+                  <ConfirmButton message="Withdraw this upload?" variant="ghost" size="sm">
+                    Withdraw
+                  </ConfirmButton>
+                </form>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
       <Card className="mt-4">
         <CardHeader>
           <CardTitle>Your data</CardTitle>
           <CardDescription>
-            We store your e-mail address, your name (once you apply), your applications and the clubs you manage.
+            We store your e-mail address, your name (once you apply), your applications, the clubs you manage, your module reviews and uploads waiting for review.
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">
@@ -139,7 +199,7 @@ export default async function MePage({ searchParams }: PageProps<"/me">) {
             <Download /> Download my data (JSON)
           </a>
           <form action={deleteAccount}>
-            <ConfirmButton message="Delete your account with all applications, schedules, degree plans and bookmarks permanently?" variant="destructive">
+            <ConfirmButton message="Delete your account with all applications, schedules, degree plans, bookmarks and reviews permanently?" variant="destructive">
               Delete account
             </ConfirmButton>
           </form>

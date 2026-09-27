@@ -3,18 +3,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-// EXPERIMENT: cal.com button — 10px radius, solid brand primary with a subtle inset highlight, bordered secondary.
-const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center whitespace-nowrap transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aria-invalid:ring-2 rounded-[10px] border border-transparent bg-clip-padding text-sm font-medium [&_svg:not([class*='size-'])]:size-4",
+// EXPERIMENT: cal.com button — 10px radius, TUM Blue primary with an inset highlight, soft gradient secondary.
+const buttonVariantClasses = cva(
+  "group/button inline-flex shrink-0 items-center justify-center whitespace-nowrap transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aria-invalid:ring-2 rounded-[10px] border border-transparent bg-clip-padding text-sm font-medium [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-[inset_0_1px_0_rgb(255_255_255/0.12),0_1px_2px_rgb(0_0_0/0.08)] hover:bg-primary/90",
+          "bg-primary text-primary-foreground shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_1px_2px_rgb(0_0_0/0.12)] hover:bg-[color-mix(in_oklab,var(--primary),black_10%)]",
         outline:
-          "border-input bg-background text-foreground shadow-[0_1px_2px_rgb(0_0_0/0.05)] hover:bg-shell hover:border-foreground/30 aria-expanded:bg-muted aria-expanded:text-foreground",
+          "border-input bg-linear-to-b from-background to-muted/60 text-foreground shadow-[0_1px_2px_rgb(0_0_0/0.05)] hover:to-muted aria-expanded:bg-muted aria-expanded:text-foreground",
         secondary:
-          "border-input bg-background text-foreground shadow-[0_1px_2px_rgb(0_0_0/0.05)] hover:bg-shell hover:border-foreground/30 aria-expanded:bg-muted aria-expanded:text-foreground",
+          "border-input bg-linear-to-b from-background to-muted/60 text-foreground shadow-[0_1px_2px_rgb(0_0_0/0.05)] hover:to-muted aria-expanded:bg-muted aria-expanded:text-foreground",
         ghost: "hover:bg-muted hover:text-foreground dark:hover:bg-muted/50 aria-expanded:bg-muted aria-expanded:text-foreground",
         destructive:
           "border-input bg-background text-destructive shadow-[0_1px_2px_rgb(0_0_0/0.05)] hover:border-destructive/40 hover:bg-destructive/5 focus-visible:ring-destructive",
@@ -39,12 +39,18 @@ const buttonVariants = cva(
   },
 );
 
+// Resolve conflicting utilities (e.g. the base `border-transparent` vs a variant's border colour) even when the
+// classes are applied to a plain <a> or <Link> rather than through <Button>.
+function buttonVariants(props?: Parameters<typeof buttonVariantClasses>[0]) {
+  return cn(buttonVariantClasses(props));
+}
+
 function Button({
   className,
   variant = "default",
   size = "default",
   ...props
-}: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants>) {
+}: React.ComponentProps<"button"> & VariantProps<typeof buttonVariantClasses>) {
   return (
     <button
       data-slot="button"

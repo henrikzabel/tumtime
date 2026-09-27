@@ -21,14 +21,14 @@ export function AccountLink({ className, labelClassName }: { className?: string;
   }, [pathname]);
 
   const cls = cn(
-    "flex shrink-0 items-center gap-2.5 rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+    "flex shrink-0 items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
     className,
   );
   if (me === undefined) return <span className={cn("block h-8 w-14", className)} />;
   if (!me) {
     return (
-      <Link href={`/login?next=${encodeURIComponent(pathname)}`} className={cls}>
-        <UserRound className="size-4" />
+      <Link href={`/login?next=${encodeURIComponent(pathname)}`} className={cls} title="Sign in">
+        {labelClassName === "sr-only" ? <UserRound className="size-4.5" strokeWidth={1.75} /> : null}
         <span className={labelClassName}>Sign in</span>
       </Link>
     );

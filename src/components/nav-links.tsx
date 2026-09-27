@@ -1,6 +1,16 @@
 "use client";
 
-import { BookOpen, CalendarDays, ChartColumn, GraduationCap, Users, type LucideIcon } from "lucide-react";
+import {
+  BookOpen,
+  CalendarDays,
+  ChartColumn,
+  FileText,
+  GraduationCap,
+  Shield,
+  Upload,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,34 +23,48 @@ const ICONS = {
   planner: GraduationCap,
   grades: ChartColumn,
   clubs: Users,
+  contribute: Upload,
+  imprint: FileText,
+  privacy: Shield,
 } satisfies Record<string, LucideIcon>;
 
 export type NavItem = { href: string; label: string; match: string[]; icon: keyof typeof ICONS };
 
-// EXPERIMENT: cal.com navigation — vertical sidebar items with icons (icon-only on medium screens), compact pills on mobile.
+/** Sidebar rows on the gray canvas (cal.com), or the compact pills of the small-screen top bar. */
 export function NavLinks({ items, variant = "bar" }: { items: NavItem[]; variant?: "sidebar" | "bar" }) {
   const pathname = usePathname();
   return (
     <>
       {items.map((item) => {
         const active = item.match.some((m) => pathname === m || pathname.startsWith(`${m}/`));
+        if (variant === "bar") {
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "shrink-0 rounded-md px-2.5 py-1.5 whitespace-nowrap transition-colors hover:bg-muted hover:text-foreground md:px-3",
+                active ? "bg-muted text-foreground" : "text-muted-foreground",
+              )}
+            >
+              {item.label}
+            </Link>
+          );
+        }
         const Icon = ICONS[item.icon];
         return (
           <Link
             key={item.href}
             href={item.href}
             aria-current={active ? "page" : undefined}
-            title={variant === "sidebar" ? item.label : undefined}
             className={cn(
-              "group flex shrink-0 items-center gap-2.5 rounded-md text-sm font-medium whitespace-nowrap transition-colors",
-              variant === "sidebar" ? "h-9 justify-center px-2.5 lg:justify-start" : "px-2.5 py-1.5",
-              active ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground",
+              "flex h-9 items-center gap-2.5 rounded-lg px-2.5 text-[0.9375rem] transition-colors",
+              active ? "bg-shell-active font-medium text-foreground" : "text-foreground/80 hover:bg-shell-hover hover:text-foreground",
             )}
           >
-            {variant === "sidebar" ? (
-              <Icon className={cn("size-4", active ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")} aria-hidden />
-            ) : null}
-            <span className={variant === "sidebar" ? "sr-only lg:not-sr-only" : undefined}>{item.label}</span>
+            <Icon className="size-4.5 shrink-0" strokeWidth={1.75} aria-hidden />
+            {item.label}
           </Link>
         );
       })}

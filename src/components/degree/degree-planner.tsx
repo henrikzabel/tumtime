@@ -205,7 +205,7 @@ export function DegreePlanner({
             }
             maxLength={60}
             aria-label="Plan name"
-            className="-ml-1 block w-full min-w-0 rounded-md bg-transparent px-1 font-cal text-2xl outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
+            className="-ml-1 block w-full min-w-0 rounded-md bg-transparent px-1 font-semibold text-2xl outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
           />
           <p className="text-sm text-muted-foreground">
             {program.degree} {program.nameEn} · started{" "}

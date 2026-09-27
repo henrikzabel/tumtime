@@ -21,7 +21,7 @@ export function DashboardNav({ slug, name }: { slug: string; name: string }) {
       <Link href={`/clubs/${slug}`} className="text-xs/relaxed text-muted-foreground hover:text-foreground">
         ← Public profile
       </Link>
-      <h1 className="mt-1 text-2xl font-semibold md:text-3xl">{name}</h1>
+      <h1 className="mt-1 text-xl font-semibold">{name}</h1>
       <nav className="mt-4 flex gap-1 overflow-x-auto text-sm [scrollbar-width:none]" aria-label="Club dashboard">
         {ITEMS.map((item) => {
           const href = `${base}${item.href}`;

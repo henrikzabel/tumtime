@@ -94,7 +94,7 @@ export function PeriodBoard({
 
   return (
     <div className={cn("space-y-4", pending && "opacity-60")}>
-      <div className="sticky top-12 z-10 md:top-2 flex min-h-10 flex-wrap items-center gap-2 rounded-md bg-background/95 p-2 text-xs/relaxed ring-1 ring-border backdrop-blur">
+      <div className="sticky top-12 z-10 lg:top-2 flex min-h-10 flex-wrap items-center gap-2 rounded-md bg-background/95 p-2 text-xs/relaxed ring-1 ring-border backdrop-blur">
         {sel ? (
           <>
             <span>

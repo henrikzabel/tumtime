@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 const PAGE = 80;
 
 const selectClass =
-  "h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm text-foreground outline-none transition-colors focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15";
+  "h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/25 px-2 text-sm text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/15";
 
 
 function Toggle({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
@@ -77,7 +77,7 @@ export function ClubBrowser({ clubs, banner }: { clubs: ClubListItem[]; banner?:
               onChange={(e) => update({ q: e.target.value })}
               placeholder="Search clubs, e.g. robotics, consulting…"
               aria-label="Search clubs"
-              className="h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 pr-2 pl-8 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15"
+              className="h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/25 pr-2 pl-8 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/15"
             />
           </div>
           <button

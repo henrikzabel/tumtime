@@ -129,7 +129,7 @@ export function ScheduleEditor({
               onBlur={() => name.trim() && name !== schedule.name && persist({ name: name.trim() })}
               maxLength={60}
               aria-label="Schedule name"
-              className="-ml-1 min-w-0 rounded-md bg-transparent px-1 font-cal text-2xl outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
+              className="-ml-1 min-w-0 rounded-md bg-transparent px-1 font-semibold text-2xl outline-none hover:bg-muted/60 focus-visible:bg-muted/60"
             />
           </div>
           <p className="text-sm text-muted-foreground">

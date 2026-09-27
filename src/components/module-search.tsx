@@ -118,7 +118,7 @@ export function ModuleSearch({
         onFocus={() => hits.length && setOpen(true)}
         onKeyDown={onKeyDown}
         className={cn(
-          "w-full border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15",
+          "w-full border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/25 outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/15",
           size === "lg" ? "h-12 rounded-xl bg-card pl-11 pr-4 text-base shadow-xs" : "h-9 rounded-md pl-8 pr-2 text-sm",
         )}
       />

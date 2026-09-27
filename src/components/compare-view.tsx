@@ -79,7 +79,7 @@ export function CompareView({ series }: { series: CompareSeries[] }) {
               <select
                 value={s.selector}
                 onChange={(e) => navigate(items.map((it, j) => (j === i ? { ...it, selector: e.target.value } : it)))}
-                className="mt-2 h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 px-2 text-sm outline-none focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15"
+                className="mt-2 h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/25 px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/15"
                 aria-label={`Exam for ${s.code}`}
               >
                 {s.options.map((o) => (

@@ -47,7 +47,7 @@ export function EntrySearch({ semester, exclude, onSelect }: { semester: string;
         onFocus={() => setOpen(true)}
         placeholder="Add a module or course…"
         aria-label="Add a module or course"
-        className="h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/40 pr-2 pl-8 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-foreground/60 focus-visible:ring-2 focus-visible:ring-ring/15"
+        className="h-9 w-full rounded-[10px] border border-input bg-background shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-foreground/25 pr-2 pl-8 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/15"
       />
       {open && visible.length > 0 && (
         <ul className="absolute inset-x-0 top-full z-30 mt-1 max-h-80 overflow-y-auto rounded-lg border bg-popover p-1 shadow-lg" role="listbox">

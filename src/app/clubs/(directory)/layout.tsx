@@ -1,6 +1,7 @@
 import { CalendarRange, ChevronRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { connection } from "next/server";
 import { Suspense } from "react";
 
 import { CatalogShell } from "@/components/catalog/catalog-shell";
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default async function ClubsLayout({ children }: LayoutProps<"/clubs">) {
+  // Club data changes constantly; render per request instead of querying the database at build time.
+  await connection();
   const [clubs, periods] = await Promise.all([listClubs(), listPeriods({ status: ["published"] })]);
   const today = new Date().toISOString().slice(0, 10);
   const current = periods.filter((p) => p.endsOn >= today).at(-1) ?? null;

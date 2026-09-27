@@ -4,15 +4,22 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { db } from "@/db";
 import { requireAdmin } from "@/lib/auth/session";
 import { reviewClaim } from "@/lib/clubs/actions";
 import { getPendingClaims } from "@/lib/clubs/queries";
+import { countPendingSubmissions } from "@/lib/contribute/submissions";
+import { countPendingComments } from "@/lib/reviews/reviews";
 
 export const metadata: Metadata = { title: "Admin", robots: { index: false } };
 
 export default async function AdminPage() {
   await requireAdmin("/admin");
-  const claims = await getPendingClaims();
+  const [claims, pendingUploads, pendingComments] = await Promise.all([
+    getPendingClaims(),
+    countPendingSubmissions(db),
+    countPendingComments(db),
+  ]);
   const pending = claims.filter((c) => c.status === "pending");
   const decided = claims.filter((c) => c.status !== "pending").slice(0, 20);
 
@@ -20,9 +27,17 @@ export default async function AdminPage() {
     <div className="mx-auto max-w-4xl px-4 py-10">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-semibold tracking-tight">Admin</h1>
-        <Link href="/admin/info-sessions" className="text-sm text-primary underline-offset-4 hover:underline">
-          Plan info session weeks →
-        </Link>
+        <div className="flex flex-wrap gap-4 text-sm">
+          <Link href="/admin/submissions" className="text-primary underline-offset-4 hover:underline">
+            Statistics uploads ({pendingUploads}) →
+          </Link>
+          <Link href="/admin/reviews" className="text-primary underline-offset-4 hover:underline">
+            Review comments ({pendingComments}) →
+          </Link>
+          <Link href="/admin/info-sessions" className="text-primary underline-offset-4 hover:underline">
+            Plan info session weeks →
+          </Link>
+        </div>
       </div>
       <h2 className="mt-8 text-lg font-semibold">Club claims ({pending.length} pending)</h2>
       <div className="mt-3 space-y-3">
